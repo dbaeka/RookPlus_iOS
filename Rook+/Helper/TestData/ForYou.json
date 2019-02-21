@@ -1,0 +1,32 @@
+[
+    {
+        "logo": "ai.png",
+        "timepost": "6h",
+        "views": 1200,
+        "title": "Career talk about the positions available at the company",
+        "category": "Business"
+    },
+    {
+        "views": 420,
+        "category": "Tech",
+        "logo": "voda.png",
+        "timepost": "2mo",
+        "title": "Training workshop to introduce certain skills"
+    },
+    {
+        "views": 150000,
+        "category": "Beans",
+        "logo": "rook.png",
+        "timepost": "1h",
+        "title": "Trial court to leverage your law skills"
+    },
+    {
+        "views": 620000000,
+        "category": "Human Resource",
+        "logo": "atrossy.png",
+        "timepost": "2m",
+        "title": "Take the SAT diagnostic test to find your score",
+    }
+]
+ 
+ 

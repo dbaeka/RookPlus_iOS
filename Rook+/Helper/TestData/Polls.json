@@ -1,0 +1,17 @@
+[
+    {
+        "title": "Would you buy data for GHc 1000?",
+        "image": "rook.png",
+        "yes": 200,
+        "no": 100,
+        "timepost": "6h"
+    },
+    {
+        "title": "Is Vodafone your first choice for intersnship?",
+        "image": "voda.png",
+        "yes": 650,
+        "no": 100,
+        "timepost": "2h"
+    }
+]
+

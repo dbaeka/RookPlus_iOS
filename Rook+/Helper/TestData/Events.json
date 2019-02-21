@@ -1,0 +1,59 @@
+[
+    {
+        "title": "UG MTN Career Talk",
+        "logo": "ai.png",
+        "image": "bg1.png",
+        "price": 0,
+        "timepost": "6h",
+        "location": "University of Ghana",
+        "date": "20 Mar 2019",
+        "detail": "Career talk about the positions available at the company",
+        "cname": "MTN Ghana"
+    },
+    {
+        "title": "PZ Cuzzon Training Workshop",
+        "logo": "pz.png",
+        "image": "bg2.png",
+        "price": 100,
+        "timepost": "2mo",
+        "location": "KNUST",
+        "date": "6 Feb 2019",
+        "detail": "Training workshop to introduce certain skills",
+        "cname": "PZ Cussons Health Care"
+    },
+    {
+        "title": "Moot Court Trial",
+        "logo": "medical.png",
+        "image": "bg1.png",
+        "price": 60,
+        "timepost": "1h",
+        "location": "Kempinski Hotel",
+        "date": "1 May 2019",
+        "detail": "Trial court to leverage your law skills",
+        "cname": "Corporate Law Concepts"
+    },
+    {
+        "title": "SAT Trial Exams",
+        "logo": "atrossy.png",
+        "image": "bg2.png",
+        "price": 10,
+        "timepost": "2m",
+        "location": "Aikins Educational Consult",
+        "date": "19 Dec 2019",
+        "detail": "Take the SAT diagnostic test to find your score",
+        "cname": "Atrossy Limited"
+    },
+    {
+        "title": "Free SIM Distribution",
+        "logo": "voda.png",
+        "image": "bg1.png",
+        "price": 0,
+        "timepost": "2h",
+        "location": "Rook+ HQ",
+        "date": "6 April 2019",
+        "detail": "Vodafone is giving away bundled SIM cards to students",
+        "cname": "Vodafone Ghana"
+    }
+]
+ 
+

@@ -1,195 +1,156 @@
 //
-//  rookLogoVector.swift
+//  barRook.swift
 //  Rook+
 //
-//  Created by Delmwin Baeka on 1/21/19.
+//  Created by Delmwin Baeka on 1/22/19.
 //  Copyright © 2019 Delmwin Baeka. All rights reserved.
 //
 
 import UIKit
 
-public class RookLogoVector : NSObject {
-    //// Drawing Methods
+@IBDesignable
+class rookLogoVector: UIView {
     
-    @objc dynamic public class func drawRookLogo(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 295, height: 142), resizing: ResizingBehavior = .aspectFit, logoSize: CGFloat = 1) {
-        //// General Declarations
-        let context = UIGraphicsGetCurrentContext()!
+    
+    
+    @IBInspectable var textColor: UIColor = RookColors.shared().rookMainBlue {
+        didSet {
+            RookTextLayer.fillColor = textColor.cgColor
+        }
+    }
+    
+    private let RookTextLayer = CAShapeLayer()
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setup()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    override open func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        setup()
+    }
+    
+    
+    fileprivate func setup() {
+        layer.addSublayer(RookTextLayer)
         
-        //// Resize to Target Frame
-        context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 295, height: 142), target: targetFrame)
-        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 295, y: resizedFrame.height / 142)
+        //// Subframes
+        let group: CGRect = CGRect(x: bounds.minX, y: bounds.minY, width: bounds.width, height: bounds.height + 1)
         
         
-        //// Rook+
-        context.saveGState()
-        context.translateBy(x: 46, y: 29)
-        context.scaleBy(x: logoSize, y: logoSize)
-        
-        
-        
+        //// Group
         //// R Drawing
-        let rPath = UIBezierPath()
-        rPath.move(to: CGPoint(x: 41.99, y: 32.1))
-        rPath.addCurve(to: CGPoint(x: 32.58, y: 46.37), controlPoint1: CGPoint(x: 42.18, y: 38.43), controlPoint2: CGPoint(x: 38.39, y: 44.17))
-        rPath.addLine(to: CGPoint(x: 41.09, y: 65))
-        rPath.addLine(to: CGPoint(x: 27.85, y: 65))
-        rPath.addLine(to: CGPoint(x: 20.86, y: 47.57))
-        rPath.addLine(to: CGPoint(x: 12.56, y: 47.57))
-        rPath.addLine(to: CGPoint(x: 12.56, y: 65))
-        rPath.addLine(to: CGPoint(x: 0, y: 65))
-        rPath.addLine(to: CGPoint(x: 0, y: 16))
-        rPath.addLine(to: CGPoint(x: 25.35, y: 16))
-        rPath.addCurve(to: CGPoint(x: 37.6, y: 20.59), controlPoint1: CGPoint(x: 30.61, y: 16), controlPoint2: CGPoint(x: 34.7, y: 17.53))
-        rPath.addCurve(to: CGPoint(x: 41.99, y: 32.1), controlPoint1: CGPoint(x: 40.53, y: 23.66), controlPoint2: CGPoint(x: 42.11, y: 27.82))
-        rPath.close()
-        rPath.move(to: CGPoint(x: 12.56, y: 25.94))
-        rPath.addLine(to: CGPoint(x: 12.56, y: 37.63))
-        rPath.addLine(to: CGPoint(x: 22.72, y: 37.63))
-        rPath.addCurve(to: CGPoint(x: 29.24, y: 31.75), controlPoint1: CGPoint(x: 27.06, y: 37.63), controlPoint2: CGPoint(x: 29.23, y: 35.67))
-        rPath.addCurve(to: CGPoint(x: 27.59, y: 27.48), controlPoint1: CGPoint(x: 29.32, y: 30.15), controlPoint2: CGPoint(x: 28.72, y: 28.59))
-        rPath.addCurve(to: CGPoint(x: 22.72, y: 25.94), controlPoint1: CGPoint(x: 26.49, y: 26.45), controlPoint2: CGPoint(x: 24.87, y: 25.94))
-        rPath.addLine(to: CGPoint(x: 12.56, y: 25.94))
-        rPath.close()
-        RookColors.shared().rookBlue.setFill()
-        rPath.fill()
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: group.minX + 0.22699 * group.width, y: group.minY + 0.48642 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.17612 * group.width, y: group.minY + 0.70263 * group.height), controlPoint1: CGPoint(x: group.minX + 0.22799 * group.width, y: group.minY + 0.58224 * group.height), controlPoint2: CGPoint(x: group.minX + 0.20753 * group.width, y: group.minY + 0.66922 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.22212 * group.width, y: group.minY + 0.98485 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.15056 * group.width, y: group.minY + 0.98485 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.11275 * group.width, y: group.minY + 0.72073 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.06787 * group.width, y: group.minY + 0.72073 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.06787 * group.width, y: group.minY + 0.98485 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.00000 * group.width, y: group.minY + 0.98485 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.00000 * group.width, y: group.minY + 0.24242 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.13705 * group.width, y: group.minY + 0.24242 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.20325 * group.width, y: group.minY + 0.31194 * group.height), controlPoint1: CGPoint(x: group.minX + 0.16548 * group.width, y: group.minY + 0.24242 * group.height), controlPoint2: CGPoint(x: group.minX + 0.18755 * group.width, y: group.minY + 0.26560 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.22699 * group.width, y: group.minY + 0.48642 * group.height), controlPoint1: CGPoint(x: group.minX + 0.21908 * group.width, y: group.minY + 0.35853 * group.height), controlPoint2: CGPoint(x: group.minX + 0.22765 * group.width, y: group.minY + 0.42147 * group.height))
+        path.close()
+        path.move(to: CGPoint(x: group.minX + 0.06787 * group.width, y: group.minY + 0.39306 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.06787 * group.width, y: group.minY + 0.57020 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.12280 * group.width, y: group.minY + 0.57020 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.15804 * group.width, y: group.minY + 0.48110 * group.height), controlPoint1: CGPoint(x: group.minX + 0.14627 * group.width, y: group.minY + 0.57020 * group.height), controlPoint2: CGPoint(x: group.minX + 0.15801 * group.width, y: group.minY + 0.54050 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.14914 * group.width, y: group.minY + 0.41637 * group.height), controlPoint1: CGPoint(x: group.minX + 0.15851 * group.width, y: group.minY + 0.45685 * group.height), controlPoint2: CGPoint(x: group.minX + 0.15526 * group.width, y: group.minY + 0.43321 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.12280 * group.width, y: group.minY + 0.39306 * group.height), controlPoint1: CGPoint(x: group.minX + 0.14319 * group.width, y: group.minY + 0.40083 * group.height), controlPoint2: CGPoint(x: group.minX + 0.13441 * group.width, y: group.minY + 0.39306 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.06787 * group.width, y: group.minY + 0.39306 * group.height))
+        path.close()
+        
         
         
         //// o Drawing
-        let oPath = UIBezierPath()
-        oPath.move(to: CGPoint(x: 75.92, y: 61.1))
-        oPath.addCurve(to: CGPoint(x: 62, y: 66), controlPoint1: CGPoint(x: 72.52, y: 64.37), controlPoint2: CGPoint(x: 67.88, y: 66))
-        oPath.addCurve(to: CGPoint(x: 48.08, y: 61.1), controlPoint1: CGPoint(x: 56.12, y: 66), controlPoint2: CGPoint(x: 51.48, y: 64.36))
-        oPath.addCurve(to: CGPoint(x: 43, y: 47.42), controlPoint1: CGPoint(x: 44.69, y: 57.84), controlPoint2: CGPoint(x: 43, y: 53.28))
-        oPath.addCurve(to: CGPoint(x: 48.05, y: 33.82), controlPoint1: CGPoint(x: 43, y: 41.57), controlPoint2: CGPoint(x: 44.68, y: 37.04))
-        oPath.addCurve(to: CGPoint(x: 62, y: 29), controlPoint1: CGPoint(x: 51.42, y: 30.61), controlPoint2: CGPoint(x: 56.07, y: 29))
-        oPath.addCurve(to: CGPoint(x: 75.95, y: 33.82), controlPoint1: CGPoint(x: 67.93, y: 29), controlPoint2: CGPoint(x: 72.58, y: 30.61))
-        oPath.addCurve(to: CGPoint(x: 81, y: 47.42), controlPoint1: CGPoint(x: 79.32, y: 37.03), controlPoint2: CGPoint(x: 81, y: 41.56))
-        oPath.addCurve(to: CGPoint(x: 75.92, y: 61.1), controlPoint1: CGPoint(x: 81, y: 53.29), controlPoint2: CGPoint(x: 79.31, y: 57.85))
-        oPath.close()
-        oPath.move(to: CGPoint(x: 62, y: 57.09))
-        oPath.addCurve(to: CGPoint(x: 69.34, y: 47.56), controlPoint1: CGPoint(x: 66.9, y: 57.09), controlPoint2: CGPoint(x: 69.34, y: 53.91))
-        oPath.addCurve(to: CGPoint(x: 62, y: 37.9), controlPoint1: CGPoint(x: 69.34, y: 41.11), controlPoint2: CGPoint(x: 66.9, y: 37.89))
-        oPath.addCurve(to: CGPoint(x: 54.66, y: 47.59), controlPoint1: CGPoint(x: 57.1, y: 37.9), controlPoint2: CGPoint(x: 54.66, y: 41.13))
-        oPath.addCurve(to: CGPoint(x: 62, y: 57.12), controlPoint1: CGPoint(x: 54.66, y: 53.94), controlPoint2: CGPoint(x: 57.1, y: 57.12))
-        oPath.addLine(to: CGPoint(x: 62, y: 57.09))
-        oPath.close()
-        RookColors.shared().rookBlue.setFill()
-        oPath.fill()
+        path.move(to: CGPoint(x: group.minX + 0.41035 * group.width, y: group.minY + 0.92578 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.33514 * group.width, y: group.minY + 1.00000 * group.height), controlPoint1: CGPoint(x: group.minX + 0.39201 * group.width, y: group.minY + 0.97533 * group.height), controlPoint2: CGPoint(x: group.minX + 0.36693 * group.width, y: group.minY + 1.00007 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.25992 * group.width, y: group.minY + 0.92578 * group.height), controlPoint1: CGPoint(x: group.minX + 0.30334 * group.width, y: group.minY + 0.99993 * group.height), controlPoint2: CGPoint(x: group.minX + 0.27826 * group.width, y: group.minY + 0.97519 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.23243 * group.width, y: group.minY + 0.71855 * group.height), controlPoint1: CGPoint(x: group.minX + 0.24159 * group.width, y: group.minY + 0.87630 * group.height), controlPoint2: CGPoint(x: group.minX + 0.23243 * group.width, y: group.minY + 0.80722 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.25973 * group.width, y: group.minY + 0.51236 * group.height), controlPoint1: CGPoint(x: group.minX + 0.23243 * group.width, y: group.minY + 0.62988 * group.height), controlPoint2: CGPoint(x: group.minX + 0.24153 * group.width, y: group.minY + 0.56115 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.33514 * group.width, y: group.minY + 0.43939 * group.height), controlPoint1: CGPoint(x: group.minX + 0.27794 * group.width, y: group.minY + 0.46372 * group.height), controlPoint2: CGPoint(x: group.minX + 0.30307 * group.width, y: group.minY + 0.43939 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.41054 * group.width, y: group.minY + 0.51236 * group.height), controlPoint1: CGPoint(x: group.minX + 0.36720 * group.width, y: group.minY + 0.43939 * group.height), controlPoint2: CGPoint(x: group.minX + 0.39233 * group.width, y: group.minY + 0.46372 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.43784 * group.width, y: group.minY + 0.71855 * group.height), controlPoint1: CGPoint(x: group.minX + 0.42874 * group.width, y: group.minY + 0.56101 * group.height), controlPoint2: CGPoint(x: group.minX + 0.43784 * group.width, y: group.minY + 0.62974 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.41035 * group.width, y: group.minY + 0.92578 * group.height), controlPoint1: CGPoint(x: group.minX + 0.43784 * group.width, y: group.minY + 0.80736 * group.height), controlPoint2: CGPoint(x: group.minX + 0.42868 * group.width, y: group.minY + 0.87644 * group.height))
+        path.close()
+        path.move(to: CGPoint(x: group.minX + 0.33514 * group.width, y: group.minY + 0.86501 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.37483 * group.width, y: group.minY + 0.72064 * group.height), controlPoint1: CGPoint(x: group.minX + 0.36160 * group.width, y: group.minY + 0.86501 * group.height), controlPoint2: CGPoint(x: group.minX + 0.37483 * group.width, y: group.minY + 0.81688 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.33514 * group.width, y: group.minY + 0.57418 * group.height), controlPoint1: CGPoint(x: group.minX + 0.37483 * group.width, y: group.minY + 0.62293 * group.height), controlPoint2: CGPoint(x: group.minX + 0.36160 * group.width, y: group.minY + 0.57411 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.29544 * group.width, y: group.minY + 0.72105 * group.height), controlPoint1: CGPoint(x: group.minX + 0.30867 * group.width, y: group.minY + 0.57425 * group.height), controlPoint2: CGPoint(x: group.minX + 0.29544 * group.width, y: group.minY + 0.62320 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.33514 * group.width, y: group.minY + 0.86543 * group.height), controlPoint1: CGPoint(x: group.minX + 0.29544 * group.width, y: group.minY + 0.81730 * group.height), controlPoint2: CGPoint(x: group.minX + 0.30867 * group.width, y: group.minY + 0.86543 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.33514 * group.width, y: group.minY + 0.86501 * group.height))
+        path.close()
+        
         
         
         //// o 2 Drawing
-        let o2Path = UIBezierPath()
-        o2Path.move(to: CGPoint(x: 114.91, y: 61.08))
-        o2Path.addCurve(to: CGPoint(x: 101.03, y: 66), controlPoint1: CGPoint(x: 111.51, y: 64.36), controlPoint2: CGPoint(x: 106.89, y: 66))
-        o2Path.addCurve(to: CGPoint(x: 87.08, y: 61.08), controlPoint1: CGPoint(x: 95.17, y: 66), controlPoint2: CGPoint(x: 90.52, y: 64.35))
-        o2Path.addCurve(to: CGPoint(x: 82, y: 47.41), controlPoint1: CGPoint(x: 83.7, y: 57.81), controlPoint2: CGPoint(x: 82, y: 53.26))
-        o2Path.addCurve(to: CGPoint(x: 87.05, y: 33.81), controlPoint1: CGPoint(x: 82, y: 41.56), controlPoint2: CGPoint(x: 83.68, y: 37.03))
-        o2Path.addCurve(to: CGPoint(x: 101, y: 29), controlPoint1: CGPoint(x: 90.42, y: 30.6), controlPoint2: CGPoint(x: 95.07, y: 29))
-        o2Path.addCurve(to: CGPoint(x: 114.95, y: 33.81), controlPoint1: CGPoint(x: 106.93, y: 29), controlPoint2: CGPoint(x: 111.58, y: 30.6))
-        o2Path.addCurve(to: CGPoint(x: 120, y: 47.41), controlPoint1: CGPoint(x: 118.32, y: 37.02), controlPoint2: CGPoint(x: 120, y: 41.55))
-        o2Path.addCurve(to: CGPoint(x: 114.91, y: 61.08), controlPoint1: CGPoint(x: 120, y: 53.27), controlPoint2: CGPoint(x: 118.3, y: 57.82))
-        o2Path.close()
-        o2Path.move(to: CGPoint(x: 101.03, y: 57.1))
-        o2Path.addCurve(to: CGPoint(x: 108.37, y: 47.58), controlPoint1: CGPoint(x: 105.92, y: 57.1), controlPoint2: CGPoint(x: 108.37, y: 53.92))
-        o2Path.addCurve(to: CGPoint(x: 101.03, y: 37.95), controlPoint1: CGPoint(x: 108.37, y: 41.14), controlPoint2: CGPoint(x: 105.92, y: 37.93))
-        o2Path.addCurve(to: CGPoint(x: 93.7, y: 47.58), controlPoint1: CGPoint(x: 96.13, y: 37.97), controlPoint2: CGPoint(x: 93.69, y: 41.18))
-        o2Path.addCurve(to: CGPoint(x: 101.03, y: 57.1), controlPoint1: CGPoint(x: 93.67, y: 53.92), controlPoint2: CGPoint(x: 96.11, y: 57.09))
-        o2Path.close()
-        RookColors.shared().rookBlue.setFill()
-        o2Path.fill()
+        path.move(to: CGPoint(x: group.minX + 0.62113 * group.width, y: group.minY + 0.92542 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.54609 * group.width, y: group.minY + 1.00000 * group.height), controlPoint1: CGPoint(x: group.minX + 0.60278 * group.width, y: group.minY + 0.97521 * group.height), controlPoint2: CGPoint(x: group.minX + 0.57777 * group.width, y: group.minY + 1.00007 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.47073 * group.width, y: group.minY + 0.92542 * group.height), controlPoint1: CGPoint(x: group.minX + 0.51442 * group.width, y: group.minY + 0.99993 * group.height), controlPoint2: CGPoint(x: group.minX + 0.48930 * group.width, y: group.minY + 0.97507 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.44324 * group.width, y: group.minY + 0.71834 * group.height), controlPoint1: CGPoint(x: group.minX + 0.45243 * group.width, y: group.minY + 0.87598 * group.height), controlPoint2: CGPoint(x: group.minX + 0.44327 * group.width, y: group.minY + 0.80695 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.47055 * group.width, y: group.minY + 0.51231 * group.height), controlPoint1: CGPoint(x: group.minX + 0.44322 * group.width, y: group.minY + 0.62973 * group.height), controlPoint2: CGPoint(x: group.minX + 0.45232 * group.width, y: group.minY + 0.56106 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.54595 * group.width, y: group.minY + 0.43939 * group.height), controlPoint1: CGPoint(x: group.minX + 0.48875 * group.width, y: group.minY + 0.46370 * group.height), controlPoint2: CGPoint(x: group.minX + 0.51388 * group.width, y: group.minY + 0.43939 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.62135 * group.width, y: group.minY + 0.51231 * group.height), controlPoint1: CGPoint(x: group.minX + 0.57801 * group.width, y: group.minY + 0.43939 * group.height), controlPoint2: CGPoint(x: group.minX + 0.60315 * group.width, y: group.minY + 0.46370 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.64865 * group.width, y: group.minY + 0.71834 * group.height), controlPoint1: CGPoint(x: group.minX + 0.63955 * group.width, y: group.minY + 0.56092 * group.height), controlPoint2: CGPoint(x: group.minX + 0.64865 * group.width, y: group.minY + 0.62960 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.62113 * group.width, y: group.minY + 0.92542 * group.height), controlPoint1: CGPoint(x: group.minX + 0.64865 * group.width, y: group.minY + 0.80709 * group.height), controlPoint2: CGPoint(x: group.minX + 0.63947 * group.width, y: group.minY + 0.87612 * group.height))
+        path.close()
+        path.move(to: CGPoint(x: group.minX + 0.54609 * group.width, y: group.minY + 0.86511 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.58578 * group.width, y: group.minY + 0.72084 * group.height), controlPoint1: CGPoint(x: group.minX + 0.57255 * group.width, y: group.minY + 0.86511 * group.height), controlPoint2: CGPoint(x: group.minX + 0.58578 * group.width, y: group.minY + 0.81702 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.54609 * group.width, y: group.minY + 0.57501 * group.height), controlPoint1: CGPoint(x: group.minX + 0.58578 * group.width, y: group.minY + 0.62328 * group.height), controlPoint2: CGPoint(x: group.minX + 0.57255 * group.width, y: group.minY + 0.57467 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.50651 * group.width, y: group.minY + 0.72084 * group.height), controlPoint1: CGPoint(x: group.minX + 0.51963 * group.width, y: group.minY + 0.57536 * group.height), controlPoint2: CGPoint(x: group.minX + 0.50644 * group.width, y: group.minY + 0.62397 * group.height))
+        path.addCurve(to: CGPoint(x: group.minX + 0.54609 * group.width, y: group.minY + 0.86511 * group.height), controlPoint1: CGPoint(x: group.minX + 0.50634 * group.width, y: group.minY + 0.81695 * group.height), controlPoint2: CGPoint(x: group.minX + 0.51953 * group.width, y: group.minY + 0.86504 * group.height))
+        path.close()
         
         
-        //// k Drawing
-        let kPath = UIBezierPath()
-        kPath.move(to: CGPoint(x: 159, y: 28.79))
-        kPath.addLine(to: CGPoint(x: 146.19, y: 43.06))
-        kPath.addLine(to: CGPoint(x: 158.44, y: 64.99))
-        kPath.addLine(to: CGPoint(x: 145.58, y: 64.99))
-        kPath.addLine(to: CGPoint(x: 138.59, y: 51.56))
-        kPath.addLine(to: CGPoint(x: 134.51, y: 56.09))
-        kPath.addLine(to: CGPoint(x: 134.51, y: 65))
-        kPath.addLine(to: CGPoint(x: 123, y: 65))
-        kPath.addLine(to: CGPoint(x: 123, y: 14))
-        kPath.addLine(to: CGPoint(x: 134.53, y: 14))
-        kPath.addLine(to: CGPoint(x: 134.53, y: 42.64))
-        kPath.addLine(to: CGPoint(x: 146.39, y: 28.79))
-        kPath.addLine(to: CGPoint(x: 159, y: 28.79))
-        kPath.close()
-        kPath.usesEvenOddFillRule = true
-        RookColors.shared().rookBlue.setFill()
-        kPath.fill()
+        path.move(to: CGPoint(x: group.minX + 0.85946 * group.width, y: group.minY + 0.43621 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.79021 * group.width, y: group.minY + 0.65247 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.85641 * group.width, y: group.minY + 0.98474 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.78693 * group.width, y: group.minY + 0.98474 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.74916 * group.width, y: group.minY + 0.78119 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.72709 * group.width, y: group.minY + 0.84978 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.72709 * group.width, y: group.minY + 0.98485 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.66486 * group.width, y: group.minY + 0.98485 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.66486 * group.width, y: group.minY + 0.21212 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.72717 * group.width, y: group.minY + 0.21212 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.72717 * group.width, y: group.minY + 0.64612 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.79131 * group.width, y: group.minY + 0.43621 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.85946 * group.width, y: group.minY + 0.43621 * group.height))
+        path.close()
+        path.usesEvenOddFillRule = true
         
         
-        //// Bezier + 6 Drawing
-        let bezier6Path = UIBezierPath()
-        bezier6Path.move(to: CGPoint(x: 173.07, y: 0))
-        bezier6Path.addLine(to: CGPoint(x: 173.07, y: 12.29))
-        bezier6Path.addLine(to: CGPoint(x: 185, y: 12.29))
-        bezier6Path.addLine(to: CGPoint(x: 185, y: 20.7))
-        bezier6Path.addLine(to: CGPoint(x: 173.07, y: 20.7))
-        bezier6Path.addLine(to: CGPoint(x: 173.07, y: 33))
-        bezier6Path.addLine(to: CGPoint(x: 164.9, y: 33))
-        bezier6Path.addLine(to: CGPoint(x: 164.9, y: 20.7))
-        bezier6Path.addLine(to: CGPoint(x: 153, y: 20.7))
-        bezier6Path.addLine(to: CGPoint(x: 153, y: 12.29))
-        bezier6Path.addLine(to: CGPoint(x: 164.93, y: 12.29))
-        bezier6Path.addLine(to: CGPoint(x: 164.93, y: 0))
-        bezier6Path.addLine(to: CGPoint(x: 173.07, y: 0))
-        bezier6Path.close()
-        bezier6Path.usesEvenOddFillRule = true
-        RookColors.shared().rookBlue.setFill()
-        bezier6Path.fill()
+        path.move(to: CGPoint(x: group.minX + 0.93549 * group.width, y: group.minY + 0.00000 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.93549 * group.width, y: group.minY + 0.18615 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 1.00000 * group.width, y: group.minY + 0.18615 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 1.00000 * group.width, y: group.minY + 0.31364 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.93549 * group.width, y: group.minY + 0.31364 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.93549 * group.width, y: group.minY + 0.50000 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.89135 * group.width, y: group.minY + 0.50000 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.89135 * group.width, y: group.minY + 0.31364 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.82703 * group.width, y: group.minY + 0.31364 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.82703 * group.width, y: group.minY + 0.18615 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.89154 * group.width, y: group.minY + 0.18615 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.89154 * group.width, y: group.minY + 0.00000 * group.height))
+        path.addLine(to: CGPoint(x: group.minX + 0.93549 * group.width, y: group.minY + 0.00000 * group.height))
+        path.close()
+        path.usesEvenOddFillRule = true
         
         
-        
-        context.restoreGState()
-        
-        context.restoreGState()
-        
-    }
-    
-    
-    
-    
-    @objc(RookLogoVectorResizingBehavior)
-    public enum ResizingBehavior: Int {
-        case aspectFit /// The content is proportionally resized to fit into the target rectangle.
-        case aspectFill /// The content is proportionally resized to completely fill the target rectangle.
-        case stretch /// The content is stretched to match the entire target rectangle.
-        case center /// The content is centered in the target rectangle, but it is NOT resized.
-        
-        public func apply(rect: CGRect, target: CGRect) -> CGRect {
-            if rect == target || target == CGRect.zero {
-                return rect
-            }
-            
-            var scales = CGSize.zero
-            scales.width = abs(target.width / rect.width)
-            scales.height = abs(target.height / rect.height)
-            
-            switch self {
-            case .aspectFit:
-                scales.width = min(scales.width, scales.height)
-                scales.height = scales.width
-            case .aspectFill:
-                scales.width = max(scales.width, scales.height)
-                scales.height = scales.width
-            case .stretch:
-                break
-            case .center:
-                scales.width = 1
-                scales.height = 1
-            }
-            
-            var result = rect.standardized
-            result.size.width *= scales.width
-            result.size.height *= scales.height
-            result.origin.x = target.minX + (target.width - result.width) / 2
-            result.origin.y = target.minY + (target.height - result.height) / 2
-            return result
-        }
+        RookTextLayer.path = path.cgPath
+        RookTextLayer.fillColor = RookColors.shared().rookMainBlue.cgColor
     }
 }
-
