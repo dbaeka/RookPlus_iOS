@@ -44,7 +44,6 @@ class discoverCard: UICollectionViewCell {
             return
         }
         let decoder = JSONDecoder()
-        print(data)
         do {
             let response = try decoder.decode([DiscoverItem].self, from: data)
             for item in response {
@@ -94,8 +93,7 @@ extension discoverCard: UICollectionViewDelegateFlowLayout {
     
     //MARK:- UICollectionViewDelegateFlowLayout Protocol Functions
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cardWidth = UIScreen.main.bounds.width/1.4
-        return CGSize(width: cardWidth, height: cardWidth/1.22)
+        return CGSize(width: 268, height: 220)
     }
 }
 

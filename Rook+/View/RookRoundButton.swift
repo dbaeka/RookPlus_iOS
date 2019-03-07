@@ -12,9 +12,9 @@ import UIKit
 @IBDesignable
 class RookRoundButton: UIButton {
     
-    @IBInspectable var isShadowOn: Bool = true {
+    @IBInspectable var isShadowOn: Bool = false {
         didSet {
-            setNeedsDisplay()
+            activateShadow()
         }
     }
     
@@ -34,9 +34,22 @@ class RookRoundButton: UIButton {
         setup()
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
     private func setup() {
-        layer.cornerRadius = bounds.height/2
-       // backgroundColor = UIColor.white
+        layer.cornerRadius = frame.height/2
+        activateShadow()
+    }
+    
+    private func activateShadow(){
         if isShadowOn {
             layer.shadowColor = UIColor.black.cgColor
             layer.shadowOffset = CGSize(width: 3, height: 3)

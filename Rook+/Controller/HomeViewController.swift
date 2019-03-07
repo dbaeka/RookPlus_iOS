@@ -9,8 +9,8 @@
 import UIKit
 
 
-let completeProfileCellHeight: CGFloat = 80
-let discoverCardCellHeight: CGFloat  = UIScreen.main.bounds.width/1.5 + 15
+let completeProfileCellHeight: CGFloat = (UIScreen.main.bounds.width - UIScreen.main.bounds.width/9)/4
+let discoverCardCellHeight: CGFloat  = 265
 let pollCardCellHeight: CGFloat  = 155
 let eventsCellHeight: CGFloat = 130
 let forYouCellHeight: CGFloat = 70
@@ -51,6 +51,36 @@ class HomeViewController: UIViewController {
         return collectionView
     }()
     
+    private let whiteFilterButton : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "whiteFilter.png"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let searchButton : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "search.png"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let searchBar: UISearchBar = {
+        let search = UISearchBar()
+        search.placeholder = " search"
+        search.searchBarStyle = UISearchBar.Style.minimal
+        let searchBarTextField = search.value(forKey: "searchField") as? UITextField
+        searchBarTextField?.font = UIFont(name: "Roboto-Regular", size: 10)
+        search.setSearchFieldBackgroundImage(UIImage(named: "searchWhiteColor"), for: .normal)
+        searchBarTextField?.leftView?.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+        search.translatesAutoresizingMaskIntoConstraints = false
+        return search
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.navigationController?.isNavigationBarHidden = false
@@ -76,6 +106,7 @@ class HomeViewController: UIViewController {
         let RookTitle = rookLogoVector(frame: CGRect(x: 0, y: 0, width: 45, height: 15))
         self.RookTitle = RookTitle
         navBar.addSubview(RookTitle)
+        RookTitle.tag = 1
         RookTitle.translatesAutoresizingMaskIntoConstraints = false
         RookTitle.topAnchor.constraint(equalTo: navBar.topAnchor, constant: 12).isActive = true
         RookTitle.heightAnchor.constraint(equalToConstant: 15).isActive = true
@@ -85,12 +116,67 @@ class HomeViewController: UIViewController {
         let notificationButton = RookNotificationButton(frame: CGRect(x: 0, y: 0, width: 17, height: 20))
         self.notificationButton = notificationButton
         navBar.addSubview(notificationButton)
+        notificationButton.tag = 2
         notificationButton.translatesAutoresizingMaskIntoConstraints = false
         notificationButton.topAnchor.constraint(equalTo: navBar.topAnchor, constant: 12).isActive = true
         notificationButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
         notificationButton.trailingAnchor.constraint(equalTo: navBar.trailingAnchor, constant: -17).isActive = true
         notificationButton.widthAnchor.constraint(equalToConstant: 17).isActive = true
 
+        navBar.addSubview(whiteFilterButton)
+        whiteFilterButton.tag = 3
+        whiteFilterButton.topAnchor.constraint(equalTo: navBar.topAnchor, constant: 12).isActive = true
+        whiteFilterButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        whiteFilterButton.trailingAnchor.constraint(equalTo: navBar.trailingAnchor, constant: -17).isActive = true
+        whiteFilterButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        navBar.addSubview(searchButton)
+        searchButton.tag = 4
+        searchButton.topAnchor.constraint(equalTo: navBar.topAnchor, constant: 12).isActive = true
+        searchButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        searchButton.trailingAnchor.constraint(equalTo: whiteFilterButton.leadingAnchor, constant: -5).isActive = true
+        searchButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        navBar.addSubview(searchBar)
+        searchBar.tag = 5
+        searchBar.centerYAnchor.constraint(equalTo: whiteFilterButton.centerYAnchor).isActive = true
+        searchBar.leadingAnchor.constraint(equalTo: navBar.leadingAnchor, constant: 15).isActive = true
+        searchBar.trailingAnchor.constraint(equalTo: searchButton.leadingAnchor, constant: -10).isActive = true
+        searchBar.heightAnchor.constraint(equalToConstant: self.searchBar.intrinsicContentSize.height).isActive = true
+        searchBar.layoutIfNeeded()
+        let offset = UIOffset(horizontal: searchBar.frame.width/2 - 30, vertical: 0)
+        searchBar.setPositionAdjustment(offset, for: UISearchBar.Icon.search)
+        
+        
+        
+        searchButton.isHidden = true
+        whiteFilterButton.isHidden = true
+        searchBar.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+         UIApplication.shared.statusBarView?.backgroundColor = self.tabBarController?.navigationController?.view.backgroundColor
+        self.tabBarController?.navigationItem.title = "Home"
+        if #available(iOS 11.0, *) {
+            self.tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
+        }
+        self.tabBarController?.navigationController?.isNavigationBarHidden = false
+        guard let navBarHeight = self.navigationController?.navigationBar.frame.height else {
+            return
+        }
+        var navHeight: CGFloat = 46
+        if #available(iOS 12.0, *), self.sizeClass() == (UIUserInterfaceSizeClass.regular, UIUserInterfaceSizeClass.regular) {
+            navHeight = 52
+        }
+        if (navBarHeight <= navHeight) {
+            UIApplication.shared.statusBarStyle = .lightContent
+        } else {
+            UIApplication.shared.statusBarStyle = .default
+        }
+        searchButton.isHidden = true
+        whiteFilterButton.isHidden = true
+        notificationButton?.isHidden = false
     }
     
     private func configureCollectionView() {
@@ -171,6 +257,7 @@ extension HomeViewController: UIScrollViewDelegate {
             setNeedsStatusBarAppearanceUpdate()
         } else {
             self.navigationController?.navigationBar.barTintColor = UIColor.white
+            UIApplication.shared.statusBarStyle = .default
             self.RookTitle?.textColor = RookColors.shared().rookMainBlue
             self.notificationButton?.color = RookColors.shared().rookMainBlue
         }
@@ -228,6 +315,7 @@ extension HomeViewController: UICollectionViewDataSource {
             
         default:
             assert(false, "Unexpected element kind")
+            return UICollectionReusableView()
         }
     }
     

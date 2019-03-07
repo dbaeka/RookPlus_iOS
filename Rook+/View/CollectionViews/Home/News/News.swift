@@ -16,8 +16,8 @@ class news: UICollectionViewCell {
     
     lazy var newsCollectionView: UICollectionView = {
         let flowLayout     = UICollectionViewFlowLayout()
-        flowLayout.minimumInteritemSpacing  = 10
-        flowLayout.minimumLineSpacing       = 15
+        flowLayout.minimumInteritemSpacing  = 15
+        flowLayout.minimumLineSpacing       = 20
         flowLayout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = .white

@@ -126,7 +126,7 @@ class RookRoundTextFieldWithButton: RookRoundTextField {
         if isLeft {
             rect.origin.x += CGFloat(buttonWidth + buttonMarginLeft)
         } else {
-            rect.origin.x -= CGFloat(buttonWidth + buttonMarginLeft)
+            // don't change the editing field X position for RTL languages
         }
         rect.size.width -= CGFloat(buttonWidth + buttonMarginLeft)
         return rect

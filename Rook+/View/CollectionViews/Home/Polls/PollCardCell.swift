@@ -117,11 +117,8 @@ class pollCardCell: UICollectionViewCell {
     
     private func configureViews() {
         self.layer.backgroundColor = UIColor.clear.cgColor
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 3.0)
-        self.layer.shadowOpacity = 0.3
-        self.layer.shadowRadius = 7
-        
+        containerView.layer.borderColor = UIColor.black.cgColor
+        containerView.layer.borderWidth = 0.1
         containerView.addSubview(textLabel)
         containerView.addSubview(logoImageView)
         containerView.addSubview(barView)

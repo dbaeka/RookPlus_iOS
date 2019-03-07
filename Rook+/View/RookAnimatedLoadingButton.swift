@@ -24,9 +24,9 @@ class RookAnimatedLoadingButton: UIButton {
         }
     }
     
-    @IBInspectable var textSize: CGFloat = 13 {
+    @IBInspectable var textSize: CGFloat = 12 {
         didSet {
-            textLayer.fontSize = textSize
+            text.font = UIFont(name: fontString, size: textSize)
         }
     }
     
@@ -34,34 +34,44 @@ class RookAnimatedLoadingButton: UIButton {
     
     @IBInspectable var title: String = "Sign In"  {
         didSet {
-            setNeedsLayout()
+            text.text = title
         }
     }
     
     @IBInspectable var fontString: String = "Roboto-Regular"
     
-    private var titleFont: UIFont {
-        guard let robotoFont = UIFont(name: self.fontString, size: self.textSize) else {
-            return UIFont.systemFont(ofSize: self.textSize)
-        }
-        return robotoFont
-    }
-    
-    
     private let circularLoader = CAShapeLayer()
     private let buttonShape = CAShapeLayer()
-    private let textLayer = CATextLayer()
     private let animator = circularLoaderAnimator()
+    
+    private let text: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.text = "Sign In"
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.font = UIFont(name: "Roboto-Regular", size: 12)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.8
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     private var isAnimating = false
     
     convenience init() {
         self.init(frame: .zero)
+        layer.addSublayer(buttonShape)
+        layer.addSublayer(circularLoader)
+        addSubview(text)
         self.setup()
     }
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
+        layer.addSublayer(buttonShape)
+        layer.addSublayer(circularLoader)
+        addSubview(text)
         self.setup()
     }
     
@@ -71,32 +81,51 @@ class RookAnimatedLoadingButton: UIButton {
     
     override public func awakeFromNib() {
         super.awakeFromNib()
+        layer.addSublayer(buttonShape)
+        layer.addSublayer(circularLoader)
+        addSubview(text)
         setup()
     }
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        layer.addSublayer(buttonShape)
+        layer.addSublayer(circularLoader)
+        addSubview(text)
         self.setup()
     }
     
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
+        layer.addSublayer(buttonShape)
+        layer.addSublayer(circularLoader)
+        addSubview(text)
         setup()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setup()
+    }
+    
+    private func configureConstraint() {
+        self.text.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        self.text.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        self.text.leftAnchor.constraint(equalTo: leftAnchor, constant: 5).isActive = true
+        self.text.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
+    }
+    
     private func setup() {
+         configureConstraint()
         
         //// Color Declarations
         let fillColor3 = UIColor(red: 0.000, green: 0.290, blue: 0.937, alpha: 1.000)
-        let textForeground2 = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
         
         //// Frames
         let frame2 = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width, height: bounds.width/2.34)
         
         //// Subframes
         let shape: CGRect = CGRect(x: frame2.minX, y: frame2.minY, width: frame2.width, height: frame2.height)
-        let frame = CGRect(x: frame2.minX + 25, y: frame2.minY + frame2.height/3, width: frame2.width - 49, height: frame2.height - 18)
-        
         
         //// RookButtonShape Drawing
         let rookButtonShapePath = UIBezierPath()
@@ -113,20 +142,6 @@ class RookAnimatedLoadingButton: UIButton {
         buttonShape.path = rookButtonShapePath.cgPath
         buttonShape.fillColor = fillColor3.cgColor
         
-
-        //TextDrawing
-        textLayer.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-        textLayer.position = CGPoint(x: frame.midX, y: frame.midY)
-        textLayer.needsDisplayOnBoundsChange = true
-        textLayer.string = self.title
-        textLayer.fontSize = self.textSize
-        textLayer.foregroundColor = textForeground2.cgColor
-        textLayer.contentsScale = UIScreen.main.scale
-        textLayer.font = self.titleFont
-        textLayer.isWrapped = true
-        textLayer.alignmentMode = CATextLayerAlignmentMode.center
-        
-        
         //Circular Loader
         circularLoader.strokeColor = loaderColor.cgColor
         circularLoader.frame = frame2
@@ -137,10 +152,6 @@ class RookAnimatedLoadingButton: UIButton {
         circularLoader.lineWidth = loaderLineWidth
         circularLoader.strokeStart = 0.0
         circularLoader.strokeEnd = 0.0
-        
-        layer.addSublayer(buttonShape)
-        layer.addSublayer(textLayer)
-        layer.addSublayer(circularLoader)
     }
     
     public func startAnimating() {
@@ -149,7 +160,7 @@ class RookAnimatedLoadingButton: UIButton {
         }
         
         animator.addAnimation(to: circularLoader)
-        self.textLayer.isHidden = true
+        self.text.isHidden = true
         isAnimating = true
     }
     
@@ -159,7 +170,7 @@ class RookAnimatedLoadingButton: UIButton {
         }
         
         animator.removeAnimation(from: circularLoader)
-        self.textLayer.isHidden = false
+        self.text.isHidden = false
         isAnimating = false
     }
     
@@ -167,19 +178,19 @@ class RookAnimatedLoadingButton: UIButton {
         if isAnimatable {
             self.startAnimating()
         }
-        self.textLayer.opacity = 0.5
+        self.text.alpha = 0.5
         return super.beginTracking(touch, with: event)
     }
     
     override func cancelTracking(with event: UIEvent?) {
         super.cancelTracking(with: event)
-        self.textLayer.opacity = 1.0
+        self.text.alpha = 1.0
         self.stopAnimating()
     }
     
     override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         super.endTracking(touch, with: event)
-        self.textLayer.opacity = 1.0
+        self.text.alpha = 1.0
     }
 }
 

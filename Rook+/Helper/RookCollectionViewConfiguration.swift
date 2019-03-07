@@ -9,7 +9,7 @@
 import UIKit
 
 public enum RookCollectionViewAppearanceType {
-    case home, discover
+    case home, discover, companies, internships, profile
 }
 
 public class RookCollectionViewConfiguration {
@@ -33,12 +33,22 @@ public class RookCollectionViewConfiguration {
         case .home:
             collectionViewAppearance = RookHomeAppearance()
             self.flowLayout = RookHomeAppearance()
-            
             flowLayout.headerReferenceSize = self.flowLayout.headerReferenceSize
             flowLayout.footerReferenceSize = self.flowLayout.footerReferenceSize
         case .discover:
             collectionViewAppearance = RookDiscoverAppearance()
             self.flowLayout = RookDiscoverAppearance()
+        case .companies:
+            collectionViewAppearance = RookCompaniesAppearance()
+            self.flowLayout = RookCompaniesAppearance()
+        case .internships:
+            collectionViewAppearance = RookInternshipsAppearance()
+            self.flowLayout = RookInternshipsAppearance()
+            flowLayout.footerReferenceSize = self.flowLayout.footerReferenceSize
+        case .profile:
+            collectionViewAppearance = RookProfileAppearance()
+            self.flowLayout = RookProfileAppearance()
+            
         }
         
         collectionView.backgroundColor = collectionViewAppearance.backgroundColor
@@ -148,6 +158,94 @@ fileprivate struct RookDiscoverAppearance: RookCollectionViewAppearance, RookCol
     var contentInset: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 0.0)
 
     var backgroundColor: UIColor = .white
+    
+    var showsHorizontalScrollIndicator: Bool = false
+    
+    var isScrollingEnabled: Bool = true
+    
+    init() {}
+}
+
+
+fileprivate struct RookCompaniesAppearance: RookCollectionViewAppearance, RookCollectionFlowLayout {
+    
+    var minimumInteritemSpacing: CGFloat = 15
+    
+    var minimumLineSpacing: CGFloat = 20
+    
+    var scrollDirection: UICollectionView.ScrollDirection = .vertical
+    
+    var backgroundColor: UIColor = .white
+    
+    var contentInset: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 15, right: 0.0)
+    
+    var alwaysBounceVertical = true
+    
+    var alwaysBounceHorizontal = false
+    
+    var allowsSelection = true
+    
+    var showsVerticalScrollIndicator = false
+    
+    var translatesAutoresizingMaskIntoConstraints = false
+    
+    var showsHorizontalScrollIndicator: Bool = false
+    
+    var isScrollingEnabled: Bool = true
+    
+    init() {}
+}
+
+fileprivate struct RookInternshipsAppearance: RookCollectionViewAppearance, RookCollectionFlowLayout {
+    
+    var minimumInteritemSpacing: CGFloat = 20
+    
+    var minimumLineSpacing: CGFloat = 20
+    
+    var scrollDirection: UICollectionView.ScrollDirection = .vertical
+    
+    var backgroundColor: UIColor = .white
+    
+    var contentInset: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 15, right: 0.0)
+    
+    var alwaysBounceVertical = true
+    
+    var alwaysBounceHorizontal = false
+    
+    var allowsSelection = true
+    
+    var showsVerticalScrollIndicator = false
+    
+    var translatesAutoresizingMaskIntoConstraints = false
+    
+    var showsHorizontalScrollIndicator: Bool = false
+    
+    var isScrollingEnabled: Bool = true
+    
+    init() {}
+}
+
+fileprivate struct RookProfileAppearance: RookCollectionViewAppearance, RookCollectionFlowLayout {
+    
+    var minimumInteritemSpacing: CGFloat = 10
+    
+    var minimumLineSpacing: CGFloat = 8
+    
+    var scrollDirection: UICollectionView.ScrollDirection = .vertical
+    
+    var backgroundColor: UIColor = .white
+    
+    var contentInset: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 15, right: 0.0)
+    
+    var alwaysBounceVertical = true
+    
+    var alwaysBounceHorizontal = false
+    
+    var allowsSelection = true
+    
+    var showsVerticalScrollIndicator = false
+    
+    var translatesAutoresizingMaskIntoConstraints = false
     
     var showsHorizontalScrollIndicator: Bool = false
     

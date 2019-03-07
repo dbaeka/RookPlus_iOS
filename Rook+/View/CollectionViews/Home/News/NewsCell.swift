@@ -142,7 +142,7 @@ class newsCell: UICollectionViewCell {
         self.detailLabel.heightAnchor.constraint(equalToConstant: self.detailLabel.intrinsicContentSize.height)
         
         self.sourceImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
-        self.sourceImageView.centerYAnchor.constraint(equalTo: self.headerImageView.centerYAnchor).isActive = true
+        self.sourceImageView.centerYAnchor.constraint(equalTo: self.headingLabel.centerYAnchor).isActive = true
         self.sourceImageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
         self.sourceImageView.widthAnchor.constraint(equalToConstant: 12).isActive = true
         

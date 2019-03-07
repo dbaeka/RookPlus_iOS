@@ -139,10 +139,7 @@ extension pollCard: UICollectionViewDataSource {
 
 extension pollCard: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = UIScreen.main.bounds.width/2.1
-        let height = width/1.4
-        print(width)
-        return CGSize(width: width, height: height)
+        return CGSize(width: 179, height: 128)
     }
 }
 

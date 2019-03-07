@@ -16,17 +16,34 @@ class barRook: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        layer.addSublayer(barLayer)
+        layer.addSublayer(RookTextLayer)
         setup()
     }
     
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
+        layer.addSublayer(barLayer)
+        layer.addSublayer(RookTextLayer)
         setup()
     }
     
-    func setup() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         layer.addSublayer(barLayer)
         layer.addSublayer(RookTextLayer)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        layer.addSublayer(barLayer)
+        layer.addSublayer(RookTextLayer)
+        setup()
+    }
+    
+    
+    func setup() {
         
         let barRookWidth: CGFloat = bounds.width
         let barRookHeight: CGFloat = barRookWidth / 3.69

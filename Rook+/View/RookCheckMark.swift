@@ -40,21 +40,34 @@ class RookCheckMark: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        layer.addSublayer(ovalShape)
+        layer.addSublayer(checkMarkShape)
         setup()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        layer.addSublayer(ovalShape)
+        layer.addSublayer(checkMarkShape)
         setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        layer.addSublayer(ovalShape)
+        layer.addSublayer(checkMarkShape)
         setup()
     }
     
     override open func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
+        layer.addSublayer(ovalShape)
+        layer.addSublayer(checkMarkShape)
+        setup()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         setup()
     }
     
@@ -69,7 +82,7 @@ class RookCheckMark: UIView {
         func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
         
         //// Frames
-        let outerFrame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+        let outerFrame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         
         //// Subframes
         let insideFrame = CGRect(x: outerFrame.minX + fastFloor(outerFrame.width * 0.24242 + 0.5), y: outerFrame.minY + fastFloor(outerFrame.height * 0.27273 + 0.5), width: fastFloor(outerFrame.width * 0.75758 + 0.5) - fastFloor(outerFrame.width * 0.24242 + 0.5), height: fastFloor(outerFrame.height * 0.72727 + 0.5) - fastFloor(outerFrame.height * 0.27273 + 0.5))
@@ -95,7 +108,6 @@ class RookCheckMark: UIView {
         checkMarkShape.fillColor = nil
         
         updateColors()
-        layer.addSublayer(ovalShape)
-        layer.addSublayer(checkMarkShape)
+
     }
 }

@@ -11,8 +11,17 @@ import UIKit
 @IBDesignable
 class RookGenderButton: UIButton {
     
-    private var coloredImage: UIImage?
-    private var noirImage: UIImage?
+    private var coloredImage: UIImage? {
+        guard let imageName = imageName else {return nil}
+        return UIImage(named: imageName)
+    }
+    
+    private var noirImage: UIImage? {
+        guard let coloredImage = coloredImage else {return nil}
+        return coloredImage.noir
+    }
+    
+    @IBInspectable var imageName: String?
     
     @IBInspectable var isActive: Bool = false {
         didSet {
@@ -30,20 +39,31 @@ class RookGenderButton: UIButton {
         setup()
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setup()
+    }
+
     private func setup() {
-        layer.cornerRadius = bounds.width/4
-        coloredImage = self.imageView?.image
-        noirImage = coloredImage?.noir
-        
+        layer.cornerRadius = frame.width/4
         layer.shadowOpacity = 0
         layer.shadowOffset = CGSize(width: 3, height: 3)
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowRadius = 4
-        
-        setColor()
+        imageView?.contentMode = .scaleAspectFit
     }
     
-    private func setColor() {
+    func setColor() {
         if isActive {
             saturate()
         } else {

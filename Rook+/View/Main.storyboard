@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gjU-UE-kdU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="slU-LW-hZj">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,17 +10,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Bold.ttf">
-            <string>Roboto-Bold</string>
-        </array>
         <array key="Roboto-BoldCondensed.ttf">
             <string>Roboto-BoldCondensed</string>
-        </array>
-        <array key="Roboto-Medium.ttf">
-            <string>Roboto-Medium</string>
-        </array>
-        <array key="Roboto-Regular.ttf">
-            <string>Roboto-Regular</string>
         </array>
     </customFonts>
     <scenes>
@@ -42,82 +33,13 @@
         <!--Onboarding View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="OnboardingViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="OnboardingViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4di-9n-1o6" userLabel="Color View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yms-0u-qoO" userLabel="BackCircle" customClass="circleShape" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="-17" y="78" width="409" height="409"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <viewLayoutGuide key="safeArea" id="rQu-rs-tAl"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                        <color key="value" red="0.85882352939999995" green="0.35294117650000001" blue="0.01176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rvz-ff-3yx" customClass="circleShape" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="-17" y="78" width="409" height="409"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <viewLayoutGuide key="safeArea" id="iGR-Vz-asZ"/>
-                            </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Xw-r3-nTR">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="YXZ-k7-dAH" kind="embed" id="TEv-lc-fbH"/>
-                                </connections>
-                            </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i03-0B-FVu" userLabel="BeginButton" customClass="RookOutlineButton" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="130.33333333333334" y="711.66666666666663" width="114.33333333333334" height="46.333333333333371"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isPressed" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="NEXT"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="handleNext:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KWs-LD-dJE"/>
-                                </connections>
-                            </button>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="RG1-zm-QKe">
-                                <rect key="frame" x="130.33333333333334" y="44" width="114.33333333333334" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </pageControl>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MTw-2W-1ki" customClass="barRook" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="513" width="88" height="29.333333333333371"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Hz-RM-cwx">
-                                <rect key="frame" x="0.0" y="734" width="134" height="1"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="93R-xR-V3a">
-                                <rect key="frame" x="241" y="734" width="134" height="1"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <viewLayoutGuide key="safeArea" id="ahs-Zb-Ig7"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.90196078431372551" green="0.39215686274509803" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="4dY-s8-lid"/>
                     </view>
                     <navigationItem key="navigationItem" id="JrQ-Lr-ipg"/>
-                    <connections>
-                        <outlet property="circle" destination="Rvz-ff-3yx" id="Kxh-vb-Oju"/>
-                        <outlet property="colorView" destination="4di-9n-1o6" id="xo9-rH-PD1"/>
-                        <outlet property="controlCircles" destination="RG1-zm-QKe" id="NJv-UY-Va8"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -126,44 +48,16 @@
         <!--CV Onboard View Controller-->
         <scene sceneID="bbx-lM-gAh">
             <objects>
-                <viewController storyboardIdentifier="CVOnboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8dz-lj-PKq" userLabel="CV Onboard View Controller" customClass="CVOnboardViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CVOnboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8dz-lj-PKq" userLabel="CV Onboard View Controller" customClass="CVOnboardViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="OiY-Vl-Dg4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZgX-kh-RXf" customClass="circleShape" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="-17" y="78" width="409" height="409"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="CVOnboard" translatesAutoresizingMaskIntoConstraints="NO" id="IGM-Pq-rF7" userLabel="circleImage">
-                                        <rect key="frame" x="72.666666666666657" y="-7.3333333333333428" width="263.66666666666674" height="423.66666666666674"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="With fully established CV, get recommended to companies for internships." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlV-hc-55I">
-                                <rect key="frame" x="19" y="550.66666666666663" width="340" height="140"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15.520000457763672"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14.520000457763672"/>
-                                </variation>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="evz-R7-dI1"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Id8-Fp-8qZ" sceneMemberID="firstResponder"/>
-                <view clipsSubviews="YES" contentMode="scaleToFill" id="1dr-xe-MHv" customClass="circleShape" customModule="Rook_" customModuleProvider="target">
+                <view clipsSubviews="YES" contentMode="scaleToFill" id="1dr-xe-MHv" customClass="circleShape" customModule="RookPlus" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="409" height="409"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -186,321 +80,32 @@
                     <viewLayoutGuide key="safeArea" id="zE8-jr-HK4"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1311" y="846"/>
+            <point key="canvasLocation" x="1202" y="120"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="vyt-Ai-4bM">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Kao-62-e5Z" customClass="LoginViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Kao-62-e5Z" customClass="LoginViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vtn-QL-cwp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zkJ-Cv-OGM" customClass="loginGradient" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="410"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TsA-rZ-fqe" customClass="barRook" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="75" width="74" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQF-4k-xb3">
-                                <rect key="frame" x="16" y="44" width="12" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="BackButton"/>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="42G-s8-0lp" customClass="spiralShape" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="124" width="337" height="286"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fem-hb-c4q" customClass="circleShape" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="157" y="238" width="24" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                        <color key="value" red="1" green="0.33333333333333331" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V3t-R8-XXs" customClass="circleShape" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="102" y="224" width="17" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                        <color key="value" red="0.23137254901960785" green="0.54509803921568623" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y2H-nN-uDm" customClass="RookRoundText" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="28" y="310" width="318" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontSize">
-                                        <real key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Username"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jwf-JH-hzW" customClass="RookRoundText" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="28" y="385" width="318" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <viewLayoutGuide key="safeArea" id="VNU-eL-IQl"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontSize">
-                                        <real key="value" value="12"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Password"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VkE-rr-ARa">
-                                <rect key="frame" x="249" y="439" width="97" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
-                                <state key="normal" title="Forgot password?">
-                                    <color key="titleColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ye-bb-xrL">
-                                <rect key="frame" x="28" y="472" width="126" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
-                                <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gv2-ab-2gI">
-                                <rect key="frame" x="155" y="466" width="47" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
-                                <state key="normal" title="Sign Up">
-                                    <color key="titleColor" red="0.0" green="0.29019607843137252" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="0Hc-t9-zxH" kind="push" id="DFy-iM-WS5"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4OA-oK-612">
-                                <rect key="frame" x="38" y="514" width="298" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3k-EA-Tib">
-                                        <rect key="frame" x="140" y="3" width="18" height="16"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
-                                        <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UN1-Nz-JQv">
-                                        <rect key="frame" x="20" y="10" width="113" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hmh-zP-hZD">
-                                        <rect key="frame" x="165" y="10" width="113" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
-                                        <viewLayoutGuide key="safeArea" id="TUf-MT-6Lk"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="dsR-KA-1WF">
-                                <rect key="frame" x="78" y="569" width="211" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X4C-V7-UYi" userLabel="G+">
-                                        <rect key="frame" x="0.0" y="0.0" width="53" height="53"/>
-                                        <state key="normal" image="G+"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ok-VS-Hzg" userLabel="Facebook">
-                                        <rect key="frame" x="80" y="0.0" width="53" height="53"/>
-                                        <state key="normal" image="Facebook"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aih-8G-ftP" userLabel="Twitter">
-                                        <rect key="frame" x="160" y="0.0" width="51" height="53"/>
-                                        <state key="normal" image="Twitter"/>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Join the community" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Njf-dY-uaL">
-                                <rect key="frame" x="16" y="103" width="312" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="26"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="of growing intellects" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wG-e0-EQ3">
-                                <rect key="frame" x="16" y="135" width="312" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXs-m6-sdG" customClass="RookAnimatedLoadingButton" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="254" y="466" width="92" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Zhb-ye-gII"/>
                     </view>
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="passwordTextField" destination="jwf-JH-hzW" id="4E9-34-oV3"/>
-                        <outlet property="signInButton" destination="tXs-m6-sdG" id="Jau-Uo-jp3"/>
-                        <outlet property="signUpButton" destination="Gv2-ab-2gI" id="AJd-v4-zh8"/>
-                        <outlet property="spiral" destination="42G-s8-0lp" id="lH2-GV-QgA"/>
-                        <outlet property="usernameTextField" destination="Y2H-nN-uDm" id="2yc-d6-EEs"/>
-                        <outletCollection property="hiddenItems" destination="Fem-hb-c4q" collectionClass="NSMutableArray" id="o3S-gF-v42"/>
-                        <outletCollection property="hiddenItems" destination="V3t-R8-XXs" collectionClass="NSMutableArray" id="cAJ-LB-SZJ"/>
-                        <outletCollection property="hiddenItems" destination="Njf-dY-uaL" collectionClass="NSMutableArray" id="eAy-ls-YOa"/>
-                        <outletCollection property="hiddenItems" destination="7wG-e0-EQ3" collectionClass="NSMutableArray" id="V2w-Dc-POQ"/>
-                        <outletCollection property="hiddenItems" destination="Y2H-nN-uDm" collectionClass="NSMutableArray" id="oBg-iZ-SIF"/>
-                        <outletCollection property="hiddenItems" destination="jwf-JH-hzW" collectionClass="NSMutableArray" id="aWl-ey-2Yy"/>
-                        <outletCollection property="hiddenItems" destination="VkE-rr-ARa" collectionClass="NSMutableArray" id="3VR-aS-kHF"/>
-                        <outletCollection property="hiddenItems" destination="Gv2-ab-2gI" collectionClass="NSMutableArray" id="KaA-pY-bgu"/>
-                        <outletCollection property="hiddenItems" destination="9ye-bb-xrL" collectionClass="NSMutableArray" id="XoC-GP-9TT"/>
-                        <outletCollection property="hiddenItems" destination="tXs-m6-sdG" collectionClass="NSMutableArray" id="s6l-g8-P9S"/>
-                        <outletCollection property="hiddenItems" destination="4OA-oK-612" collectionClass="NSMutableArray" id="B0A-nH-Mj5"/>
-                        <outletCollection property="hiddenItems" destination="dsR-KA-1WF" collectionClass="NSMutableArray" id="2IB-fJ-htl"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gqm-3q-r9w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="344.80000000000001" y="1781.5270935960591"/>
+            <point key="canvasLocation" x="-538" y="891"/>
         </scene>
-        <!--View Controller-->
+        <!--Pre Sign Up View Controller-->
         <scene sceneID="lfn-Hz-pbT">
             <objects>
-                <viewController id="0Hc-t9-zxH" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signUp" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Hc-t9-zxH" customClass="PreSignUpViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="goR-cd-Bir">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gbh-CO-c4W" customClass="rectGradient" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCD-Ja-UMX">
-                                <rect key="frame" x="16" y="44" width="12" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="BackButton"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Take the next steps to Join Us" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Atb-qw-PuB">
-                                <rect key="frame" x="80" y="162" width="214" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="19"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gUd-ct-uEe">
-                                <rect key="frame" x="38" y="374" width="298" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfH-3q-7LC">
-                                        <rect key="frame" x="140" y="3" width="18" height="16"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h71-wL-YQG">
-                                        <rect key="frame" x="20" y="10" width="113" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nQY-Iz-qPk">
-                                        <rect key="frame" x="165" y="10" width="113" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                        <viewLayoutGuide key="safeArea" id="lUU-5E-HDE"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <viewLayoutGuide key="safeArea" id="MId-DC-A95"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avb-e6-Wfd" customClass="RookRoundButton" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="38" y="276" width="298" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="13"/>
-                                <state key="normal" title="Register with your email">
-                                    <color key="titleColor" red="0.22352941176470587" green="0.22352941176470587" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="njm-bi-CJk" kind="push" id="vwR-qv-k5R"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDh-Bk-nc7" customClass="RookRoundButton" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="38" y="436" width="298" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
-                                <state key="normal" title="Register with your Facebook">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isShadowOn" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="od1-2V-ucv" customClass="RookRoundButton" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="38" y="486" width="298" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.86274509803921573" green="0.30588235294117649" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
-                                <state key="normal" title="Register with your Google+">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isShadowOn" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hb9-w3-Nsx" customClass="RookRoundButton" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="38" y="541" width="298" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.68235294117647061" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
-                                <state key="normal" title="Register with your Twitter">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isShadowOn" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By registering with us, you are " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuA-qm-mPd">
-                                <rect key="frame" x="113" y="747" width="147" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-BoldCondensed" family="Roboto" pointSize="12"/>
-                                <color key="textColor" red="0.13725490196078433" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lrw-46-SPb">
-                                <rect key="frame" x="82" y="762" width="209" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2Z-u8-iCd">
-                                        <rect key="frame" x="89" y="0.0" width="100" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Roboto-BoldCondensed" family="Roboto" pointSize="12"/>
-                                        <state key="normal" title="terms and conditions"/>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="accepting our" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BzU-ee-JVb">
-                                        <rect key="frame" x="20" y="1" width="67" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Roboto-BoldCondensed" family="Roboto" pointSize="12"/>
-                                        <color key="textColor" red="0.13725490200000001" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ryf-4L-fOe"/>
                     </view>
@@ -508,131 +113,46 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ezX-lI-tGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1252" y="1781.5270935960591"/>
-        </scene>
-        <!--Scroll View Controller-->
-        <scene sceneID="XJ5-ZG-jLx">
-            <objects>
-                <viewController id="YXZ-k7-dAH" customClass="ScrollViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6Xs-hm-D01">
-                        <rect key="frame" x="0.0" y="0.0" width="1125" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Jk0-48-lmI"/>
-                    </view>
-                    <size key="freeformSize" width="1125" height="812"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gjY-aO-CW0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2028" y="119"/>
+            <point key="canvasLocation" x="282" y="891"/>
         </scene>
         <!--Experience Onboard View Controller-->
         <scene sceneID="Jvu-Cm-Qbu">
             <objects>
-                <viewController storyboardIdentifier="ExperienceOnboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6kn-aO-k4d" customClass="ExperienceOnboardViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExperienceOnboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6kn-aO-k4d" customClass="ExperienceOnboardViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="FEG-s4-1kH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y4J-mE-KoE" customClass="circleShape" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="-17" y="78" width="409" height="409"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="XPOboard" translatesAutoresizingMaskIntoConstraints="NO" id="WPU-EI-yEb" userLabel="circleImage">
-                                        <rect key="frame" x="24" y="32" width="360" height="424"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSc-a1-GAu">
-                                <rect key="frame" x="19" y="550.66666666666663" width="340" height="140"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">Gain work experience virtually at your own
-time and comfort</string>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15.520000457763672"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14.520000457763672"/>
-                                </variation>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="51i-d0-qWW"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SmU-im-eWu" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="844.58128078817742"/>
+            <point key="canvasLocation" x="1983" y="120"/>
         </scene>
         <!--Job Ready Onboard View Controller-->
         <scene sceneID="hPH-1K-0wa">
             <objects>
-                <viewController storyboardIdentifier="JobReadyOnboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yuk-d9-o2g" customClass="JobReadyOnboardViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JobReadyOnboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yuk-d9-o2g" customClass="JobReadyOnboardViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="hUl-WK-Tnl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sjZ-9P-rYl" customClass="circleShape" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="-17" y="78" width="409" height="409"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="JobOnboard" translatesAutoresizingMaskIntoConstraints="NO" id="EvC-Qg-z08" userLabel="circleImage">
-                                        <rect key="frame" x="73" y="8" width="263.66666666666674" height="423.66666666666674"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <viewLayoutGuide key="safeArea" id="BWq-zh-iFJ"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Become job ready by learning from experience" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wx-tC-fkc">
-                                <rect key="frame" x="19" y="550.66666666666663" width="340" height="140"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15.520000457763672"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14.520000457763672"/>
-                                </variation>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="A23-Jk-L7g"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aZm-8C-7nM" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2737" y="845"/>
+            <point key="canvasLocation" x="2756" y="120"/>
         </scene>
         <!--Sign Up Pages View Controller-->
         <scene sceneID="oVr-se-Nl5">
             <objects>
-                <viewController id="njm-bi-CJk" customClass="SignUpPagesViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="register" useStoryboardIdentifierAsRestorationIdentifier="YES" id="njm-bi-CJk" customClass="SignUpPagesViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jqs-Uu-2yN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qe3-eU-8b1" customClass="rectGradient" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eP-VG-nPZ">
-                                <rect key="frame" x="16" y="44" width="12" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="BackButton"/>
-                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NfR-16-4f7">
                                 <rect key="frame" x="92" y="757" width="191" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -653,18 +173,6 @@ time and comfort</string>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S34-XG-kVf" customClass="barRook" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="75" width="74" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0sG-VP-nbf">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="bxB-k5-r4F" kind="embed" id="BGi-B9-z8T"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Xxj-as-kds"/>
@@ -673,40 +181,45 @@ time and comfort</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6oz-pa-a6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="1781.5270935960591"/>
+            <point key="canvasLocation" x="1098" y="890"/>
         </scene>
         <!--MyTasks-->
         <scene sceneID="DfR-mu-KeF">
             <objects>
                 <viewController id="bGt-rJ-LO1" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rwg-Td-S3z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="EfF-Wa-nbS"/>
-                    </view>
                     <tabBarItem key="tabBarItem" title="MyTasks" image="MyTasksInactive" selectedImage="MyTasksActive" id="4FM-GR-4jO"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="1eA-C4-uZt" id="BeM-0l-Z24"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iSy-a3-zxi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="1eA-C4-uZt">
+                    <connections>
+                        <outlet property="delegate" destination="bGt-rJ-LO1" id="Cji-Pu-lLk"/>
+                        <outlet property="searchContentsController" destination="bGt-rJ-LO1" id="n4a-ll-471"/>
+                        <outlet property="searchResultsDataSource" destination="bGt-rJ-LO1" id="ia4-cm-6tJ"/>
+                        <outlet property="searchResultsDelegate" destination="bGt-rJ-LO1" id="6mx-Oc-cIw"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2407" y="4022"/>
+            <point key="canvasLocation" x="2399" y="1662"/>
         </scene>
         <!--Home-->
         <scene sceneID="Lb6-6Q-W2E">
             <objects>
-                <viewController id="ww4-oG-nGT" customClass="HomeViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ww4-oG-nGT" customClass="HomeViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="HomeInactive" selectedImage="HomeActive" id="zT1-13-PoY"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7q4-9B-kv5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1561" y="4022"/>
+            <point key="canvasLocation" x="1458" y="1661"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ySP-Ql-nHN">
             <objects>
                 <navigationController id="gjU-UE-kdU" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="voz-lN-KaW">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="voz-lN-KaW">
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -715,12 +228,12 @@ time and comfort</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wrh-UJ-PzT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="298" y="3262"/>
+            <point key="canvasLocation" x="-538" y="1662"/>
         </scene>
         <!--RookTabViewController-->
         <scene sceneID="yeH-La-3GB">
             <objects>
-                <tabBarController storyboardIdentifier="RookTabBarViewController" title="RookTabViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fml-ya-ec6" customClass="RookTabBarViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="RookTabBarViewController" title="RookTabViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fml-ya-ec6" customClass="RookTabBarViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="KfM-83-cd5"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5SV-8f-3Qj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -739,443 +252,134 @@ time and comfort</string>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iwt-nf-uOx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1310" y="3262"/>
+            <point key="canvasLocation" x="474" y="1662"/>
         </scene>
         <!--Sign Up Page1 View Controller-->
         <scene sceneID="8sI-te-7md">
             <objects>
-                <viewController storyboardIdentifier="SignUpPage1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t8T-dq-NEW" customClass="SignUpPage1ViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpPage1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t8T-dq-NEW" customClass="SignUpPage1ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cBl-Qw-8P6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your name &amp;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="016-Ah-ERx">
-                                <rect key="frame" x="16" y="103" width="183" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="22"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s57-fA-X38">
-                                <rect key="frame" x="16" y="128" width="183" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="22"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sHQ-Pi-PUx" customClass="RookRoundText" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="23" y="222" width="151" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="First Name"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mtu-xL-xIm" customClass="RookRoundText" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="23" y="304" width="330" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Email address"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sHz-2F-igl" customClass="RookRoundText" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="202" y="222" width="151" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Last Name"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRW-Je-XFc" customClass="RookAnimatedLoadingButton" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="276" y="370" width="77" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAnimatable" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Next"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="fontString" value="Roboto-Bold"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="handleNext:" destination="t8T-dq-NEW" eventType="touchUpInside" id="BuP-nu-0Pp"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="YBh-jr-i8f"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0N-pX-UhD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2685.5999999999999" y="2528.5714285714289"/>
-        </scene>
-        <!--Scroll View Controller-->
-        <scene sceneID="Eqi-wv-zaC">
-            <objects>
-                <viewController id="bxB-k5-r4F" customClass="ScrollViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ft4-OK-Muz">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="ddv-k6-jlw"/>
-                    </view>
-                    <size key="freeformSize" width="1000" height="812"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6nb-fT-1Uo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3525" y="1782"/>
+            <point key="canvasLocation" x="1873" y="891"/>
         </scene>
         <!--Sign Up Page2 View Controller-->
         <scene sceneID="ZdN-eC-ODA">
             <objects>
-                <viewController storyboardIdentifier="SignUpPage2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="O0L-62-vEv" customClass="SignUpPage2ViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpPage2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="O0L-62-vEv" customClass="SignUpPage2ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7IH-tI-6sU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose your birthdate &amp;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uv8-nw-919">
-                                <rect key="frame" x="16" y="103" width="246" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="22"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRZ-9e-W4O">
-                                <rect key="frame" x="16" y="128" width="183" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="22"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IYN-3Z-Aby">
-                                <rect key="frame" x="43" y="384" width="289" height="134"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lXd-T2-Prf" customClass="RookGenderButton" customModule="Rook_" customModuleProvider="target">
-                                        <rect key="frame" x="168" y="5" width="101" height="120"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="FemaleCard"/>
-                                        <connections>
-                                            <action selector="handleGenderSelection:" destination="O0L-62-vEv" eventType="touchUpInside" id="58x-Kh-Rbc"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E6v-Jd-FrW" customClass="RookGenderButton" customModule="Rook_" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="5" width="101" height="120"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="MaleCard"/>
-                                        <connections>
-                                            <action selector="handleGenderSelection:" destination="O0L-62-vEv" eventType="touchUpInside" id="I41-to-Q3C"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="um6-Fe-sse" customClass="RookRoundButton" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="22" y="264" width="330" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="11"/>
-                                <state key="normal" title="12 January 2018">
-                                    <color key="titleColor" red="0.71764705882352942" green="0.71764705882352942" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isShadowOn" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="marginLabel">
-                                        <real key="value" value="45"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What is your birthday?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WdA-az-u8k">
-                                <rect key="frame" x="117" y="233" width="141" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose your gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qvj-Xu-nU1">
-                                <rect key="frame" x="117" y="342" width="126" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vlH-vy-zMC" customClass="RookAnimatedLoadingButton" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="275" y="543" width="77" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAnimatable" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Next"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="fontString" value="Roboto-Bold"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="handleNext:" destination="O0L-62-vEv" eventType="touchUpInside" id="XxF-IR-EC7"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="28B-Wu-QuS"/>
                     </view>
-                    <connections>
-                        <outlet property="femaleCardButton" destination="lXd-T2-Prf" id="kLe-j0-oB8"/>
-                        <outlet property="maleCardButton" destination="E6v-Jd-FrW" id="XGr-Ul-u1f"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2pF-6F-k5S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3381.5999999999999" y="2528.5714285714289"/>
+            <point key="canvasLocation" x="2569" y="891"/>
         </scene>
         <!--Sign Up Page3 View Controller-->
         <scene sceneID="V7Z-aH-Oay">
             <objects>
-                <viewController storyboardIdentifier="SignUpPage3" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2hi-Uw-Xrp" customClass="SignUpPage3ViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpPage3" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2hi-Uw-Xrp" customClass="SignUpPage3ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bgU-8J-Dzf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OK-li-H4M">
-                                <rect key="frame" x="16" y="103" width="246" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="22"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password Strength:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aN-Ll-BOu">
-                                <rect key="frame" x="45" y="272" width="106" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Strong" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAL-PD-bj9">
-                                <rect key="frame" x="282" y="272" width="36" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
-                                <color key="textColor" red="0.43137254901960786" green="0.91764705882352937" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Must have at least 8 characters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8D6-vL-ydW">
-                                <rect key="frame" x="92" y="336" width="170" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Must include a special character" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q61-6Y-28h">
-                                <rect key="frame" x="92" y="365" width="175" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOc-dR-TEs" customClass="RookAnimatedLoadingButton" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="275" y="543" width="77" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAnimatable" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Next"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="fontString" value="Roboto-Bold"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="handleNext:" destination="2hi-Uw-Xrp" eventType="touchUpInside" id="Ozq-gZ-x1L"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j2P-cb-fem" customClass="RookRoundText" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="24" y="219" width="327" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Enter a new password"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="TFTypeValue">
-                                        <integer key="value" value="0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isLeft" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="buttonText" value="Show"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Must include a capital letter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxv-bg-DVo">
-                                <rect key="frame" x="92" y="393" width="150" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oR1-HC-Xib" customClass="RookCheckMark" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="63" y="336" width="16" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uFv-tf-uId" customClass="RookCheckMark" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="63" y="365" width="16" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qcq-cz-e7s" customClass="RookCheckMark" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="63" y="393" width="16" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="yvi-32-iMw"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JaB-D2-BJd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4077.5999999999999" y="2528.5714285714289"/>
+            <point key="canvasLocation" x="3265" y="891"/>
         </scene>
         <!--Sign Up Page4 View Controller-->
         <scene sceneID="Kcc-r1-Dwr">
             <objects>
-                <viewController storyboardIdentifier="SignUpPage4" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ciu-J1-H4T" customClass="SignUpPage4ViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpPage4" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ciu-J1-H4T" customClass="SignUpPage4ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VS8-oK-GCs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxl-kc-Wsz">
-                                <rect key="frame" x="16" y="103" width="246" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="22"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rdh-T0-dO7" customClass="RookRoundText" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="24" y="219" width="327" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Enter your phone number"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="TFTypeValue">
-                                        <integer key="value" value="0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isLeft" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="buttonText" value="+233"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Byo-wZ-UEu" customClass="RookAnimatedLoadingButton" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="282" y="286" width="77" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAnimatable" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Next"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="fontString" value="Roboto-Bold"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="handleNext:" destination="Ciu-J1-H4T" eventType="touchUpInside" id="ugd-Uh-edA"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="u88-HW-3Re"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F0R-ir-nZr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4777" y="2529"/>
+            <point key="canvasLocation" x="3962" y="891"/>
         </scene>
         <!--Sign Up Page5 View Controller-->
         <scene sceneID="bXn-Zq-PxM">
             <objects>
-                <viewController storyboardIdentifier="SignUpPage5" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tjs-bj-UwA" customClass="SignUpPage5ViewController" customModule="Rook_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpPage5" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tjs-bj-UwA" customClass="SignUpPage5ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QBb-So-Zgx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Verification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2PO-cJ-2aw">
-                                <rect key="frame" x="16" y="103" width="246" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="22"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekn-Tn-nAF">
-                                <rect key="frame" x="70" y="152" width="235" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">Enter the verification code sent to the
-number +233 *** *** *099</string>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bxA-HU-Rmj" userLabel="Keypad" customClass="RookKeypadVerificationView" customModule="Rook_" customModuleProvider="target">
-                                <rect key="frame" x="16" y="198" width="343" height="580"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Mf7-3P-n0s"/>
                     </view>
-                    <connections>
-                        <outlet property="keyPadContainer" destination="bxA-HU-Rmj" id="KUA-Vu-tYq"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pte-fY-ihX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5488.8000000000002" y="2528.5714285714289"/>
+            <point key="canvasLocation" x="4674" y="891"/>
         </scene>
         <!--Companies-->
         <scene sceneID="WCw-WA-WPb">
             <objects>
-                <viewController id="x3C-r0-zyQ" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hn2-WR-al7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="95z-R3-x1W"/>
-                    </view>
+                <viewController id="x3C-r0-zyQ" customClass="CompaniesViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Companies" image="CompaniesInactive" selectedImage="CompaniesActive" id="0Pa-Ny-XWr"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="xf3-Nu-g8W" id="Qvz-5i-pPI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kqh-Hw-PaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="xf3-Nu-g8W">
+                    <connections>
+                        <outlet property="delegate" destination="x3C-r0-zyQ" id="HHh-pb-QTn"/>
+                        <outlet property="searchContentsController" destination="x3C-r0-zyQ" id="OU6-hd-rq3"/>
+                        <outlet property="searchResultsDataSource" destination="x3C-r0-zyQ" id="mk7-yy-D2a"/>
+                        <outlet property="searchResultsDelegate" destination="x3C-r0-zyQ" id="ZIv-Sv-Qcv"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="3185" y="4022"/>
+            <point key="canvasLocation" x="3258" y="1662"/>
         </scene>
         <!--Internships-->
         <scene sceneID="2t8-Oj-9L2">
             <objects>
-                <viewController id="xGB-5G-KdY" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nyU-1f-duA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="U4t-Oc-JuF"/>
-                    </view>
+                <viewController id="xGB-5G-KdY" customClass="InternshipsViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Internships" image="InternshipInactive" selectedImage="InternshipActive" id="jJa-xF-M8q"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QJ7-LO-Ymd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4044" y="4022"/>
+            <point key="canvasLocation" x="4118" y="1662"/>
         </scene>
         <!--Profile-->
         <scene sceneID="C1o-Fz-uli">
             <objects>
-                <viewController id="Z2o-Va-teK" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ikc-Sd-IY2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Bwz-Xr-w7e"/>
-                    </view>
+                <viewController id="Z2o-Va-teK" customClass="ProfileViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" id="O0U-mu-bNi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X8m-rO-VPa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4822" y="4022"/>
+            <point key="canvasLocation" x="4895" y="1662"/>
         </scene>
     </scenes>
     <resources>
-        <image name="BackButton" width="12" height="19"/>
         <image name="CVOnboard" width="263" height="424"/>
-        <image name="CompaniesActive" width="21" height="20"/>
-        <image name="CompaniesInactive" width="21" height="20"/>
-        <image name="Facebook" width="53" height="53"/>
-        <image name="FemaleCard" width="51" height="91"/>
-        <image name="G+" width="53" height="53"/>
-        <image name="HomeActive" width="22" height="20"/>
-        <image name="HomeInactive" width="22" height="20"/>
+        <image name="CompaniesActive" width="31" height="30"/>
+        <image name="CompaniesInactive" width="31" height="30"/>
+        <image name="HomeActive" width="27" height="24"/>
+        <image name="HomeInactive" width="27" height="24"/>
         <image name="InternshipActive" width="17" height="23"/>
         <image name="InternshipInactive" width="17" height="23"/>
-        <image name="JobOnboard" width="266" height="394"/>
-        <image name="MaleCard" width="50" height="93"/>
         <image name="MyTasksActive" width="15" height="20"/>
         <image name="MyTasksInactive" width="15" height="20"/>
-        <image name="Twitter" width="51" height="51"/>
-        <image name="XPOboard" width="371" height="336"/>
     </resources>
 </document>

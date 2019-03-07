@@ -32,11 +32,6 @@ class discoverCardCell: UICollectionViewCell {
     }
     
     func configureViews() {
-        self.layer.backgroundColor = UIColor.clear.cgColor
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 3.0)
-        self.layer.shadowOpacity = 0.5
-        self.layer.shadowRadius = 7
         setup()
         addSubview(containerView)
         containerView.addSubview(imageImageView)

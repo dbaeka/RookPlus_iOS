@@ -22,7 +22,16 @@ class circleShape: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
-        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
     }
     
     override func prepareForInterfaceBuilder() {
@@ -33,15 +42,10 @@ class circleShape: UIView {
     func setup() {
         self.cornerRadius = bounds.width/2
         layer.addSublayer(circleLayer)
-        
-        //// Variable Declarations
-        
-        //// circle Drawing
-        let frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
-
+       
+        let frame = CGRect(x: 0, y: 0, width: 400, height: 400)
         let circlePath = UIBezierPath(ovalIn: frame)
         circleLayer.path = circlePath.cgPath
-        
         circleLayer.fillColor = color.cgColor
     }
 }
@@ -62,16 +66,34 @@ class loginGradient: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        layer.addSublayer(gradientLayer)
         setup()
     }
     
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
+        layer.addSublayer(gradientLayer)
+        setup()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        layer.addSublayer(gradientLayer)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        layer.addSublayer(gradientLayer)
+        setup()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         setup()
     }
     
     func setup() {
-        layer.addSublayer(gradientLayer)
         
         let frame = bounds
         let width = frame.width
@@ -112,17 +134,36 @@ class spiralShape: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        layer.addSublayer(spiralLayer)
         setup()
     
     }
     
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
+        layer.addSublayer(spiralLayer)
+        setup()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        layer.addSublayer(spiralLayer)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        layer.addSublayer(spiralLayer)
+        setup()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         setup()
     }
     
     func setup() {
-        layer.addSublayer(spiralLayer)
+        
         
         let width = bounds.width
         let height = bounds.height
@@ -271,16 +312,35 @@ class rectGradient: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        layer.addSublayer(gradientLayer)
         setup()
     }
     
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
+        layer.addSublayer(gradientLayer)
+        setup()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        layer.addSublayer(gradientLayer)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        layer.addSublayer(gradientLayer)
+        setup()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         setup()
     }
     
     func setup() {
-        layer.addSublayer(gradientLayer)
+        
         
         let frame = bounds
 

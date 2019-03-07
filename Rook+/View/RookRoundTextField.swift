@@ -22,25 +22,34 @@ class RookRoundText: UIView {
     
     @IBInspectable var isLeft: Bool = true {
         didSet {
-            setNeedsLayout()
+            textFieldWithButton.isLeft = isLeft
         }
     }
     
     @IBInspectable var buttonText: String? = "Button" {
         didSet {
-            setNeedsLayout()
+            textFieldWithButton.buttonText = buttonText
         }
     }
     
     @IBInspectable var placeholderFontSize: CGFloat = 11 {
         didSet{
-            layoutIfNeeded()
+            textField.placeholderFont = UIFont(name: "Roboto-Regular", size: placeholderFontSize)
+            textFieldWithButton.placeholderFont = textField.placeholderFont
         }
     }
     
     @IBInspectable var placeholder: String? {
         didSet{
-            setNeedsDisplay()
+            textField.placeholder = placeholder
+            textFieldWithButton.placeholder = placeholder
+        }
+    }
+    
+    @IBInspectable var isSecureEntry: Bool = false {
+        didSet{
+            textField.isSecureTextEntry = isSecureEntry
+            textFieldWithButton.isSecureTextEntry = isSecureEntry
         }
     }
     
@@ -56,7 +65,7 @@ class RookRoundText: UIView {
     
     open var TFType: RookRoundTFType = .noButton {
         didSet {
-          //  updateHiddenState()
+            updateHiddenState()
         }
     }
     
@@ -69,6 +78,22 @@ class RookRoundText: UIView {
         super.prepareForInterfaceBuilder()
         setup()
     }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateView()
+    }
+    
     fileprivate func setup() {
         createTextField()
         createTextFieldWithButton()
@@ -79,6 +104,11 @@ class RookRoundText: UIView {
         layer.shadowColor = UIColor.black.cgColor
         
         updateHiddenState()
+    }
+    
+    private func updateView(){
+        textField.frame = bounds
+        textFieldWithButton.frame = bounds
     }
     
     fileprivate func createTextField() {
@@ -326,6 +356,7 @@ open class RookRoundTextField: UITextField { // swiftlint:disable:this type_body
      */
     override public init(frame: CGRect) {
         super.init(frame: frame)
+        addEditingChangedObserver()
         init_RookRoundButton()
     }
     
@@ -335,13 +366,18 @@ open class RookRoundTextField: UITextField { // swiftlint:disable:this type_body
      */
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        addEditingChangedObserver()
+        init_RookRoundButton()
+    }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
         init_RookRoundButton()
     }
     
     fileprivate final func init_RookRoundButton() {
         //.borderStyle = .none
         updateColors()
-        addEditingChangedObserver()
         updateTextAligment()
         layer.cornerRadius = bounds.height/2
         layer.masksToBounds = true
@@ -502,10 +538,6 @@ open class RookRoundTextField: UITextField { // swiftlint:disable:this type_body
         if #available(iOS 8.0, *) {
             super.prepareForInterfaceBuilder()
         }
-        
-      //  borderStyle = .none
-        
-     //   isSelected = true
         init_RookRoundButton()
         updateControl(false)
     }
