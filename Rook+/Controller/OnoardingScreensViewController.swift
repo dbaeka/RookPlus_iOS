@@ -44,21 +44,23 @@ class CVOnboardViewController: UIViewController {
         view.addSubview(circleImage)
         view.addSubview(textLabel)
         configureConstraints()
+        
+        view.isUserInteractionEnabled = false
     }
     
     private func configureConstraints() {
         let width = (self.sizeClass() == (UIUserInterfaceSizeClass.regular, UIUserInterfaceSizeClass.regular)) ? UIScreen.main.bounds.width/2 : UIScreen.main.bounds.width
         let controlCircleOffset: CGFloat = UIScreen.main.bounds.height/18 + 20
         self.circleImage.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.height/38 + controlCircleOffset).isActive = true
-        self.circleImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        self.circleImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         self.circleImage.widthAnchor.constraint(equalToConstant: width*1.1).isActive = true
         self.circleImage.heightAnchor.constraint(equalToConstant: width*1.1).isActive = true
         self.circleImage.layer.cornerRadius = (1.1*width)/2
-        
+    
         let barRookOffset: CGFloat = UIScreen.main.bounds.height/38 + (width/3.3)/4.14814815
         let textOffset: CGFloat = width/3.3
         self.textLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: textOffset/3.6).isActive = true
-        self.textLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -textOffset/3.6).isActive = true
+        self.textLabel.rightAnchor.constraint(equalTo: view.rightAnchor , constant: -textOffset/3.6).isActive = true
         self.textLabel.topAnchor.constraint(equalTo: self.circleImage.bottomAnchor, constant: barRookOffset+(UIScreen.main.bounds.height/56)).isActive = true
         
         if (self.sizeClass() == (UIUserInterfaceSizeClass.regular,UIUserInterfaceSizeClass.regular)) {
@@ -106,6 +108,8 @@ class ExperienceOnboardViewController: UIViewController {
         view.addSubview(circleImage)
         view.addSubview(textLabel)
         configureConstraints()
+        
+        view.isUserInteractionEnabled = false
     }
     
     private func configureConstraints() {
@@ -169,6 +173,8 @@ class JobReadyOnboardViewController: UIViewController {
         view.addSubview(circleImage)
         view.addSubview(textLabel)
         configureConstraints()
+        
+        view.isUserInteractionEnabled = false
     }
     
     private func configureConstraints() {

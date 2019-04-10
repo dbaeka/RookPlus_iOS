@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import FBSDKLoginKit
+import TwitterKit
+import LinkedinSwift
 
 class PreSignUpViewController: UIViewController {
+    
+    private let linkedinHelper = LinkedinSwiftHelper(configuration: LinkedinSwiftConfiguration(clientId: "813got1qgr4n0g", clientSecret: "Rrs0hRXL1cbmdgr2", state: "DLKDJF46ikMMZADfdfds", permissions: ["r_basicprofile", "r_emailaddress"], redirectUrl: "https://myrookery.com"))
     
     private let background: rectGradient = {
         let view = rectGradient()
@@ -159,8 +164,11 @@ class PreSignUpViewController: UIViewController {
         view.addSubview(headingLabel)
         view.addSubview(subHeadingLabel)
         view.addSubview(linkedInButton)
+        self.linkedInButton.addTarget(self, action: #selector(handleLinkedIn), for: .touchUpInside)
         view.addSubview(facebookButton)
+        self.facebookButton.addTarget(self, action: #selector(socialMediaRegister(_:)), for: .touchUpInside)
         view.addSubview(twitterButton)
+        self.twitterButton.addTarget(self, action: #selector(twitterConnect), for: .touchUpInside)
         
         configureConstraints()
     }
@@ -229,7 +237,7 @@ class PreSignUpViewController: UIViewController {
         bottomView.addSubview(termsButton)
         
         self.byRegisteringLabel.heightAnchor.constraint(equalToConstant: textFontSize/1.6).isActive = true
-         self.termsButton.heightAnchor.constraint(equalToConstant: textFontSize/1.6).isActive = true
+        self.termsButton.heightAnchor.constraint(equalToConstant: textFontSize/1.6).isActive = true
         bottomView.heightAnchor.constraint(equalToConstant: textFontSize/1.6).isActive = true
         bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -distanceToTop*1.2).isActive = true
         bottomView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -251,6 +259,8 @@ class PreSignUpViewController: UIViewController {
         } else {
             view.addSubview(byRegisteringLabel)
             bottomView.addSubview(acceptingLabel)
+            self.acceptingLabel.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor).isActive = true
+            self.acceptingLabel.leftAnchor.constraint(equalTo: bottomView.leftAnchor).isActive = true
     
             self.byRegisteringLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             
@@ -276,6 +286,88 @@ class PreSignUpViewController: UIViewController {
                 lineView.rightAnchor.constraint(equalTo: emailButton.rightAnchor, constant: -20).isActive = true
                 lineView.leftAnchor.constraint(equalTo: orLabel.rightAnchor, constant: 5).isActive = true
             }
+        }
+    }
+    
+    @objc func socialMediaRegister(_ sender: Any) {
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) -> Void in
+            if (error == nil){
+                let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                // if user cancel the login
+                if (result?.isCancelled)!{
+                    return
+                }
+                if(fbloginresult.grantedPermissions.contains("email"))
+                {
+                    self.getFBUserData()
+                }
+            }
+        }
+    }
+    
+    @objc func twitterConnect() {
+        TWTRTwitter.sharedInstance().logIn { (session, error) in
+            guard let session = session else {
+                print("error: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            print(session.userName)
+            let client = TWTRAPIClient.withCurrentUser()
+            let request = client.urlRequest(withMethod: "GET", urlString: "https://api.twitter.com/1.1/account/verify_credentials.json", parameters: ["include_email": "true", "skip_status": "true"], error: nil)
+            client.sendTwitterRequest(request) { (response, data, connectionError) in
+                if connectionError != nil {
+                    print("Error: \(connectionError)")
+                }
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!, options: [.allowFragments])
+                    print("json: \(json)")
+                } catch let jsonError as NSError {
+                    print("json error: \(jsonError.localizedDescription)")
+                }
+            }
+            client.loadUser(withID: session.userID, completion: { (user, error) in
+                print(user?.name ?? "")
+            })
+            client.requestEmail { email, error in
+                guard let email = email else {
+                    print("error: \(String(describing: error?.localizedDescription))")
+                    return
+                }
+                print("signed in as \(String(describing: session.userName))")
+                let recivedEmailID = email
+                print(recivedEmailID)
+            
+            }
+        }
+    }
+    
+    @objc func handleLinkedIn() {
+        linkedinHelper.authorizeSuccess({ (lsToken) -> Void in
+            //Login success lsToken
+            self.linkedinHelper.requestURL("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url,picture-urls::(original),positions,date-of-birth,phone-numbers,location)?format=json", requestType: LinkedinSwiftRequestGet, success: { (response) -> Void in
+                print(response)
+                //parse this response which is in the JSON format
+            }) {(error) -> Void in
+                
+                print(error.localizedDescription)
+                //handle the error
+            }
+        }, error: { (error) -> Void in
+            //Encounter error: error.localizedDescription
+        }, cancel: { () -> Void in
+            //User Cancelled!
+        })
+    }
+    
+    private func getFBUserData(){
+        if((FBSDKAccessToken.current()) != nil){
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+                if (error == nil){
+                    //everything works print the user data
+                    print(result)
+                }
+            })
         }
     }
     

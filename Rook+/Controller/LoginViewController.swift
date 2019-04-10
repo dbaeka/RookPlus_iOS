@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import FBSDKLoginKit
+import TwitterKit
+import LinkedinSwift
+import VSAlert
+import SwiftyJSON
 
 class LoginViewController: UIViewController {
+    
+    private let linkedinHelper = LinkedinSwiftHelper(configuration: LinkedinSwiftConfiguration(clientId: "813got1qgr4n0g", clientSecret: "Rrs0hRXL1cbmdgr2", state: "DLKDJF46ikMMZADfdfds", permissions: ["r_basicprofile", "r_emailaddress"], redirectUrl: "https://myrookery.com"))
 
     private let spiral: spiralShape = {
         let spiral = spiralShape()
@@ -56,10 +63,10 @@ class LoginViewController: UIViewController {
         return view
     }()
     
-    private let usernameTextField: RookRoundText = {
+    private let emailTextField: RookRoundText = {
         let textfield = RookRoundText()
         textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.placeholder = "Username"
+        textfield.placeholder = "Email Address"
         textfield.textField.keyboardType = .emailAddress
         textfield.textField.tag = 1
         return textfield
@@ -69,9 +76,12 @@ class LoginViewController: UIViewController {
         let textfield = RookRoundText()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.placeholder = "Password"
-        textfield.textField.keyboardType = .alphabet
         textfield.isSecureEntry = true
-        textfield.textField.tag = 2
+        textfield.textFieldWithButton.keyboardType = UIKeyboardType.alphabet
+        textfield.isLeft = false
+        textfield.TFType = .button
+        textfield.buttonText = "Show"
+        textfield.textFieldWithButton.tag = 2
         return textfield
     }()
     
@@ -202,25 +212,32 @@ class LoginViewController: UIViewController {
         view.addSubview(spiral)
         view.addSubview(blueCircle)
         view.addSubview(orangeCircle)
-        view.addSubview(usernameTextField)
+        view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
+         self.passwordTextField.textFieldWithButton.button.addTarget(self, action: #selector(togglePasswordVisible(_:)), for: .touchUpInside)
         view.addSubview(forgotPasswordButton)
         view.addSubview(noAccountLabel)
         view.addSubview(signInButton)
+        self.signInButton.addTarget(self, action: #selector(signInUser(_:)), for: .touchUpInside)
         view.addSubview(signUpButton)
         signUpButton.addTarget(self, action: #selector(goToSignUp(_:)), for: .touchUpInside)
         view.addSubview(orLabel)
         view.addSubview(headingLabel)
         view.addSubview(subHeadingLabel)
         view.addSubview(linkedInButton)
+         self.linkedInButton.addTarget(self, action: #selector(handleLinkedIn), for: .touchUpInside)
         view.addSubview(facebookButton)
+         self.facebookButton.addTarget(self, action: #selector(socialMediaRegister(_:)), for: .touchUpInside)
         view.addSubview(twitterButton)
+         self.twitterButton.addTarget(self, action: #selector(twitterConnect), for: .touchUpInside)
         
-        self.hiddenItems = [blueCircle, orangeCircle, usernameTextField, passwordTextField, forgotPasswordButton, noAccountLabel, signInButton, signUpButton, orLabel, linkedInButton, facebookButton, twitterButton]
+        self.hiddenItems = [blueCircle, orangeCircle, emailTextField, passwordTextField, forgotPasswordButton, noAccountLabel, signInButton, signUpButton, orLabel, linkedInButton, facebookButton, twitterButton]
 
         self.yConstraints = []
         
         configureConstraints()
+        self.signInButton.isEnabled = false
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: UITextField.textDidChangeNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -235,8 +252,22 @@ class LoginViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UITextField.textDidChangeNotification, object: nil)
+    }
+    
     @objc func goBack(_ sender: Any){
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func togglePasswordVisible(_ sender: Any) {
+        self.passwordTextField.isSecureEntry = !self.passwordTextField.isSecureEntry
+        if passwordTextField.isSecureEntry {
+            self.passwordTextField.buttonText = "Show"
+        } else {
+            self.passwordTextField.buttonText = "Hide"
+        }
     }
     
     private func configureConstraints() {
@@ -282,14 +313,14 @@ class LoginViewController: UIViewController {
         self.orangeCircle.layer.cornerRadius = width/40
         
         let textFieldWIdth: CGFloat = (self.sizeClass() == (UIUserInterfaceSizeClass.regular, UIUserInterfaceSizeClass.regular)) ? 400 : width-50
-        let usernameTFBottomAnchor = self.usernameTextField.bottomAnchor.constraint(equalTo: logingradient.bottomAnchor, constant: -30)
+        let usernameTFBottomAnchor = self.emailTextField.bottomAnchor.constraint(equalTo: logingradient.bottomAnchor, constant: -30)
         usernameTFBottomAnchor.isActive = true
         self.yConstraints?.append(usernameTFBottomAnchor)
-        self.usernameTextField.widthAnchor.constraint(equalToConstant: textFieldWIdth).isActive = true
-        self.usernameTextField.heightAnchor.constraint(equalToConstant: textFieldWIdth/7.76).isActive = true
-        self.usernameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        self.emailTextField.widthAnchor.constraint(equalToConstant: textFieldWIdth).isActive = true
+        self.emailTextField.heightAnchor.constraint(equalToConstant: textFieldWIdth/7.76).isActive = true
+        self.emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        let passwordTFTopAnchor = self.passwordTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 20)
+        let passwordTFTopAnchor = self.passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20)
         passwordTFTopAnchor.isActive = true
         self.yConstraints?.append(passwordTFTopAnchor)
         self.passwordTextField.widthAnchor.constraint(equalToConstant: textFieldWIdth).isActive = true
@@ -309,7 +340,7 @@ class LoginViewController: UIViewController {
         self.signInButton.widthAnchor.constraint(equalToConstant: textFieldWIdth/5).isActive = true
         self.signInButton.heightAnchor.constraint(equalToConstant: textFieldWIdth/(5*2.3)).isActive = true
         
-        self.noAccountLabel.leftAnchor.constraint(equalTo: usernameTextField.leftAnchor, constant: 8).isActive = true
+        self.noAccountLabel.leftAnchor.constraint(equalTo: emailTextField.leftAnchor, constant: 8).isActive = true
         self.noAccountLabel.centerYAnchor.constraint(equalTo: signInButton.centerYAnchor).isActive = true
         self.noAccountLabel.heightAnchor.constraint(equalToConstant: 14).isActive = true
         
@@ -360,10 +391,10 @@ class LoginViewController: UIViewController {
             lineView.centerYAnchor.constraint(equalTo: orLabel.centerYAnchor).isActive = true
             
             if (i == 0) {
-                lineView.leftAnchor.constraint(equalTo: usernameTextField.leftAnchor, constant: 20).isActive = true
+                lineView.leftAnchor.constraint(equalTo: emailTextField.leftAnchor, constant: 20).isActive = true
                 lineView.rightAnchor.constraint(equalTo: orLabel.leftAnchor, constant: -5).isActive = true
             } else {
-                lineView.rightAnchor.constraint(equalTo: usernameTextField.rightAnchor, constant: -20).isActive = true
+                lineView.rightAnchor.constraint(equalTo: emailTextField.rightAnchor, constant: -20).isActive = true
                 lineView.leftAnchor.constraint(equalTo: orLabel.rightAnchor, constant: 5).isActive = true
             }
         }
@@ -373,9 +404,31 @@ class LoginViewController: UIViewController {
         self.spiral.startAnimation()
     }
     
+    @objc private func textDidChange (_ notification: Notification){
+        self.validate()
+    }
+    
+    private func validate(_ textField: UITextField? = nil){
+        var passwordIsValid = false
+        var emailIsValid = false
+        
+        emailIsValid = Validator.isEmail().apply(emailTextField.textField.text) && Validator.required().apply(emailTextField.textField.text)
+        emailTextField.textField.errorMessage = (emailIsValid) ? "" : "Invalid Email"
+        
+        passwordIsValid = Validator.required().apply(passwordTextField.textFieldWithButton.text)
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            self.signInButton.isEnabled = passwordIsValid
+        })
+    }
+    
+    private func resignKeyboards() {
+        self.emailTextField.textField.resignFirstResponder()
+        self.passwordTextField.textFieldWithButton.resignFirstResponder()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.usernameTextField.textField.resignFirstResponder()
-        self.passwordTextField.textField.resignFirstResponder()
+        self.resignKeyboards()
         self.signInButton.stopAnimating()
     }
 
@@ -384,6 +437,118 @@ class LoginViewController: UIViewController {
         guard let vc = signup else { return }
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @objc func signInUser(_ sender: Any) {
+        RookUser.shared.login(email: self.emailTextField.textField.text!, password: self.passwordTextField.textFieldWithButton.text!) { (success, data, error) in
+            if (success) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0, execute: {
+                    RookUser.shared.user.refresh(completion: { (success, data, error) in
+                        if (success){
+                            DispatchQueue.main.async {
+                                guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") else {return}
+                                self.present(vc, animated: true, completion: nil)
+                            }
+                        }
+                    })
+                    })
+                
+            } else {
+                self.signInButton.stopAnimating()
+                guard let error = error else { return }
+                let statusMessage = (error as NSError).userInfo["message"] ?? "No message"
+                DispatchQueue.main.async {
+                    let controller = VSAlertController(title: "Incorrect Login Credential", message: statusMessage as? String, preferredStyle: VSAlertControllerStyle.alert)
+                    controller?.shouldDismissOnBackgroundTap = true
+                    controller?.animationStyle = .fall
+                    let action = VSAlertAction(title: "Close", style: VSAlertActionStyle.cancel, action: nil)
+                    controller?.add(action!)
+                    self.present(controller!, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    @objc func socialMediaRegister(_ sender: Any) {
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) -> Void in
+            if (error == nil){
+                let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                // if user cancel the login
+                if (result?.isCancelled)!{
+                    return
+                }
+                if(fbloginresult.grantedPermissions.contains("email"))
+                {
+                    self.getFBUserData()
+                }
+            }
+        }
+    }
+    
+    @objc func twitterConnect() {
+        TWTRTwitter.sharedInstance().logIn { (session, error) in
+            guard let session = session else {
+                print("error: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            let client = TWTRAPIClient.withCurrentUser()
+            let request = client.urlRequest(withMethod: "GET", urlString: "https://api.twitter.com/1.1/account/verify_credentials.json", parameters: ["include_email": "true", "skip_status": "true"], error: nil)
+            client.sendTwitterRequest(request) { (response, data, connectionError) in
+                if connectionError != nil {
+                    print("Error: \(connectionError)")
+                }
+                do {
+                    guard let data = data else { return }
+                    let json = try JSON(data: data)
+                    let email = json["email"].string
+                    let id = json["id_str"].string
+                    let avatar = json["default_profile_image"].boolValue ? "" : json["profile_image_url_https"].string
+                    let location = json["location"].string
+                    print("json: \(email! + id! + avatar!)")
+                } catch let jsonError {
+                    print("json error: \(jsonError.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    @objc func handleLinkedIn() {
+        linkedinHelper.authorizeSuccess({ (lsToken) -> Void in
+            //Login success lsToken
+            self.linkedinHelper.requestURL("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url,picture-urls::(original),positions,date-of-birth,phone-numbers,location)?format=json", requestType: LinkedinSwiftRequestGet, success: { (response) -> Void in
+                let json = JSON(response.jsonObject)
+                print(json)
+                
+            }) {(error) -> Void in
+                
+                print(error.localizedDescription)
+                //handle the error
+            }
+        }, error: { (error) -> Void in
+            //Encounter error: error.localizedDescription
+        }, cancel: { () -> Void in
+            //User Cancelled!
+        })
+    }
+    
+    private func getFBUserData(){
+        if((FBSDKAccessToken.current()) != nil){
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+                if (error == nil){
+                    //everything works print the user data
+                    guard let result = result else { return }
+                    let json = JSON(result)
+                    let email = json["email"].string
+                    let id = json["id"].string
+                    let avatar = json["picture"].exists() ?  json["picture"]["data"]["url"].string : ""
+                    let fname = json["first_name"].string
+                    let lname = json["last_name"].string
+                    print(email!+id!+avatar!+fname!+lname!)
+                }
+            })
+        }
+    }
+    
 }
 
 

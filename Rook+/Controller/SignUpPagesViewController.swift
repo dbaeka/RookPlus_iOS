@@ -69,24 +69,24 @@ class SignUpPagesViewController: UIViewController {
         return button
     }()
     
-    lazy var SignUpPage1: UIViewController! = {
-        return self.storyboard?.instantiateViewController(withIdentifier: "SignUpPage1")
+    lazy var SignUpPage1: SignUpPage1ViewController! = {
+        return self.storyboard?.instantiateViewController(withIdentifier: "SignUpPage1") as! SignUpPage1ViewController
     }()
     
-    lazy var SignUpPage2: UIViewController! = {
-        return self.storyboard?.instantiateViewController(withIdentifier: "SignUpPage2")
+    lazy var SignUpPage2: SignUpPage2ViewController! = {
+        return self.storyboard?.instantiateViewController(withIdentifier: "SignUpPage2") as! SignUpPage2ViewController
     }()
     
-    lazy var SignUpPage3: UIViewController! = {
-        return self.storyboard?.instantiateViewController(withIdentifier: "SignUpPage3")
+    lazy var SignUpPage3: SignUpPage3ViewController! = {
+        return self.storyboard?.instantiateViewController(withIdentifier: "SignUpPage3") as! SignUpPage3ViewController
     }()
     
-    lazy var SignUpPage4: UIViewController! = {
-        return self.storyboard?.instantiateViewController(withIdentifier: "SignUpPage4")
+    lazy var SignUpPage4: SignUpPage4ViewController! = {
+        return self.storyboard?.instantiateViewController(withIdentifier: "SignUpPage4") as! SignUpPage4ViewController
     }()
     
-    lazy var SignUpPage5: UIViewController! = {
-        return self.storyboard?.instantiateViewController(withIdentifier: "SignUpPage5")
+    lazy var SignUpPage5: SignUpPage5ViewController! = {
+        return self.storyboard?.instantiateViewController(withIdentifier: "SignUpPage5") as! SignUpPage5ViewController
     }()
    
     
@@ -113,6 +113,8 @@ class SignUpPagesViewController: UIViewController {
         
         view.addSubview(backButton)
         self.backButton.addTarget(self, action: #selector(goBack(_:)), for: .touchUpInside)
+        
+        self.loginButton.addTarget(self, action: #selector(goToLogin(_:)), for: .touchUpInside)
         
         configureConstraints()
     }
@@ -148,8 +150,9 @@ class SignUpPagesViewController: UIViewController {
         bottomView.addSubview(alreadyAccountLabel)
         
         self.alreadyAccountLabel.heightAnchor.constraint(equalToConstant: textFontSize/1.6).isActive = true
-        self.alreadyAccountLabel.font = UIFont(name: "Roboto-BoldCondensed", size: textFontSize/1.6)
+        self.alreadyAccountLabel.font = UIFont(name: "Roboto-BoldCondensed", size: textFontSize/1.4)
         self.alreadyAccountLabel.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor).isActive = true
+        self.alreadyAccountLabel.leftAnchor.constraint(equalTo: bottomView.leftAnchor).isActive = true
             
         self.loginButton.centerYAnchor.constraint(equalTo: alreadyAccountLabel.centerYAnchor).isActive = true
         self.loginButton.leftAnchor.constraint(equalTo: alreadyAccountLabel.rightAnchor, constant: 5).isActive = true
@@ -158,8 +161,9 @@ class SignUpPagesViewController: UIViewController {
         self.loginButton.setAttributedTitle(attributedStrings.normal, for: .normal)
         self.loginButton.setAttributedTitle(attributedStrings.highlighted, for: .highlighted)
         
+        let distance: CGFloat = (screenRatio < 2.0 && self.sizeClass() != (UIUserInterfaceSizeClass.regular, UIUserInterfaceSizeClass.regular)) ? -20 : -distanceToTop*1.2
         bottomView.heightAnchor.constraint(equalToConstant: textFontSize/1.6).isActive = true
-        bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -distanceToTop*1.2).isActive = true
+        bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: distance).isActive = true
         bottomView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         bottomView.widthAnchor.constraint(equalToConstant: alreadyAccountLabel.intrinsicContentSize.width + loginButton.intrinsicContentSize.width + 5).isActive = true
         
@@ -187,6 +191,14 @@ class SignUpPagesViewController: UIViewController {
                     break
                 }
             }
+        }
+    }
+    
+    @objc private func goToLogin(_ sender: Any) {
+        let count = self.navigationController?.viewControllers.count
+        if count != nil {
+            let loginVC = self.navigationController?.viewControllers[count!-3]
+            self.navigationController?.popToViewController(loginVC!, animated: true)
         }
     }
 }

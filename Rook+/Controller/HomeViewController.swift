@@ -192,12 +192,12 @@ class HomeViewController: UIViewController {
         RookHomeCollectionView.register(SectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderViewID)
         RookHomeCollectionView.register(SectionFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: SectionFooterViewID)
         
-        
-        
         RookHomeCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         RookHomeCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         RookHomeCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         RookHomeCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        self.extendedLayoutIncludesOpaqueBars = true
     }
     
     

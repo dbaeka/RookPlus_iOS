@@ -9,7 +9,7 @@
 import UIKit
 
 class SignUpPage1ViewController: UIViewController {
-
+    
     private let firstNameTextField: RookRoundText = {
         let textfield = RookRoundText()
         textfield.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +82,15 @@ class SignUpPage1ViewController: UIViewController {
         self.nextButton.addTarget(self, action: #selector(handleNext(_:)), for: .touchUpInside)
         
         configureConstraints()
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: UITextField.textDidChangeNotification, object: nil)
+        self.nextButton.isEnabled = false
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UITextField.textDidChangeNotification, object: nil)
+    }
+    
     
     private func configureConstraints() {
         let height = UIScreen.main.bounds.height
@@ -128,11 +136,44 @@ class SignUpPage1ViewController: UIViewController {
     }
     
     @objc func handleNext(_ sender: Any) {
+        self.resignKeyboards()
         let vc = self.parent?.parent as! SignUpPagesViewController
         vc.handleNext(sender)
     }
+    
+    @objc private func textDidChange (_ notification: Notification){
+        self.validate()
+    }
+    
+    private func validate(){
+        var emailIsValid = false
+        var fnameIsValid = false
+        var lnameIsValid = false
+        
+        fnameIsValid = Validator.isASCII().apply(firstNameTextField.textField.text) && Validator.required().apply(firstNameTextField.textField.text)
+        firstNameTextField.textField.errorMessage = (fnameIsValid) ? "" : "Invalid First Name"
+        
+        lnameIsValid = Validator.isASCII().apply(lastNameTextField.textField.text) && Validator.required().apply(lastNameTextField.textField.text)
+        lastNameTextField.textField.errorMessage = (lnameIsValid) ? "" : "Invalid Last Name"
+        
+        emailIsValid = Validator.isEmail().apply(emailTextField.textField.text) && Validator.required().apply(emailTextField.textField.text)
+        emailTextField.textField.errorMessage = (emailIsValid) ? "" : "Invalid Email"
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            self.nextButton.isEnabled = emailIsValid && fnameIsValid && lnameIsValid
+        })
+    }
+    
+    private func resignKeyboards() {
+        self.firstNameTextField.textField.resignFirstResponder()
+        self.lastNameTextField.textField.resignFirstResponder()
+        self.emailTextField.textField.resignFirstResponder()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.resignKeyboards()
+    }
 }
-
 
 class SignUpPage2ViewController: UIViewController {
     
@@ -169,6 +210,17 @@ class SignUpPage2ViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    private var birthdayString: String = "20 February 1997" {
+        didSet {
+            let textAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: "Roboto-Regular", size: 13), NSAttributedString.Key.foregroundColor: UIColor.black]
+            let attributedString = NSMutableAttributedString(string: birthdayString, attributes: textAttributes)
+            birthdayButton.setAttributedTitle(attributedString, for: .normal)
+            birthdayButton.marginLabel = 45
+            self.isDateSet = true
+            self.validate()
+        }
+    }
     
     private let birthdayButton : RookRoundButton = {
         let button = RookRoundButton()
@@ -213,7 +265,7 @@ class SignUpPage2ViewController: UIViewController {
         button.isActive = false
         button.clipsToBounds = false
         button.backgroundColor = UIColor.white
-        button.imageName = "MaleCard"
+        button.imageName = .male
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -223,16 +275,21 @@ class SignUpPage2ViewController: UIViewController {
         button.isActive = false
         button.clipsToBounds = false
         button.backgroundColor = UIColor.white
-        button.imageName = "FemaleCard"
+        button.imageName = .female
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    private var birthDate: String?
+    private var isDateSet: Bool = false
+    private var gender: RookGenderButton.Gender?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(headingLabel)
         view.addSubview(subHeadingLabel)
         view.addSubview(birthdayButton)
+        self.birthdayButton.addTarget(self, action: #selector(showDatePicker(_:)), for: .touchUpInside)
         view.addSubview(birthdayLabel)
         view.addSubview(genderLabel)
         view.addSubview(nextButton)
@@ -243,6 +300,14 @@ class SignUpPage2ViewController: UIViewController {
         self.femaleCardButton.addTarget(self, action: #selector(handleGenderSelection(_:)), for: .touchUpInside)
         
         configureConstraints()
+        self.nextButton.isEnabled = false
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBirthday(notification:)), name: NSNotification.Name("dateChosen"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("dateChosen"), object: nil)
     }
     
     private func configureConstraints() {
@@ -294,7 +359,7 @@ class SignUpPage2ViewController: UIViewController {
         self.femaleCardButton.centerYAnchor.constraint(equalTo: maleCardButton.centerYAnchor).isActive = true
         self.femaleCardButton.rightAnchor.constraint(equalTo: birthdayButton.rightAnchor, constant: -genderWidth/4).isActive = true
         self.femaleCardButton.setColor()
-    
+        
         self.nextButton.topAnchor.constraint(equalTo: femaleCardButton.bottomAnchor, constant: height/25).isActive = true
         self.nextButton.rightAnchor.constraint(equalTo: birthdayButton.rightAnchor).isActive = true
         self.nextButton.widthAnchor.constraint(equalToConstant: textFieldWIdth/4).isActive = true
@@ -305,15 +370,36 @@ class SignUpPage2ViewController: UIViewController {
         let vc = self.parent?.parent as! SignUpPagesViewController
         vc.handleNext(sender)
     }
-
+    
     
     @objc func handleGenderSelection(_ sender: RookGenderButton) {
+        self.gender =  (sender.isActive) ? sender.imageName : nil
         if sender == maleCardButton {
             self.femaleCardButton.isActive = false
         }
         else {
             self.maleCardButton.isActive = false
         }
+        self.validate()
+    }
+    
+    @objc func showDatePicker(_ sender: Any) {
+        RookBSController.shared().present(DatePickerViewController(startDate: self.birthdayString.rookDatefromLongString!), on: self)
+    }
+    
+    @objc private func updateBirthday(notification: Notification) {
+        if let info = notification.userInfo {
+            let userInfo = info as! [String: Date]
+            let chosenDate = userInfo["date"]!
+            birthdayString = chosenDate.rookLongStringDate!
+            RookBSController.shared().dismiss(from: self)
+        }
+    }
+    
+    private func validate() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.nextButton.isEnabled = self.gender != nil && self.isDateSet
+        })
     }
 }
 
@@ -337,11 +423,11 @@ class SignUpPage3ViewController: UIViewController {
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.placeholder = "Enter a new password"
         textfield.isSecureEntry = true
-        textfield.textField.keyboardType = UIKeyboardType.alphabet
+        textfield.textFieldWithButton.keyboardType = UIKeyboardType.alphabet
         textfield.isLeft = false
         textfield.TFType = .button
         textfield.buttonText = "Show"
-        textfield.textField.tag = 1
+        textfield.textFieldWithButton.tag = 5
         return textfield
     }()
     
@@ -368,8 +454,8 @@ class SignUpPage3ViewController: UIViewController {
     
     private let strengthTypeLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(hexString: "#6EEA74")
-        label.text = "Strong"
+        label.textColor = UIColor.red
+        label.text = "Very Weak"
         label.numberOfLines = 1
         label.textAlignment = .right
         label.font = UIFont(name: "Roboto-Medium", size: 12)
@@ -408,12 +494,13 @@ class SignUpPage3ViewController: UIViewController {
         }
         return labels
     }()
- 
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(headingLabel)
         view.addSubview(passwordTextField)
+        self.passwordTextField.textFieldWithButton.button.addTarget(self, action: #selector(togglePasswordVisible(_:)), for: .touchUpInside)
         view.addSubview(passwordStrengthLabel)
         view.addSubview(strengthTypeLabel)
         view.addSubview(nextButton)
@@ -425,6 +512,13 @@ class SignUpPage3ViewController: UIViewController {
         }
         
         configureConstraints()
+        self.nextButton.isEnabled = false
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: UITextField.textDidChangeNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UITextField.textDidChangeNotification, object: nil)
     }
     
     private func configureConstraints() {
@@ -454,7 +548,7 @@ class SignUpPage3ViewController: UIViewController {
         self.passwordStrengthLabel.rightAnchor.constraint(equalTo: passwordStrengthLabel.rightAnchor).isActive = true
         self.passwordStrengthLabel.font = UIFont(name: "Roboto-Medium", size: textFontSize/2)
         
-       self.strengthTypeLabel.centerYAnchor.constraint(equalTo: passwordStrengthLabel.centerYAnchor).isActive = true
+        self.strengthTypeLabel.centerYAnchor.constraint(equalTo: passwordStrengthLabel.centerYAnchor).isActive = true
         self.strengthTypeLabel.rightAnchor.constraint(equalTo: passwordTextField.rightAnchor, constant: -textFieldWIdth/12).isActive = true
         self.strengthTypeLabel.leftAnchor.constraint(equalTo: passwordStrengthLabel.leftAnchor).isActive = true
         self.strengthTypeLabel.font = passwordStrengthLabel.font
@@ -473,7 +567,7 @@ class SignUpPage3ViewController: UIViewController {
             self.validationLabels[i].rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
             self.validationLabels[i].font = passwordStrengthLabel.font
         }
-  
+        
         self.nextButton.topAnchor.constraint(equalTo: validationLabels[2].bottomAnchor, constant: height/25).isActive = true
         self.nextButton.rightAnchor.constraint(equalTo: passwordTextField.rightAnchor).isActive = true
         self.nextButton.widthAnchor.constraint(equalToConstant: textFieldWIdth/4).isActive = true
@@ -481,14 +575,57 @@ class SignUpPage3ViewController: UIViewController {
     }
     
     @objc func handleNext(_ sender: Any) {
+        self.resignKeyboards()
         let vc = self.parent?.parent as! SignUpPagesViewController
         vc.handleNext(sender)
     }
-
+    
+    @objc private func togglePasswordVisible(_ sender: Any) {
+        self.passwordTextField.isSecureEntry = !self.passwordTextField.isSecureEntry
+        if passwordTextField.isSecureEntry {
+            self.passwordTextField.buttonText = "Show"
+        } else {
+            self.passwordTextField.buttonText = "Hide"
+        }
+    }
+    
+    @objc private func textDidChange (_ notification: Notification){
+        let textfield = notification.object as! UITextField
+        self.validate(textfield)
+    }
+    
+    private func validate(_ textField: UITextField? = nil){
+        guard let textField = textField else { return }
+        
+        if textField.tag == 5 {
+            var passwordIsValid = false
+            
+            passwordIsValid = Validator.minLength(8).apply(passwordTextField.textFieldWithButton.text) && Validator.required().apply(passwordTextField.textFieldWithButton.text) && !Validator.isLowercase().apply(passwordTextField.textFieldWithButton.text) && Validator.hasSpecialCharacter().apply(passwordTextField.textFieldWithButton.text)
+            RookCheckMarks[0].isOn = Validator.minLength(8).apply(passwordTextField.textFieldWithButton.text)
+            RookCheckMarks[1].isOn = Validator.hasSpecialCharacter().apply(passwordTextField.textFieldWithButton.text)
+            RookCheckMarks[2].isOn = !Validator.isLowercase().apply(passwordTextField.textFieldWithButton.text)
+            
+            let strength = Validator.strength(ofPassword: passwordTextField.textFieldWithButton.text)
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                self.strengthTypeLabel.text = strength.rawValue
+                self.strengthTypeLabel.textColor = strength.color
+                self.nextButton.isEnabled = passwordIsValid
+            })
+        }
+    }
+    
+    private func resignKeyboards() {
+        self.passwordTextField.textFieldWithButton.resignFirstResponder()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.resignKeyboards()
+    }
 }
 
 
-class SignUpPage4ViewController: UIViewController {
+class SignUpPage4ViewController: UIViewController, UITextFieldDelegate {
     
     private let headingLabel: UILabel = {
         let label = UILabel()
@@ -503,15 +640,22 @@ class SignUpPage4ViewController: UIViewController {
         return label
     }()
     
+    private var phoneCode: String = "+233" {
+        didSet {
+            phoneNumberTextField.buttonText = phoneCode
+            self.validate()
+        }
+    }
+    
     private let phoneNumberTextField: RookRoundText = {
         let textfield = RookRoundText()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.placeholder = "Enter your phone number"
-        textfield.textField.keyboardType = UIKeyboardType.alphabet
+        textfield.textFieldWithButton.keyboardType = UIKeyboardType.alphabet
         textfield.isLeft = true
         textfield.TFType = .button
         textfield.buttonText = "+233"
-        textfield.textField.tag = 1
+        textfield.textFieldWithButton.tag = 4
         return textfield
     }()
     
@@ -527,10 +671,21 @@ class SignUpPage4ViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(headingLabel)
         view.addSubview(phoneNumberTextField)
+        self.phoneNumberTextField.textFieldWithButton.delegate = self
+        self.phoneNumberTextField.textFieldWithButton.button.addTarget(self, action: #selector(selectPhoneCode(_:)), for: .touchUpInside)
         view.addSubview(nextButton)
         self.nextButton.addTarget(self, action: #selector(handleNext(_:)), for: .touchUpInside)
         
         configureConstraints()
+        self.nextButton.isEnabled = false
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: UITextField.textDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updatePhoneCode(notification:)), name: NSNotification.Name("localeDoneChosen"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UITextField.textDidChangeNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("localeDoneChosen"), object: nil)
     }
     
     private func configureConstraints() {
@@ -562,13 +717,72 @@ class SignUpPage4ViewController: UIViewController {
     }
     
     @objc func handleNext(_ sender: Any) {
+        self.resignKeyboards()
         let vc = self.parent?.parent as! SignUpPagesViewController
+        vc.SignUpPage5.phoneNumber = self.phoneNumberTextField.textFieldWithButton.text
         vc.handleNext(sender)
+    }
+    
+    @objc private func updatePhoneCode(notification: Notification) {
+        if let info = notification.userInfo {
+            let userInfo = info as! [String: LocaleInfo]
+            self.phoneCode = (userInfo["locale"]?.phoneCode)!
+        }
+        RookBSController.shared().dismiss(from: self)
+    }
+    
+    @objc private func textDidChange (_ notification: Notification){
+        let textfield = notification.object as! UITextField
+        self.validate(textfield)
+    }
+    
+    @objc private func selectPhoneCode(_ sender: Any) {
+        RookBSController.shared().present(LocalePickerViewController(type: .phoneCode), on: self)
+    }
+    
+    private func validate(_ textField: UITextField? = nil){
+        guard let textField = textField else { return }
+        
+        if textField.tag == 4 {
+            var phoneIsValid = false
+            guard let text = phoneNumberTextField.textFieldWithButton.text else {return}
+            let unformattedText = text.unformat(string: text, with: "(NNN) NNN NNNN")
+            phoneIsValid = Validator.isPhone(.en_GH).apply(unformattedText) && Validator.required().apply(unformattedText)
+            self.phoneNumberTextField.textFieldWithButton.errorMessage = (phoneIsValid) ? "" : "Invalid Phone Number"
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                self.nextButton.isEnabled = phoneIsValid
+            })
+        }
+    }
+    
+    private func resignKeyboards() {
+        self.phoneNumberTextField.textFieldWithButton.resignFirstResponder()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.resignKeyboards()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let lastText = (text as NSString).replacingCharacters(in: range, with: string) as String
+        textField.text = lastText.format(string: text, with: "(NNN) NNN NNNN")
+        let notification = Notification(name: UITextField.textDidChangeNotification, object: textField, userInfo: nil)
+        self.textDidChange(notification)
+        return false
     }
 }
 
 
 class SignUpPage5ViewController: UIViewController, RookKeypadVerificationViewDelegate {
+    
+    var phoneNumber: String? {
+        didSet {
+            guard let phoneNumber = phoneNumber else { return }
+            verificationLabel.text = "Enter the verification code sent to the number " + phoneNumber
+        }
+    }
     
     private let headingLabel: UILabel = {
         let label = UILabel()
@@ -602,7 +816,7 @@ class SignUpPage5ViewController: UIViewController, RookKeypadVerificationViewDel
         return keypad
     }()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(headingLabel)
@@ -629,7 +843,7 @@ class SignUpPage5ViewController: UIViewController, RookKeypadVerificationViewDel
         self.headingLabel.font = UIFont(name: "Roboto-Bold", size: textFontSize)
         self.headingLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: headingOffset).isActive = true
         self.headingLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: textOffset/4.8).isActive = true
-        self.headingLabel.heightAnchor.constraint(equalToConstant: headingLabel.intrinsicContentSize.width/7.5).isActive = true
+        self.headingLabel.heightAnchor.constraint(equalToConstant: headingLabel.intrinsicContentSize.width/6.5).isActive = true
         
         self.verificationLabel.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: height/24).isActive = true
         self.verificationLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: textFieldWIdth/20).isActive = true
@@ -642,18 +856,12 @@ class SignUpPage5ViewController: UIViewController, RookKeypadVerificationViewDel
         self.keyPadContainer.widthAnchor.constraint(equalToConstant: keypadWIdth).isActive = true
         self.keyPadContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -bottomOffset).isActive = true
         self.keyPadContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        keyPadContainer.backgroundColor = .red
-       
-        
     }
     
     
     func codeView(sender: RookKeypadVerificationView, didFinishInput code: String) {
         print(code)
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "RookTabBarViewController") as! RookTabBarViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeScreenViewController") as! WelcomeScreenViewController
+        self.present(vc, animated: false, completion: nil)
     }
-
-
 }

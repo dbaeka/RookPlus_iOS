@@ -176,6 +176,8 @@ class videosCell: UICollectionViewCell {
         addSubview(shareButton)
         addSubview(videoImageView)
         addSubview(playButton)
+        
+        self.playButton.addTarget(self, action: #selector(tapPlayButton), for: .touchUpInside)
     }
     
     private func setupConstraints() {
@@ -237,6 +239,10 @@ class videosCell: UICollectionViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func tapPlayButton(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("open"), object: nil, userInfo: ["videoCellFrame": self.videoImageView.globalFrame!])
     }
     
 }

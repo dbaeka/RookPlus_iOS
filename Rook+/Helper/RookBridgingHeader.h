@@ -9,8 +9,6 @@
 #ifndef RookBridgingHeader_h
 #define RookBridgingHeader_h
 
-
-
 #endif /* RookBridgingHeader_h */
 
 
