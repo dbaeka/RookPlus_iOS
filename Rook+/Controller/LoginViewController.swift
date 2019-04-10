@@ -515,10 +515,17 @@ class LoginViewController: UIViewController {
     @objc func handleLinkedIn() {
         linkedinHelper.authorizeSuccess({ (lsToken) -> Void in
             //Login success lsToken
-            self.linkedinHelper.requestURL("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url,picture-urls::(original),positions,date-of-birth,phone-numbers,location)?format=json", requestType: LinkedinSwiftRequestGet, success: { (response) -> Void in
+            self.linkedinHelper.requestURL("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,industry,picture-url,picture-urls::(original),positions,date-of-birth,phone-numbers,location)?format=json", requestType: LinkedinSwiftRequestGet, success: { (response) -> Void in
                 let json = JSON(response.jsonObject)
                 print(json)
-                
+                let email = json["emailAddress"].string
+                let id = json["id"].string
+                let avatar = json["pictureUrl"].boolValue ? "" : json["pictureUrl"].string
+                let location = json["location"]["name"].string
+                let fname = json["firstName"].string
+                let lname = json["lastName"].string
+                let positions = json["positions"]
+                let industry = json["industry"].string
             }) {(error) -> Void in
                 
                 print(error.localizedDescription)
