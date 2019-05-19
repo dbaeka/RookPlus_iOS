@@ -1,0 +1,58 @@
+[
+    {
+        "cname": "Atrossy Limited",
+        "location": "East Legon, Ghana",
+        "type": "Paid",
+        "title": "Software Intern",
+        "logo": "atrossy.png",
+        "date": "Dec 20",
+        "category": "List"
+    },
+    {
+        "cname": "Vodafone Ghana",
+        "location": "Accra, Ghana",
+        "type": "Free",
+        "title": "Software Developer Intern for Handling Nonsense Work",
+        "logo": "voda.png",
+        "date": "Feb 20",
+        "category": "List"
+    },
+    {
+        "cname": "Atrossy Limited",
+        "location": "East Legon, Ghana",
+        "type": "Paid",
+        "title": "Software Developer Intern",
+        "logo": "atrossy.png",
+        "date": "Dec 20",
+        "category": "Ad",
+        "ratio": 1.2
+    },
+    {
+        "cname": "Vodafone Ghana",
+        "location": "Accra, Ghana",
+        "type": "Free",
+        "title": "Software Developer Intern",
+        "logo": "voda.png",
+        "date": "Feb 20",
+        "category": "List"
+    },
+    {
+        "cname": "Atrossy Limited",
+        "location": "East Legon, Ghana",
+        "type": "Paid",
+        "title": "Software Developer Intern",
+        "logo": "atrossy.png",
+        "date": "Dec 20",
+        "category": "List"
+    },
+    {
+        "cname": "Vodafone Ghana",
+        "location": "Accra, Ghana",
+        "type": "Free",
+        "title": "Software Developer Intern",
+        "logo": "voda.png",
+        "date": "Feb 20",
+        "category": "Ad",
+        "ratio": 1.0
+    }
+]

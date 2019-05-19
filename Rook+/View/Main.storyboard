@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="slU-LW-hZj">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-BoldCondensed.ttf">
+            <string>Roboto-BoldCondensed</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="n82-Gf-K4B">
+            <objects>
+                <navigationController storyboardIdentifier="IntroNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="slU-LW-hZj" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yvE-Jl-4PT">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="9N1-iQ-hK9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YLs-kj-HvG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-537" y="120"/>
+        </scene>
+        <!--Onboarding View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="OnboardingViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="8TO-b2-cD3"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="JrQ-Lr-ipg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="344.80000000000001" y="119.70443349753695"/>
+        </scene>
+        <!--CV Onboard View Controller-->
+        <scene sceneID="bbx-lM-gAh">
+            <objects>
+                <viewController storyboardIdentifier="CVOnboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8dz-lj-PKq" userLabel="CV Onboard View Controller" customClass="CVOnboardViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="OiY-Vl-Dg4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="5VJ-24-4qT"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Id8-Fp-8qZ" sceneMemberID="firstResponder"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" id="1dr-xe-MHv" customClass="circleShape" customModule="RookPlus" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="409" height="409"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CVOnboard" translatesAutoresizingMaskIntoConstraints="NO" id="eeU-Ig-tWb" userLabel="circleImage">
+                            <rect key="frame" x="72.666666666666657" y="-7.3333333333333428" width="263.66666666666674" height="423.66666666666674"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="eeU-Ig-tWb" secondAttribute="height" multiplier="263:423" id="dgp-cK-MxO"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="eeU-Ig-tWb" firstAttribute="centerY" secondItem="1dr-xe-MHv" secondAttribute="centerY" id="41x-h6-XnV"/>
+                        <constraint firstAttribute="width" secondItem="1dr-xe-MHv" secondAttribute="height" multiplier="1:1" id="W2s-6u-mw0"/>
+                        <constraint firstItem="eeU-Ig-tWb" firstAttribute="centerX" secondItem="1dr-xe-MHv" secondAttribute="centerX" id="b2g-bb-Poy"/>
+                        <constraint firstAttribute="bottom" secondItem="eeU-Ig-tWb" secondAttribute="bottom" constant="-7.3333333333333712" id="eEU-mG-vKF"/>
+                        <constraint firstItem="eeU-Ig-tWb" firstAttribute="top" secondItem="1dr-xe-MHv" secondAttribute="top" constant="-7.3333333333333428" id="jXz-jy-DKE"/>
+                        <constraint firstAttribute="width" constant="409" id="tDS-N8-QBZ"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="5kR-pt-WeA"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="1202" y="120"/>
+        </scene>
+        <!--Welcome Screen View Controller-->
+        <scene sceneID="AaB-nG-HOL">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeScreenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gBl-SN-R6J" customClass="WelcomeScreenViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VHL-EQ-wyP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="naF-ql-C2W"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JaM-RG-gZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5438" y="890"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="vyt-Ai-4bM">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Kao-62-e5Z" customClass="LoginViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vtn-QL-cwp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="W4G-F8-iwD"/>
+                    </view>
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gqm-3q-r9w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-538" y="891"/>
+        </scene>
+        <!--Pre Sign Up View Controller-->
+        <scene sceneID="lfn-Hz-pbT">
+            <objects>
+                <viewController storyboardIdentifier="signUp" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Hc-t9-zxH" customClass="PreSignUpViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="goR-cd-Bir">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="HvN-c3-MwN"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qPd-bp-Ujy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ezX-lI-tGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="282" y="891"/>
+        </scene>
+        <!--Experience Onboard View Controller-->
+        <scene sceneID="Jvu-Cm-Qbu">
+            <objects>
+                <viewController storyboardIdentifier="ExperienceOnboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6kn-aO-k4d" customClass="ExperienceOnboardViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="FEG-s4-1kH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Dq8-U7-wkO"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SmU-im-eWu" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1983" y="120"/>
+        </scene>
+        <!--Job Ready Onboard View Controller-->
+        <scene sceneID="hPH-1K-0wa">
+            <objects>
+                <viewController storyboardIdentifier="JobReadyOnboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yuk-d9-o2g" customClass="JobReadyOnboardViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="hUl-WK-Tnl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ikz-o5-2zL"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aZm-8C-7nM" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2756" y="120"/>
+        </scene>
+        <!--Sign Up Pages View Controller-->
+        <scene sceneID="oVr-se-Nl5">
+            <objects>
+                <viewController storyboardIdentifier="register" useStoryboardIdentifierAsRestorationIdentifier="YES" id="njm-bi-CJk" customClass="SignUpPagesViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jqs-Uu-2yN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NfR-16-4f7">
+                                <rect key="frame" x="92" y="757" width="191" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dD-QD-Myh">
+                                        <rect key="frame" x="141" y="0.0" width="30" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Roboto-BoldCondensed" family="Roboto" pointSize="12"/>
+                                        <state key="normal" title="log in"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Already have an account?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAU-aU-8Du">
+                                        <rect key="frame" x="20" y="1" width="123" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Roboto-BoldCondensed" family="Roboto" pointSize="12"/>
+                                        <color key="textColor" red="0.13725490200000001" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Wpg-4n-YZh"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Dg0-Ye-Q6G"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6oz-pa-a6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1098" y="890"/>
+        </scene>
+        <!--MyTasks-->
+        <scene sceneID="DfR-mu-KeF">
+            <objects>
+                <viewController id="bGt-rJ-LO1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="MyTasks" image="MyTasksInactive" selectedImage="MyTasksActive" id="4FM-GR-4jO"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="1eA-C4-uZt" id="BeM-0l-Z24"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iSy-a3-zxi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="1eA-C4-uZt">
+                    <connections>
+                        <outlet property="delegate" destination="bGt-rJ-LO1" id="Cji-Pu-lLk"/>
+                        <outlet property="searchContentsController" destination="bGt-rJ-LO1" id="n4a-ll-471"/>
+                        <outlet property="searchResultsDataSource" destination="bGt-rJ-LO1" id="ia4-cm-6tJ"/>
+                        <outlet property="searchResultsDelegate" destination="bGt-rJ-LO1" id="6mx-Oc-cIw"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="2399" y="1662"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="Lb6-6Q-W2E">
+            <objects>
+                <viewController id="ww4-oG-nGT" customClass="HomeViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="HomeInactive" selectedImage="HomeActive" id="zT1-13-PoY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7q4-9B-kv5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1458" y="1661"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ySP-Ql-nHN">
+            <objects>
+                <navigationController storyboardIdentifier="MainNavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gjU-UE-kdU" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="voz-lN-KaW">
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="fml-ya-ec6" kind="relationship" relationship="rootViewController" id="3Zj-PT-bcs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wrh-UJ-PzT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-538" y="1662"/>
+        </scene>
+        <!--RookTabViewController-->
+        <scene sceneID="yeH-La-3GB">
+            <objects>
+                <tabBarController storyboardIdentifier="RookTabBarViewController" title="RookTabViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fml-ya-ec6" customClass="RookTabBarViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="KfM-83-cd5"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5SV-8f-3Qj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.94999999999999996" alpha="0.4647062059859155" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.0" green="0.29019607843137252" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                    </tabBar>
+                    <connections>
+                        <outlet property="playerView" destination="SMS-Qf-rWp" id="hMY-oQ-pkf"/>
+                        <segue destination="ww4-oG-nGT" kind="relationship" relationship="viewControllers" id="AwC-ly-aqg"/>
+                        <segue destination="bGt-rJ-LO1" kind="relationship" relationship="viewControllers" id="tee-6Z-mXU"/>
+                        <segue destination="x3C-r0-zyQ" kind="relationship" relationship="viewControllers" id="gpc-hM-D7g"/>
+                        <segue destination="xGB-5G-KdY" kind="relationship" relationship="viewControllers" id="DTc-mq-DoT"/>
+                        <segue destination="Z2o-Va-teK" kind="relationship" relationship="viewControllers" id="gmF-Kp-aLr"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iwt-nf-uOx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="fuR-4a-S06">
+                    <connections>
+                        <action selector="minimizeGesture:" destination="SMS-Qf-rWp" id="Rci-mJ-MJQ"/>
+                    </connections>
+                </panGestureRecognizer>
+                <view contentMode="scaleToFill" id="SMS-Qf-rWp" customClass="PlayerView" customModule="RookPlus" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TfO-ee-o5x">
+                            <rect key="frame" x="20" y="20" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Jof-rl-PDr"/>
+                                <constraint firstAttribute="width" constant="30" id="MBE-cc-Sm4"/>
+                            </constraints>
+                            <state key="normal" image="BackButton"/>
+                            <connections>
+                                <action selector="minimize:" destination="SMS-Qf-rWp" eventType="touchUpInside" id="e3r-eY-Ngz"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fO2-O2-wYs">
+                            <rect key="frame" x="0.0" y="233" width="375" height="211"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <gestureRecognizers/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="fuR-4a-S06" appends="YES" id="m8H-ot-mpA"/>
+                            </connections>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="TfO-ee-o5x" firstAttribute="leading" secondItem="SMS-Qf-rWp" secondAttribute="leading" constant="20" id="JGN-uD-28f"/>
+                        <constraint firstItem="fO2-O2-wYs" firstAttribute="width" secondItem="fO2-O2-wYs" secondAttribute="height" multiplier="16:9" id="OrT-cs-UEx"/>
+                        <constraint firstItem="fO2-O2-wYs" firstAttribute="leading" secondItem="SMS-Qf-rWp" secondAttribute="leading" id="ThP-ay-EA4"/>
+                        <constraint firstItem="TfO-ee-o5x" firstAttribute="top" secondItem="SMS-Qf-rWp" secondAttribute="top" constant="20" id="W8d-pP-Iyo"/>
+                        <constraint firstAttribute="trailing" secondItem="fO2-O2-wYs" secondAttribute="trailing" id="bwo-pY-jJW"/>
+                        <constraint firstItem="fO2-O2-wYs" firstAttribute="centerY" secondItem="zx5-ND-2Xd" secondAttribute="centerY" id="jwg-ap-MTs"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="zx5-ND-2Xd"/>
+                    <connections>
+                        <outlet property="minimizeButton" destination="TfO-ee-o5x" id="PQg-p6-DnE"/>
+                        <outlet property="player" destination="fO2-O2-wYs" id="fhV-ix-ek7"/>
+                    </connections>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="474" y="1662"/>
+        </scene>
+        <!--Sign Up Page1 View Controller-->
+        <scene sceneID="8sI-te-7md">
+            <objects>
+                <viewController storyboardIdentifier="SignUpPage1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t8T-dq-NEW" customClass="SignUpPage1ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cBl-Qw-8P6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="fd2-nc-1pD"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y0N-pX-UhD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1873" y="891"/>
+        </scene>
+        <!--Sign Up Page2 View Controller-->
+        <scene sceneID="ZdN-eC-ODA">
+            <objects>
+                <viewController storyboardIdentifier="SignUpPage2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="O0L-62-vEv" customClass="SignUpPage2ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7IH-tI-6sU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ARy-Ug-Shf"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2pF-6F-k5S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2569" y="891"/>
+        </scene>
+        <!--Sign Up Page3 View Controller-->
+        <scene sceneID="V7Z-aH-Oay">
+            <objects>
+                <viewController storyboardIdentifier="SignUpPage3" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2hi-Uw-Xrp" customClass="SignUpPage3ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bgU-8J-Dzf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="TYa-wZ-MaG"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JaB-D2-BJd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3265" y="891"/>
+        </scene>
+        <!--Sign Up Page4 View Controller-->
+        <scene sceneID="Kcc-r1-Dwr">
+            <objects>
+                <viewController storyboardIdentifier="SignUpPage4" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ciu-J1-H4T" customClass="SignUpPage4ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VS8-oK-GCs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="2Hg-g9-CTD"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F0R-ir-nZr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3962" y="891"/>
+        </scene>
+        <!--Sign Up Page5 View Controller-->
+        <scene sceneID="bXn-Zq-PxM">
+            <objects>
+                <viewController storyboardIdentifier="SignUpPage5" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tjs-bj-UwA" customClass="SignUpPage5ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QBb-So-Zgx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="SFs-Le-hQN"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pte-fY-ihX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4674" y="891"/>
+        </scene>
+        <!--Companies-->
+        <scene sceneID="WCw-WA-WPb">
+            <objects>
+                <viewController id="x3C-r0-zyQ" customClass="CompaniesViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Companies" image="CompaniesInactive" selectedImage="CompaniesActive" id="0Pa-Ny-XWr"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="xf3-Nu-g8W" id="Qvz-5i-pPI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kqh-Hw-PaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="xf3-Nu-g8W">
+                    <connections>
+                        <outlet property="delegate" destination="x3C-r0-zyQ" id="HHh-pb-QTn"/>
+                        <outlet property="searchContentsController" destination="x3C-r0-zyQ" id="OU6-hd-rq3"/>
+                        <outlet property="searchResultsDataSource" destination="x3C-r0-zyQ" id="mk7-yy-D2a"/>
+                        <outlet property="searchResultsDelegate" destination="x3C-r0-zyQ" id="ZIv-Sv-Qcv"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="3258" y="1662"/>
+        </scene>
+        <!--Internships-->
+        <scene sceneID="2t8-Oj-9L2">
+            <objects>
+                <viewController id="xGB-5G-KdY" customClass="InternshipsViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Internships" image="InternshipInactive" selectedImage="InternshipActive" id="jJa-xF-M8q"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QJ7-LO-Ymd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4118" y="1662"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="C1o-Fz-uli">
+            <objects>
+                <viewController id="Z2o-Va-teK" customClass="ProfileViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" id="O0U-mu-bNi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X8m-rO-VPa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4895" y="1662"/>
+        </scene>
+        <!--Welcome Screen2 View Controller-->
+        <scene sceneID="3aZ-01-q6t">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeScreen2ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qdP-KB-3no" customClass="WelcomeScreen2ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vf2-qZ-WGF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="TD3-9a-BjB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yW0-oa-5z6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7009" y="890"/>
+        </scene>
+        <!--Welcome Screen1 View Controller-->
+        <scene sceneID="qcs-PC-vLo">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeScreen1ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9Wo-MJ-CL1" customClass="WelcomeScreen1ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dtG-dN-Ru7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ANS-jZ-21N"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wwi-S5-gzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6250" y="890"/>
+        </scene>
+        <!--Welcome Screen3 View Controller-->
+        <scene sceneID="hVh-ce-vhP">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeScreen3ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n68-w7-Iv8" customClass="WelcomeScreen3ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aDS-jd-2K3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="4eX-Bd-APz"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YNw-ox-Wb8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7839" y="890"/>
+        </scene>
+        <!--Welcome Screen4 View Controller-->
+        <scene sceneID="jvJ-sX-dD5">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeScreen4ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ttY-Ue-4lw" customClass="WelcomeScreen4ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XSg-3n-bvj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="OKR-sB-Dti"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bbL-Pv-Bb1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8626" y="890"/>
+        </scene>
+        <!--Welcome Screen5 View Controller-->
+        <scene sceneID="x2k-Gk-kcz">
+            <objects>
+                <viewController storyboardIdentifier="WelcomeScreen5ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ls1-M3-z9A" customClass="WelcomeScreen5ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gIF-rN-zZq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="qJu-k3-3ns"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4t3-YB-cwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9422" y="890"/>
+        </scene>
+        <!--Interests Page View Controller-->
+        <scene sceneID="Wcj-C7-4NE">
+            <objects>
+                <viewController storyboardIdentifier="InterestsPageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wwg-q7-myj" customClass="InterestsPageViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t0t-dk-RMP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="yuH-tA-5Os"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xJ8-im-gEA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10164" y="890"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="BackButton" width="12" height="19"/>
+        <image name="CVOnboard" width="263" height="424"/>
+        <image name="CompaniesActive" width="31" height="30"/>
+        <image name="CompaniesInactive" width="31" height="30"/>
+        <image name="HomeActive" width="27" height="24"/>
+        <image name="HomeInactive" width="27" height="24"/>
+        <image name="InternshipActive" width="17" height="23"/>
+        <image name="InternshipInactive" width="17" height="23"/>
+        <image name="MyTasksActive" width="15" height="20"/>
+        <image name="MyTasksInactive" width="15" height="20"/>
+    </resources>
+</document>
