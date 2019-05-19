@@ -290,10 +290,10 @@ class PreSignUpViewController: UIViewController {
     }
     
     @objc func socialMediaRegister(_ sender: Any) {
-        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
-        fbLoginManager.logIn(withReadPermissions: ["email"], from: self) { (result, error) -> Void in
+        let fbLoginManager : LoginManager = LoginManager()
+        fbLoginManager.logIn(permissions: ["email"], from: self) { (result, error) -> Void in
             if (error == nil){
-                let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                let fbloginresult : LoginManagerLoginResult = result!
                 // if user cancel the login
                 if (result?.isCancelled)!{
                     return
@@ -361,8 +361,8 @@ class PreSignUpViewController: UIViewController {
     }
     
     private func getFBUserData(){
-        if((FBSDKAccessToken.current()) != nil){
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+        if((AccessToken.current) != nil){
+            GraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
                 if (error == nil){
                     //everything works print the user data
                     print(result)

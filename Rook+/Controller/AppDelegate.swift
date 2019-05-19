@@ -13,6 +13,7 @@ import Firebase
 import FBSDKLoginKit
 import TwitterKit
 import LinkedinSwift
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,11 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // Fabric.with([Crashlytics.self])
         TWTRTwitter.sharedInstance().start(withConsumerKey:"SlZzOGKqNhTACSlc3IfoYwuqq", consumerSecret:"WZ6zRcAVuLUxCNh1nbRNDRckxUl7BUM8b3EM4aXofiTEb6wKVD")
      //   dummyView()
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        return ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        return ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {

@@ -27,6 +27,7 @@
 		3B36286221F6913900E1E1DF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B36286121F6913900E1E1DF /* Extensions.swift */; };
 		3B36286421F697C100E1E1DF /* barRook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B36286321F697C100E1E1DF /* barRook.swift */; };
 		3B4984DD22028773006CC161 /* RookTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4984DC22028773006CC161 /* RookTabBarViewController.swift */; };
+		3B5052CA2291C7B200CAAAA5 /* fix_twitter_warnings.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3B5052C92291C7AF00CAAAA5 /* fix_twitter_warnings.sh */; };
 		3B54526021FE8A4A007C847C /* RookRoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B54525F21FE8A4A007C847C /* RookRoundTextField.swift */; };
 		3B5AFEEF220119D60012D026 /* RookRoundTextFieldWithButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5AFEEE220119D60012D026 /* RookRoundTextFieldWithButton.swift */; };
 		3B60565D2218281C00466751 /* Discover.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B60565C2218281C00466751 /* Discover.json */; };
@@ -67,23 +68,6 @@
 		3B773F5E22007C10002DDCBF /* SignUpPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F5D22007C10002DDCBF /* SignUpPagesViewController.swift */; };
 		3B773F6022008859002DDCBF /* SignUpPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F5F22008859002DDCBF /* SignUpPageViewController.swift */; };
 		3B773F622200D0F5002DDCBF /* RookGenderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F612200D0F5002DDCBF /* RookGenderButton.swift */; };
-		3B773F7C2200E2FB002DDCBF /* IQTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F662200E2FB002DDCBF /* IQTextView.swift */; };
-		3B773F7D2200E2FB002DDCBF /* IQPreviousNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F682200E2FB002DDCBF /* IQPreviousNextView.swift */; };
-		3B773F7E2200E2FB002DDCBF /* IQTitleBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F692200E2FB002DDCBF /* IQTitleBarButtonItem.swift */; };
-		3B773F7F2200E2FB002DDCBF /* IQBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F6A2200E2FB002DDCBF /* IQBarButtonItem.swift */; };
-		3B773F802200E2FB002DDCBF /* IQToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F6B2200E2FB002DDCBF /* IQToolbar.swift */; };
-		3B773F812200E2FB002DDCBF /* IQUIView+IQKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F6C2200E2FB002DDCBF /* IQUIView+IQKeyboardToolbar.swift */; };
-		3B773F822200E2FB002DDCBF /* IQInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F6D2200E2FB002DDCBF /* IQInvocation.swift */; };
-		3B773F832200E2FB002DDCBF /* IQKeyboardManagerConstantsInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F6F2200E2FB002DDCBF /* IQKeyboardManagerConstantsInternal.swift */; };
-		3B773F842200E2FB002DDCBF /* IQKeyboardManagerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F702200E2FB002DDCBF /* IQKeyboardManagerConstants.swift */; };
-		3B773F852200E2FB002DDCBF /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3B773F722200E2FB002DDCBF /* IQKeyboardManager.bundle */; };
-		3B773F862200E2FB002DDCBF /* IQKeyboardReturnKeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F732200E2FB002DDCBF /* IQKeyboardReturnKeyHandler.swift */; };
-		3B773F872200E2FB002DDCBF /* IQKeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F742200E2FB002DDCBF /* IQKeyboardManager.swift */; };
-		3B773F882200E2FB002DDCBF /* IQUIScrollView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F772200E2FB002DDCBF /* IQUIScrollView+Additions.swift */; };
-		3B773F892200E2FB002DDCBF /* IQUIViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F782200E2FB002DDCBF /* IQUIViewController+Additions.swift */; };
-		3B773F8A2200E2FB002DDCBF /* IQUITextFieldView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F792200E2FB002DDCBF /* IQUITextFieldView+Additions.swift */; };
-		3B773F8B2200E2FB002DDCBF /* IQUIView+Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F7A2200E2FB002DDCBF /* IQUIView+Hierarchy.swift */; };
-		3B773F8C2200E2FB002DDCBF /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B773F7B2200E2FB002DDCBF /* IQNSArray+Sort.swift */; };
 		3B77F596222AB6FF0011CEB1 /* BasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B77F595222AB6FF0011CEB1 /* BasicInfoCell.swift */; };
 		3B77F598222AB7080011CEB1 /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B77F597222AB7080011CEB1 /* StatsCell.swift */; };
 		3B77F59A222AB7130011CEB1 /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B77F599222AB7130011CEB1 /* WalletCell.swift */; };
@@ -220,6 +204,7 @@
 		3B36286121F6913900E1E1DF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3B36286321F697C100E1E1DF /* barRook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = barRook.swift; sourceTree = "<group>"; };
 		3B4984DC22028773006CC161 /* RookTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RookTabBarViewController.swift; sourceTree = "<group>"; };
+		3B5052C92291C7AF00CAAAA5 /* fix_twitter_warnings.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = fix_twitter_warnings.sh; sourceTree = "<group>"; };
 		3B54525F21FE8A4A007C847C /* RookRoundTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RookRoundTextField.swift; sourceTree = "<group>"; };
 		3B5AFEEE220119D60012D026 /* RookRoundTextFieldWithButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RookRoundTextFieldWithButton.swift; sourceTree = "<group>"; };
 		3B60565C2218281C00466751 /* Discover.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Discover.json; sourceTree = "<group>"; };
@@ -260,24 +245,6 @@
 		3B773F5D22007C10002DDCBF /* SignUpPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPagesViewController.swift; sourceTree = "<group>"; };
 		3B773F5F22008859002DDCBF /* SignUpPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPageViewController.swift; sourceTree = "<group>"; };
 		3B773F612200D0F5002DDCBF /* RookGenderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RookGenderButton.swift; sourceTree = "<group>"; };
-		3B773F662200E2FB002DDCBF /* IQTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQTextView.swift; sourceTree = "<group>"; };
-		3B773F682200E2FB002DDCBF /* IQPreviousNextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQPreviousNextView.swift; sourceTree = "<group>"; };
-		3B773F692200E2FB002DDCBF /* IQTitleBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQTitleBarButtonItem.swift; sourceTree = "<group>"; };
-		3B773F6A2200E2FB002DDCBF /* IQBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQBarButtonItem.swift; sourceTree = "<group>"; };
-		3B773F6B2200E2FB002DDCBF /* IQToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQToolbar.swift; sourceTree = "<group>"; };
-		3B773F6C2200E2FB002DDCBF /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
-		3B773F6D2200E2FB002DDCBF /* IQInvocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQInvocation.swift; sourceTree = "<group>"; };
-		3B773F6F2200E2FB002DDCBF /* IQKeyboardManagerConstantsInternal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQKeyboardManagerConstantsInternal.swift; sourceTree = "<group>"; };
-		3B773F702200E2FB002DDCBF /* IQKeyboardManagerConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQKeyboardManagerConstants.swift; sourceTree = "<group>"; };
-		3B773F722200E2FB002DDCBF /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
-		3B773F732200E2FB002DDCBF /* IQKeyboardReturnKeyHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQKeyboardReturnKeyHandler.swift; sourceTree = "<group>"; };
-		3B773F742200E2FB002DDCBF /* IQKeyboardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQKeyboardManager.swift; sourceTree = "<group>"; };
-		3B773F752200E2FB002DDCBF /* IQKeyboardManagerSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQKeyboardManagerSwift.h; sourceTree = "<group>"; };
-		3B773F772200E2FB002DDCBF /* IQUIScrollView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIScrollView+Additions.swift"; sourceTree = "<group>"; };
-		3B773F782200E2FB002DDCBF /* IQUIViewController+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIViewController+Additions.swift"; sourceTree = "<group>"; };
-		3B773F792200E2FB002DDCBF /* IQUITextFieldView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUITextFieldView+Additions.swift"; sourceTree = "<group>"; };
-		3B773F7A2200E2FB002DDCBF /* IQUIView+Hierarchy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIView+Hierarchy.swift"; sourceTree = "<group>"; };
-		3B773F7B2200E2FB002DDCBF /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		3B77F595222AB6FF0011CEB1 /* BasicInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoCell.swift; sourceTree = "<group>"; };
 		3B77F597222AB7080011CEB1 /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
 		3B77F599222AB7130011CEB1 /* WalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCell.swift; sourceTree = "<group>"; };
@@ -443,7 +410,6 @@
 		3B36281E21F63C8F00E1E1DF /* Rook+ */ = {
 			isa = PBXGroup;
 			children = (
-				3B773F632200E2E5002DDCBF /* Dummy Frameworks */,
 				3B36285021F63D0600E1E1DF /* Helper */,
 				3B36284F21F63CFB00E1E1DF /* Controller */,
 				3B36284E21F63CF300E1E1DF /* View */,
@@ -502,6 +468,7 @@
 		3B36285021F63D0600E1E1DF /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				3B5052C92291C7AF00CAAAA5 /* fix_twitter_warnings.sh */,
 				3B8C15F22239BE3700322C1C /* Validator */,
 				3BDDFB3C223C17B5004ECA38 /* RookUser */,
 				3B0BA7FE2234A0A4003082F0 /* SRP */,
@@ -655,79 +622,6 @@
 				3B6A303F22161E8C006D85B8 /* NewsCell.swift */,
 			);
 			path = News;
-			sourceTree = "<group>";
-		};
-		3B773F632200E2E5002DDCBF /* Dummy Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3B773F642200E2FB002DDCBF /* IQKeyboardManagerSwift */,
-			);
-			path = "Dummy Frameworks";
-			sourceTree = "<group>";
-		};
-		3B773F642200E2FB002DDCBF /* IQKeyboardManagerSwift */ = {
-			isa = PBXGroup;
-			children = (
-				3B773F652200E2FB002DDCBF /* IQTextView */,
-				3B773F672200E2FB002DDCBF /* IQToolbar */,
-				3B773F6E2200E2FB002DDCBF /* Constants */,
-				3B773F712200E2FB002DDCBF /* Resources */,
-				3B773F732200E2FB002DDCBF /* IQKeyboardReturnKeyHandler.swift */,
-				3B773F742200E2FB002DDCBF /* IQKeyboardManager.swift */,
-				3B773F752200E2FB002DDCBF /* IQKeyboardManagerSwift.h */,
-				3B773F762200E2FB002DDCBF /* Categories */,
-			);
-			path = IQKeyboardManagerSwift;
-			sourceTree = "<group>";
-		};
-		3B773F652200E2FB002DDCBF /* IQTextView */ = {
-			isa = PBXGroup;
-			children = (
-				3B773F662200E2FB002DDCBF /* IQTextView.swift */,
-			);
-			path = IQTextView;
-			sourceTree = "<group>";
-		};
-		3B773F672200E2FB002DDCBF /* IQToolbar */ = {
-			isa = PBXGroup;
-			children = (
-				3B773F682200E2FB002DDCBF /* IQPreviousNextView.swift */,
-				3B773F692200E2FB002DDCBF /* IQTitleBarButtonItem.swift */,
-				3B773F6A2200E2FB002DDCBF /* IQBarButtonItem.swift */,
-				3B773F6B2200E2FB002DDCBF /* IQToolbar.swift */,
-				3B773F6C2200E2FB002DDCBF /* IQUIView+IQKeyboardToolbar.swift */,
-				3B773F6D2200E2FB002DDCBF /* IQInvocation.swift */,
-			);
-			path = IQToolbar;
-			sourceTree = "<group>";
-		};
-		3B773F6E2200E2FB002DDCBF /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				3B773F6F2200E2FB002DDCBF /* IQKeyboardManagerConstantsInternal.swift */,
-				3B773F702200E2FB002DDCBF /* IQKeyboardManagerConstants.swift */,
-			);
-			path = Constants;
-			sourceTree = "<group>";
-		};
-		3B773F712200E2FB002DDCBF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				3B773F722200E2FB002DDCBF /* IQKeyboardManager.bundle */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		3B773F762200E2FB002DDCBF /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				3B773F772200E2FB002DDCBF /* IQUIScrollView+Additions.swift */,
-				3B773F782200E2FB002DDCBF /* IQUIViewController+Additions.swift */,
-				3B773F792200E2FB002DDCBF /* IQUITextFieldView+Additions.swift */,
-				3B773F7A2200E2FB002DDCBF /* IQUIView+Hierarchy.swift */,
-				3B773F7B2200E2FB002DDCBF /* IQNSArray+Sort.swift */,
-			);
-			path = Categories;
 			sourceTree = "<group>";
 		};
 		3B77F594222AB6E00011CEB1 /* Profile */ = {
@@ -1026,8 +920,8 @@
 				3B36281921F63C8F00E1E1DF /* Frameworks */,
 				3B36281A21F63C8F00E1E1DF /* Resources */,
 				3BDF1D1B2230AC7400486E27 /* ShellScript */,
-				89661E0AE3615E58DA00F4F5 /* [CP] Copy Pods Resources */,
 				E897E84AE5DE3AF4CCCDFEA8 /* [CP] Embed Pods Frameworks */,
+				EFA6C6CA8D59985871734783 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1079,12 +973,12 @@
 				3B36282721F63C9000E1E1DF /* Assets.xcassets in Resources */,
 				3BFBBA6D221B253C00189FCC /* dis3.png in Resources */,
 				3BC1AFA52228B90400655DFA /* Internships.json in Resources */,
-				3B773F852200E2FB002DDCBF /* IQKeyboardManager.bundle in Resources */,
 				3BFBBA5F221B1D0800189FCC /* Videos.json in Resources */,
 				3BC1AF8F22274B7600655DFA /* Companies.json in Resources */,
 				3B6D43E721FF0C3300E94A07 /* Roboto-Light.ttf in Resources */,
 				3BFBBA56221B098800189FCC /* bg1.png in Resources */,
 				3BDF1D1F2230BBF900486E27 /* GoogleService-Info.plist in Resources */,
+				3B5052CA2291C7B200CAAAA5 /* fix_twitter_warnings.sh in Resources */,
 				3BFBBA47221AFF5700189FCC /* Events.json in Resources */,
 				3B6D43E621FF0C3300E94A07 /* Roboto-Bold.ttf in Resources */,
 				3BF0E09E222D75E400AADB34 /* Launch Screen.storyboard in Resources */,
@@ -1154,28 +1048,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		89661E0AE3615E58DA00F4F5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-RookPlus/Pods-RookPlus-resources.sh",
-				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RookPlus/Pods-RookPlus-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E897E84AE5DE3AF4CCCDFEA8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1184,21 +1056,20 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-RookPlus/Pods-RookPlus-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-RookPlus/Pods-RookPlus-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/BlueCryptor/Cryptor.framework",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IOSLinkedInAPIFix/IOSLinkedInAPIFix.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/LinkedinSwift/LinkedinSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Mixpanel-swift/Mixpanel.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
@@ -1212,16 +1083,15 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cryptor.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IOSLinkedInAPIFix.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LinkedinSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
@@ -1229,7 +1099,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RookPlus/Pods-RookPlus-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RookPlus/Pods-RookPlus-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFA6C6CA8D59985871734783 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RookPlus/Pods-RookPlus-resources.sh",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RookPlus/Pods-RookPlus-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1247,7 +1139,6 @@
 				3B8C16082239BE3700322C1C /* Double+StringConvertible.swift in Sources */,
 				3BFBBA73221B290200189FCC /* NewsItem.swift in Sources */,
 				3B8C16072239BE3700322C1C /* FQDNOptions.swift in Sources */,
-				3B773F842200E2FB002DDCBF /* IQKeyboardManagerConstants.swift in Sources */,
 				3B77F596222AB6FF0011CEB1 /* BasicInfoCell.swift in Sources */,
 				3BB615EE2202044500D002A9 /* RookCheckMark.swift in Sources */,
 				3BE4F6EA22407C03004BD60B /* LocalePickerViewController.swift in Sources */,
@@ -1257,23 +1148,18 @@
 				3BB615F522021C5D00D002A9 /* RookCodeItemView.swift in Sources */,
 				3B8C16102239BE3700322C1C /* Phone.swift in Sources */,
 				3BC1AF9422274ED200655DFA /* CompaniesItemStore.swift in Sources */,
-				3B773F862200E2FB002DDCBF /* IQKeyboardReturnKeyHandler.swift in Sources */,
 				3B6A303E22161E56006D85B8 /* News.swift in Sources */,
 				3B0BA80A2234A0CE003082F0 /* SRP.swift in Sources */,
 				3BE4F6E122405DB6004BD60B /* DatePickerViewController.swift in Sources */,
 				3B8C15EF2239791800322C1C /* WelcomeScreens.swift in Sources */,
 				3B71213B21FB4F8F00D0EA26 /* OnoardingScreensViewController.swift in Sources */,
-				3B773F8C2200E2FB002DDCBF /* IQNSArray+Sort.swift in Sources */,
 				3B6A303122161D94006D85B8 /* EventsCell.swift in Sources */,
-				3B773F7F2200E2FB002DDCBF /* IQBarButtonItem.swift in Sources */,
 				3BC1AFAC2228BA4200655DFA /* InternshipItem.swift in Sources */,
 				3BDDFB4C223DC651004ECA38 /* RookUser+Router.swift in Sources */,
 				3B36285921F6711300E1E1DF /* RookOutlineButton.swift in Sources */,
 				3B6A302022161C8F006D85B8 /* CompleteProfile.swift in Sources */,
-				3B773F8A2200E2FB002DDCBF /* IQUITextFieldView+Additions.swift in Sources */,
 				3B773F6022008859002DDCBF /* SignUpPageViewController.swift in Sources */,
 				3B36282221F63C8F00E1E1DF /* OnboardingViewController.swift in Sources */,
-				3B773F812200E2FB002DDCBF /* IQUIView+IQKeyboardToolbar.swift in Sources */,
 				3BFBBA63221B1D6A00189FCC /* VideosItemStore.swift in Sources */,
 				3BE4F6DA22405AEC004BD60B /* RookBSConfiguration.swift in Sources */,
 				3B8C160A2239BE3700322C1C /* Float+StringConvertible.swift in Sources */,
@@ -1284,14 +1170,12 @@
 				3B6A302A22161D23006D85B8 /* PollCard.swift in Sources */,
 				3B8C16132239BE3700322C1C /* ValueProvider.swift in Sources */,
 				3B36285521F6411800E1E1DF /* Colors.swift in Sources */,
-				3B773F7E2200E2FB002DDCBF /* IQTitleBarButtonItem.swift in Sources */,
 				3B6A301D22161C59006D85B8 /* SectionFooterView.swift in Sources */,
 				3B77F5AD222AB7DF0011CEB1 /* EducationCell.swift in Sources */,
 				3B6A303C22161E32006D85B8 /* VideosCell.swift in Sources */,
 				3B0BA80B2234A0CE003082F0 /* Server.swift in Sources */,
 				3BFBBA77221B6AB000189FCC /* RookCompleteProfileView.swift in Sources */,
 				3B8C16152239BE3700322C1C /* StringConvertible.swift in Sources */,
-				3B773F802200E2FB002DDCBF /* IQToolbar.swift in Sources */,
 				3B77F59E222AB7330011CEB1 /* DemographicsCell.swift in Sources */,
 				3B6A303422161DC8006D85B8 /* ForYou.swift in Sources */,
 				3BDDFB39223B2AE7004ECA38 /* InterestsPageViewController.swift in Sources */,
@@ -1303,7 +1187,6 @@
 				3B77F5AB222AB7D40011CEB1 /* Education.swift in Sources */,
 				3B844FB022174D74008BAD08 /* DiscoverItemStore.swift in Sources */,
 				3B77F5B1222AB8030011CEB1 /* WorkExperienceCell.swift in Sources */,
-				3B773F832200E2FB002DDCBF /* IQKeyboardManagerConstantsInternal.swift in Sources */,
 				3B773F622200D0F5002DDCBF /* RookGenderButton.swift in Sources */,
 				3BC1AFAA2228BA2D00655DFA /* RecInternhipItemStore.swift in Sources */,
 				3BE4F6DC22405AEC004BD60B /* RookBSDismissalTransition.swift in Sources */,
@@ -1339,11 +1222,9 @@
 				3B36286021F68DDC00E1E1DF /* rookShapes.swift in Sources */,
 				3BE4F6FC22414836004BD60B /* String+Additions.swift in Sources */,
 				3B77F5B3222AB80D0011CEB1 /* Portfolio.swift in Sources */,
-				3B773F8B2200E2FB002DDCBF /* IQUIView+Hierarchy.swift in Sources */,
 				3B0BA8092234A0CE003082F0 /* Cryptor+Extensions.swift in Sources */,
 				3B6D43EE21FF20BF00E94A07 /* RookAnimatedLoadingButton.swift in Sources */,
 				3BC1AF9F2228B50700655DFA /* recInternshipsCell.swift in Sources */,
-				3B773F892200E2FB002DDCBF /* IQUIViewController+Additions.swift in Sources */,
 				3BC1AF8D22273FBE00655DFA /* CompaniesCell.swift in Sources */,
 				3BE4F6F422407C81004BD60B /* CountryCell.swift in Sources */,
 				3BE4F6FA224131D9004BD60B /* PasswordStrength.swift in Sources */,
@@ -1355,7 +1236,6 @@
 				3BC1AF9222274EC400655DFA /* CompaniesItem.swift in Sources */,
 				3BC1AF8922273B6F00655DFA /* CompaniesViewController.swift in Sources */,
 				3B6A302522161CE6006D85B8 /* DiscoverCard.swift in Sources */,
-				3B773F872200E2FB002DDCBF /* IQKeyboardManager.swift in Sources */,
 				3BE4F6EC22407C25004BD60B /* LocaleStore.swift in Sources */,
 				3BFBBA5D221B156F00189FCC /* ForYouItemStore.swift in Sources */,
 				3B8C16142239BE3700322C1C /* Bool+StringConvertible.swift in Sources */,
@@ -1366,13 +1246,10 @@
 				3B8C16092239BE3700322C1C /* String+StringConvertible.swift in Sources */,
 				3BE4F6DE22405AEC004BD60B /* RookBSPresentationController.swift in Sources */,
 				3BE4F6DD22405AEC004BD60B /* RookBSTransitioningDelegate.swift in Sources */,
-				3B773F882200E2FB002DDCBF /* IQUIScrollView+Additions.swift in Sources */,
 				3BFBBA61221B1D5F00189FCC /* VideosItem.swift in Sources */,
-				3B773F822200E2FB002DDCBF /* IQInvocation.swift in Sources */,
 				3BC1AF992228B4E400655DFA /* Internships.swift in Sources */,
 				3B6A303A22161E15006D85B8 /* Videos.swift in Sources */,
 				3B36282021F63C8F00E1E1DF /* AppDelegate.swift in Sources */,
-				3B773F7D2200E2FB002DDCBF /* IQPreviousNextView.swift in Sources */,
 				3B6056632218D36D00466751 /* PollsItem.swift in Sources */,
 				3B7AD2112214553E00302A18 /* HomeViewController.swift in Sources */,
 				3B6A302722161CFE006D85B8 /* DiscoverCardCell.swift in Sources */,
@@ -1383,7 +1260,6 @@
 				3BE4F6CB223FF851004BD60B /* PlayerView.swift in Sources */,
 				3B77F5AF222AB7F80011CEB1 /* WorkExperience.swift in Sources */,
 				3BC0259F21FFC42500210E2D /* RookRoundButton.swift in Sources */,
-				3B773F7C2200E2FB002DDCBF /* IQTextView.swift in Sources */,
 				3BDDFB3B223B2B89004ECA38 /* TagsCellLayout.swift in Sources */,
 				3B0BA80E2234A39A003082F0 /* SRPTest.swift in Sources */,
 				3B773F5E22007C10002DDCBF /* SignUpPagesViewController.swift in Sources */,
