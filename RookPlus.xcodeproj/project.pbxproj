@@ -125,6 +125,23 @@
 		3BC1AFAE2228BA4F00655DFA /* InternshipItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC1AFAD2228BA4F00655DFA /* InternshipItemStore.swift */; };
 		3BC1AFB022293BBC00655DFA /* AdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC1AFAF22293BBC00655DFA /* AdCell.swift */; };
 		3BC1AFB22229D88E00655DFA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC1AFB12229D88E00655DFA /* ProfileViewController.swift */; };
+		3BD037C222929486009BBA6F /* AptitudeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037C022929486009BBA6F /* AptitudeItem.swift */; };
+		3BD037CB2292957B009BBA6F /* BPCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037C52292957B009BBA6F /* BPCollectionViewCell.swift */; };
+		3BD037CD2292957B009BBA6F /* BPCellConfigFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037C72292957B009BBA6F /* BPCellConfigFile.swift */; };
+		3BD037CE2292957B009BBA6F /* BPImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037C82292957B009BBA6F /* BPImageType.swift */; };
+		3BD037CF2292957B009BBA6F /* BPDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037C92292957B009BBA6F /* BPDelegate.swift */; };
+		3BD037D02292957B009BBA6F /* BPLayoutConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037CA2292957B009BBA6F /* BPLayoutConfigurator.swift */; };
+		3BD037D32292984B009BBA6F /* BPDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037D12292984B009BBA6F /* BPDirection.swift */; };
+		3BD037D42292984B009BBA6F /* BPAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037D22292984B009BBA6F /* BPAlignment.swift */; };
+		3BD037D622929A15009BBA6F /* RookProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037D522929A15009BBA6F /* RookProgressBar.swift */; };
+		3BD037DD22929A25009BBA6F /* InterestItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037D722929A24009BBA6F /* InterestItem.swift */; };
+		3BD037DE22929A25009BBA6F /* ExperienceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037D822929A25009BBA6F /* ExperienceItem.swift */; };
+		3BD037DF22929A25009BBA6F /* PortfolioItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037D922929A25009BBA6F /* PortfolioItem.swift */; };
+		3BD037E022929A25009BBA6F /* SkillItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037DA22929A25009BBA6F /* SkillItem.swift */; };
+		3BD037E122929A25009BBA6F /* EducationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037DB22929A25009BBA6F /* EducationItem.swift */; };
+		3BD037E222929A25009BBA6F /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037DC22929A25009BBA6F /* WalletCell.swift */; };
+		3BD037E422929A36009BBA6F /* BubblePictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD037E322929A36009BBA6F /* BubblePictures.swift */; };
+		3BD037E622929A3F009BBA6F /* BPCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BD037E522929A3F009BBA6F /* BPCollectionViewCell.xib */; };
 		3BDDFB37223B1EDC004ECA38 /* TagsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDDFB36223B1EDC004ECA38 /* TagsCollectionViewCell.swift */; };
 		3BDDFB39223B2AE7004ECA38 /* InterestsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDDFB38223B2AE7004ECA38 /* InterestsPageViewController.swift */; };
 		3BDDFB3B223B2B89004ECA38 /* TagsCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDDFB3A223B2B89004ECA38 /* TagsCellLayout.swift */; };
@@ -303,6 +320,23 @@
 		3BC1AFAD2228BA4F00655DFA /* InternshipItemStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternshipItemStore.swift; sourceTree = "<group>"; };
 		3BC1AFAF22293BBC00655DFA /* AdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdCell.swift; sourceTree = "<group>"; };
 		3BC1AFB12229D88E00655DFA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		3BD037C022929486009BBA6F /* AptitudeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AptitudeItem.swift; sourceTree = "<group>"; };
+		3BD037C52292957B009BBA6F /* BPCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPCollectionViewCell.swift; sourceTree = "<group>"; };
+		3BD037C72292957B009BBA6F /* BPCellConfigFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPCellConfigFile.swift; sourceTree = "<group>"; };
+		3BD037C82292957B009BBA6F /* BPImageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPImageType.swift; sourceTree = "<group>"; };
+		3BD037C92292957B009BBA6F /* BPDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPDelegate.swift; sourceTree = "<group>"; };
+		3BD037CA2292957B009BBA6F /* BPLayoutConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPLayoutConfigurator.swift; sourceTree = "<group>"; };
+		3BD037D12292984B009BBA6F /* BPDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPDirection.swift; sourceTree = "<group>"; };
+		3BD037D22292984B009BBA6F /* BPAlignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPAlignment.swift; path = "../../../../../../../../../Volumes/DATA2/Downloads/BubblePictures-master/BubblePictures/Classes/Enums/BPAlignment.swift"; sourceTree = "<group>"; };
+		3BD037D522929A15009BBA6F /* RookProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RookProgressBar.swift; sourceTree = "<group>"; };
+		3BD037D722929A24009BBA6F /* InterestItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestItem.swift; sourceTree = "<group>"; };
+		3BD037D822929A25009BBA6F /* ExperienceItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceItem.swift; sourceTree = "<group>"; };
+		3BD037D922929A25009BBA6F /* PortfolioItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortfolioItem.swift; sourceTree = "<group>"; };
+		3BD037DA22929A25009BBA6F /* SkillItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillItem.swift; sourceTree = "<group>"; };
+		3BD037DB22929A25009BBA6F /* EducationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EducationItem.swift; sourceTree = "<group>"; };
+		3BD037DC22929A25009BBA6F /* WalletCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletCell.swift; sourceTree = "<group>"; };
+		3BD037E322929A36009BBA6F /* BubblePictures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubblePictures.swift; sourceTree = "<group>"; };
+		3BD037E522929A3F009BBA6F /* BPCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPCollectionViewCell.xib; sourceTree = "<group>"; };
 		3BDDFB36223B1EDC004ECA38 /* TagsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsCollectionViewCell.swift; sourceTree = "<group>"; };
 		3BDDFB38223B2AE7004ECA38 /* InterestsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsPageViewController.swift; sourceTree = "<group>"; };
 		3BDDFB3A223B2B89004ECA38 /* TagsCellLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsCellLayout.swift; sourceTree = "<group>"; };
@@ -423,6 +457,7 @@
 		3B36284D21F63CD000E1E1DF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3BD037BF22928E20009BBA6F /* Profile */,
 				3BC1AFA62228BA0600655DFA /* Internships */,
 				3BC1AF9022274EB400655DFA /* Companies */,
 				3B844FAC221746B6008BAD08 /* Home */,
@@ -803,6 +838,36 @@
 			path = Internships;
 			sourceTree = "<group>";
 		};
+		3BD037BF22928E20009BBA6F /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				3BD037DB22929A25009BBA6F /* EducationItem.swift */,
+				3BD037D822929A25009BBA6F /* ExperienceItem.swift */,
+				3BD037D722929A24009BBA6F /* InterestItem.swift */,
+				3BD037D922929A25009BBA6F /* PortfolioItem.swift */,
+				3BD037DA22929A25009BBA6F /* SkillItem.swift */,
+				3BD037DC22929A25009BBA6F /* WalletCell.swift */,
+				3BD037C022929486009BBA6F /* AptitudeItem.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		3BD037C42292950C009BBA6F /* Badges */ = {
+			isa = PBXGroup;
+			children = (
+				3BD037E522929A3F009BBA6F /* BPCollectionViewCell.xib */,
+				3BD037E322929A36009BBA6F /* BubblePictures.swift */,
+				3BD037D22292984B009BBA6F /* BPAlignment.swift */,
+				3BD037D12292984B009BBA6F /* BPDirection.swift */,
+				3BD037C52292957B009BBA6F /* BPCollectionViewCell.swift */,
+				3BD037C92292957B009BBA6F /* BPDelegate.swift */,
+				3BD037C82292957B009BBA6F /* BPImageType.swift */,
+				3BD037CA2292957B009BBA6F /* BPLayoutConfigurator.swift */,
+				3BD037C72292957B009BBA6F /* BPCellConfigFile.swift */,
+			);
+			path = Badges;
+			sourceTree = "<group>";
+		};
 		3BDDFB33223B1EA8004ECA38 /* Tags */ = {
 			isa = PBXGroup;
 			children = (
@@ -874,10 +939,12 @@
 		3BE4F6F822409148004BD60B /* ExtraViews */ = {
 			isa = PBXGroup;
 			children = (
+				3BD037C42292950C009BBA6F /* Badges */,
 				3BDDFB33223B1EA8004ECA38 /* Tags */,
 				3BB615EF2202060000D002A9 /* RookKeypadVerification */,
 				3B36285121F640B000E1E1DF /* VectorCodes */,
 				3B36285821F6711300E1E1DF /* RookOutlineButton.swift */,
+				3BD037D522929A15009BBA6F /* RookProgressBar.swift */,
 				3B54525F21FE8A4A007C847C /* RookRoundTextField.swift */,
 				3B6D43ED21FF20BF00E94A07 /* RookAnimatedLoadingButton.swift */,
 				3BC0259E21FFC42500210E2D /* RookRoundButton.swift */,
@@ -992,6 +1059,7 @@
 				3B6D43E921FF0C3300E94A07 /* Roboto-Condensed.ttf in Resources */,
 				3B36285E21F677DC00E1E1DF /* Roboto-Regular.ttf in Resources */,
 				3BFBBA53221B087400189FCC /* pz.png in Resources */,
+				3BD037E622929A3F009BBA6F /* BPCollectionViewCell.xib in Resources */,
 				3B71214321FB8DA700D0EA26 /* Main.storyboard in Resources */,
 				3B6D43EB21FF0C3300E94A07 /* Roboto-Thin.ttf in Resources */,
 				3B60565D2218281C00466751 /* Discover.json in Resources */,
@@ -1140,6 +1208,7 @@
 				3BFBBA73221B290200189FCC /* NewsItem.swift in Sources */,
 				3B8C16072239BE3700322C1C /* FQDNOptions.swift in Sources */,
 				3B77F596222AB6FF0011CEB1 /* BasicInfoCell.swift in Sources */,
+				3BD037CE2292957B009BBA6F /* BPImageType.swift in Sources */,
 				3BB615EE2202044500D002A9 /* RookCheckMark.swift in Sources */,
 				3BE4F6EA22407C03004BD60B /* LocalePickerViewController.swift in Sources */,
 				3B6A304022161E8C006D85B8 /* NewsCell.swift in Sources */,
@@ -1155,6 +1224,8 @@
 				3B71213B21FB4F8F00D0EA26 /* OnoardingScreensViewController.swift in Sources */,
 				3B6A303122161D94006D85B8 /* EventsCell.swift in Sources */,
 				3BC1AFAC2228BA4200655DFA /* InternshipItem.swift in Sources */,
+				3BD037CD2292957B009BBA6F /* BPCellConfigFile.swift in Sources */,
+				3BD037E422929A36009BBA6F /* BubblePictures.swift in Sources */,
 				3BDDFB4C223DC651004ECA38 /* RookUser+Router.swift in Sources */,
 				3B36285921F6711300E1E1DF /* RookOutlineButton.swift in Sources */,
 				3B6A302022161C8F006D85B8 /* CompleteProfile.swift in Sources */,
@@ -1181,6 +1252,7 @@
 				3BDDFB39223B2AE7004ECA38 /* InterestsPageViewController.swift in Sources */,
 				3B77F59A222AB7130011CEB1 /* WalletCell.swift in Sources */,
 				3B7AD2172214EE8D00302A18 /* RookNotificationButton.swift in Sources */,
+				3BD037C222929486009BBA6F /* AptitudeItem.swift in Sources */,
 				3BC1AFB022293BBC00655DFA /* AdCell.swift in Sources */,
 				3B36286221F6913900E1E1DF /* Extensions.swift in Sources */,
 				3B77F5B5222AB8180011CEB1 /* PortfolioCell.swift in Sources */,
@@ -1196,6 +1268,7 @@
 				3B36285321F640C100E1E1DF /* rookLogoVector.swift in Sources */,
 				3B6A303622161DD0006D85B8 /* ForYouCell.swift in Sources */,
 				3BC1AFB22229D88E00655DFA /* ProfileViewController.swift in Sources */,
+				3BD037CB2292957B009BBA6F /* BPCollectionViewCell.swift in Sources */,
 				3BDDFB3E223C17D5004ECA38 /* RookUser.swift in Sources */,
 				3B8C160C2239BE3700322C1C /* PostalCode.swift in Sources */,
 				3BDDFB42223C1822004ECA38 /* RookUserModel.swift in Sources */,
@@ -1212,6 +1285,8 @@
 				3B8C16112239BE3700322C1C /* Regex.swift in Sources */,
 				3B54526021FE8A4A007C847C /* RookRoundTextField.swift in Sources */,
 				3BE4F6F022407C70004BD60B /* Locale+Extensions.swift in Sources */,
+				3BD037D42292984B009BBA6F /* BPAlignment.swift in Sources */,
+				3BD037D622929A15009BBA6F /* RookProgressBar.swift in Sources */,
 				3B844FAE221746D2008BAD08 /* DiscoverItem.swift in Sources */,
 				3BFBBA4B221B020D00189FCC /* EventsItemStore.swift in Sources */,
 				3B8C160D2239BE3700322C1C /* ISBN.swift in Sources */,
@@ -1220,14 +1295,18 @@
 				3B77F5A4222AB7950011CEB1 /* InterestsCell.swift in Sources */,
 				3B71213921FB455E00D0EA26 /* ScrollViewController.swift in Sources */,
 				3B36286021F68DDC00E1E1DF /* rookShapes.swift in Sources */,
+				3BD037E022929A25009BBA6F /* SkillItem.swift in Sources */,
 				3BE4F6FC22414836004BD60B /* String+Additions.swift in Sources */,
 				3B77F5B3222AB80D0011CEB1 /* Portfolio.swift in Sources */,
 				3B0BA8092234A0CE003082F0 /* Cryptor+Extensions.swift in Sources */,
+				3BD037DD22929A25009BBA6F /* InterestItem.swift in Sources */,
 				3B6D43EE21FF20BF00E94A07 /* RookAnimatedLoadingButton.swift in Sources */,
 				3BC1AF9F2228B50700655DFA /* recInternshipsCell.swift in Sources */,
+				3BD037DF22929A25009BBA6F /* PortfolioItem.swift in Sources */,
 				3BC1AF8D22273FBE00655DFA /* CompaniesCell.swift in Sources */,
 				3BE4F6F422407C81004BD60B /* CountryCell.swift in Sources */,
 				3BE4F6FA224131D9004BD60B /* PasswordStrength.swift in Sources */,
+				3BD037D02292957B009BBA6F /* BPLayoutConfigurator.swift in Sources */,
 				3B8C160B2239BE3700322C1C /* Validator.swift in Sources */,
 				3BE4F6E322405DD6004BD60B /* AlertViewController.swift in Sources */,
 				3B6A302222161CB7006D85B8 /* CompleteProfileCell.swift in Sources */,
@@ -1240,7 +1319,10 @@
 				3BFBBA5D221B156F00189FCC /* ForYouItemStore.swift in Sources */,
 				3B8C16142239BE3700322C1C /* Bool+StringConvertible.swift in Sources */,
 				3BE4F6EE22407C37004BD60B /* LocaleInfo.swift in Sources */,
+				3BD037D32292984B009BBA6F /* BPDirection.swift in Sources */,
 				3BE4F6CD223FF8B8004BD60B /* Video.swift in Sources */,
+				3BD037E122929A25009BBA6F /* EducationItem.swift in Sources */,
+				3BD037E222929A25009BBA6F /* WalletCell.swift in Sources */,
 				3BFBBA49221B01FC00189FCC /* EventsItem.swift in Sources */,
 				3BC1AF962228AF4900655DFA /* InternshipsViewController.swift in Sources */,
 				3B8C16092239BE3700322C1C /* String+StringConvertible.swift in Sources */,
@@ -1262,8 +1344,10 @@
 				3BC0259F21FFC42500210E2D /* RookRoundButton.swift in Sources */,
 				3BDDFB3B223B2B89004ECA38 /* TagsCellLayout.swift in Sources */,
 				3B0BA80E2234A39A003082F0 /* SRPTest.swift in Sources */,
+				3BD037CF2292957B009BBA6F /* BPDelegate.swift in Sources */,
 				3B773F5E22007C10002DDCBF /* SignUpPagesViewController.swift in Sources */,
 				3B6A301B22161C31006D85B8 /* SectionHeaderView.swift in Sources */,
+				3BD037DE22929A25009BBA6F /* ExperienceItem.swift in Sources */,
 				3B6A302F22161D75006D85B8 /* Events.swift in Sources */,
 				3B8C160E2239BE3700322C1C /* NSString+StringConvertible.swift in Sources */,
 				3B6A302C22161D42006D85B8 /* PollCardCell.swift in Sources */,

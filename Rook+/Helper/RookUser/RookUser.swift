@@ -29,7 +29,19 @@ import Cryptor
 public class RookUser {
     
     static let shared = RookUser()
-    var user = RookUser.getSavedUser()
+    
+    private var _user = RookUser.getSavedUser()
+    
+    var user: RookUserModel {
+        get {
+            guard let user = _user else { return RookUserModel() }
+            return user
+        }
+        set {
+            self._user = newValue
+        }
+    }
+    
     internal var base_url : String?
     private var appcode : String?
     internal var config : RookUserConfig!
@@ -125,8 +137,8 @@ public class RookUser {
      - to: The platform you want to login ( .facebook, .google )
      - token: The token that will be used for the login, you can get it via the third party sdks
      */
-    public func socialLogin(to: socialTypes, token: String, completion: @escaping RookUserCompletion ) {
-        self.config.loginStrategy.socialLogin(to: to, token: token, completion: {(success, data, error) in
+    public func socialLogin(to: socialTypes, id: String, completion: @escaping RookUserCompletion ) {
+        self.config.loginStrategy.socialLogin(to: to, id: id, completion: {(success, data, error) in
             completion(success, data, error)
         })
     }
@@ -139,20 +151,21 @@ public class RookUser {
      - password: The password that will be used for the user
      
      */
-    public func createUser(email: String, password: String, completion: @escaping RookUserCompletion ) {
-        self.config.signupStrategy.signup(email: email, password: password, completion: {(success, data, error) in
+    public func createUser(type: RookUser.signUpType, parameters: [String: Any], completion: @escaping RookUserCompletion ) {
+        self.config.signupStrategy.signup(type: type, parameters: parameters, completion: {(success, data, error) in
             completion(success, data, error)
         })
     }
+    
     /**
      Get the details of a specified user
      
      - parameters:
      - username: the username to fetch
      */
-    public func getUser(email: String, completion: @escaping RookUserCompletion ) {
-        assert(email != "", "Email of user to fetch cannot be empty")
-        get(url: "/user/"+email, parameters: [:], completion: { (success, data, error) in
+    public func getUser(parameters: [String: Any], completion: @escaping RookUserCompletion ) {
+        assert(parameters["email"] as! String != "", "Email of user to fetch cannot be empty")
+        post(url: "/auth/check_user.php", parameters: parameters, completion: { (success, data, error) in
             completion(success, data, error)
         })
     }
@@ -185,10 +198,15 @@ public class RookUser {
         })
     }
     
-    private static func getSavedUser() -> RookUserModel {
+    private static func getSavedUser() -> RookUserModel? {
         if let encodedUser = UserDefaults.standard.object(forKey: saved_rook_user) {
-            let user = NSKeyedUnarchiver.unarchiveObject(with: encodedUser as! Data) as! RookUserModel
-            return user
+            guard let data = NSKeyedUnarchiver.unarchiveObject(with: encodedUser as! Data) as? Data else { return nil}
+            do {
+                let user = try PropertyListDecoder().decode(RookUserModel.self, from: data)
+                return user
+            } catch {
+                return RookUserModel()
+            }
         }
         return RookUserModel()
     }
@@ -197,8 +215,13 @@ public class RookUser {
      Saves the current stored user
      */
     public static func saveCurrentUser() {
-        let encodedUser = NSKeyedArchiver.archivedData(withRootObject: RookUser.shared.user)
-        UserDefaults.standard.set(encodedUser, forKey: saved_rook_user)
+        do {
+            let data = try PropertyListEncoder().encode(RookUser.shared.user)
+            let encodedUser = NSKeyedArchiver.archivedData(withRootObject: data)
+            UserDefaults.standard.set(encodedUser, forKey: saved_rook_user)
+        } catch{
+            print("Save failed")
+        }
     }
     /**
      Remove the current stored user
@@ -688,7 +711,7 @@ public class RookUser {
         }
         return h
     }
-   
+    
     
     // MARK: Variables
     
@@ -696,6 +719,10 @@ public class RookUser {
     public typealias RookFileCompletion = (( _ success : Bool, _ data : Data?, _ error: Error? ) -> Void)
     
     // MARK: Enums
+    
+    public enum signUpType {
+        case email, social
+    }
     
     /// Enum the possible social logins offered by Rook+
     public enum socialTypes : String {

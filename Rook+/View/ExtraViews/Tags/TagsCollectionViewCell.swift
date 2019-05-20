@@ -11,6 +11,24 @@ import UIKit
 
 class TagCollectionViewCell: UICollectionViewCell {
     
+    var selectedBackgroundColor: UIColor = UIColor(hexString: "FF5500") {
+        didSet {
+            tagView.backgroundColor = selectedBackgroundColor
+        }
+    }
+    
+    var normalTextColor: UIColor = UIColor.white {
+        didSet {
+            tagView.textColor = normalTextColor
+        }
+    }
+    
+    var normalBorderColor: UIColor = UIColor.white {
+        didSet {
+            tagView.layer.borderColor = normalBorderColor.cgColor
+        }
+    }
+    
     var tagSelected: Bool = false {
         didSet {
             if tagSelected {
@@ -39,10 +57,10 @@ class TagCollectionViewCell: UICollectionViewCell {
         label.clipsToBounds = true
         return label
     }()
-
+    
     private func configureViews() {
         tagView.layer.cornerRadius = tagView.frame.size.height/2 - 2
-       
+        
         addSubview(tagView)
     }
     
