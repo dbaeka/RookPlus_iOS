@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let config = RookUserConfig()
-        RookUser.setup(url: "http://localhost:8080/api/v0", appcode: "your appcode", config: config)
+        RookUser.setup(url: "https://myrookery.com/api/v0", appcode: "your appcode", config: config)
         // Override point for customization after application launch.
         IQKeyboardManager.shared().isEnabled = true
       //  FirebaseApp.configure()
