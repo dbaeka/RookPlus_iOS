@@ -85,11 +85,6 @@ class SignUpPagesViewController: UIViewController {
         return self.storyboard?.instantiateViewController(withIdentifier: "SignUpPage4") as! SignUpPage4ViewController
     }()
     
-    lazy var SignUpPage5: SignUpPage5ViewController! = {
-        return self.storyboard?.instantiateViewController(withIdentifier: "SignUpPage5") as! SignUpPage5ViewController
-    }()
-   
-    
     // MARK: - IBActions
     func handleNext(_ sender: Any) {
         for (index, vc) in viewControllers.enumerated() {
@@ -108,7 +103,7 @@ class SignUpPagesViewController: UIViewController {
         
         addChild(self.scrollViewController)
         view.addSubview(scrollViewController.view)
-        scrollViewController.viewControllers = [SignUpPage1, SignUpPage2, SignUpPage3, SignUpPage4, SignUpPage5]
+        scrollViewController.viewControllers = [SignUpPage1, SignUpPage2, SignUpPage3, SignUpPage4]
         scrollViewController.delegate = self
         
         view.addSubview(backButton)
@@ -207,7 +202,7 @@ class SignUpPagesViewController: UIViewController {
 extension SignUpPagesViewController: ScrollViewControllerDelegate {
       
     var viewControllers: [UIViewController?] {
-        return [SignUpPage1, SignUpPage2, SignUpPage3, SignUpPage4, SignUpPage5]
+        return [SignUpPage1, SignUpPage2, SignUpPage3, SignUpPage4]
     }
     
     var initialViewController: UIViewController {

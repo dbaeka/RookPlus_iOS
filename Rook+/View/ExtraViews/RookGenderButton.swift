@@ -17,6 +17,15 @@ class RookGenderButton: UIButton {
         var string: String {
             return rawValue
         }
+        
+        var serializedString: String {
+            switch self {
+            case .male:
+                return "m"
+            case .female:
+                return "f"
+            }
+        }
     }
     
     private var coloredImage: UIImage? {

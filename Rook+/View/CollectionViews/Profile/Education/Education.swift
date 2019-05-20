@@ -132,15 +132,17 @@ extension Education: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return RookUser.shared.user.education?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let educationCell: EducationCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.educationCellID, for: indexPath) as! EducationCell
-        educationCell.schoolName = "University of Michigan"
-        educationCell.course = "BSc. Electrical and Computer Engineering"
-        educationCell.completionYear = 2020
-        educationCell.gradeLevel = "Sophomore"
+        let educationItem = RookUser.shared.user.education?[indexPath.row]
+        educationCell.schoolName = educationItem?.name
+        educationCell.course = educationItem?.course
+        educationCell.completionYear = educationItem?.completion
+        educationCell.gradeLevel = educationItem?.level
+        educationCell.id = educationItem?.id
         return educationCell
         
     }

@@ -22,8 +22,9 @@ class EducationCell: UICollectionViewCell {
         }
     }
     
-    var completionYear: Int = 0 {
+    var completionYear: String? {
         didSet {
+            guard let completionYear = completionYear else { return }
             self.completionLabel.text = "Completion: " + String(completionYear)
         }
     }
@@ -34,6 +35,8 @@ class EducationCell: UICollectionViewCell {
             self.gradeLevelLabel.text = "Grade: " + gradeLevel
         }
     }
+    
+    var id: String?
     
     private let schoolNameLabel: UILabel = {
         let label = UILabel()

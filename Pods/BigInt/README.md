@@ -100,12 +100,6 @@ BigInt can be used, distributed and modified under [the MIT license][license].
 BigInt 3.0.0 requires Swift 4. (The last version with support for Swift 3.x was BigInt 2.1.0.
 The last version with support for Swift 2 was BigInt 1.3.0.)
 
-| Swift Version | last BigInt Version|
-| ------------- |:-------------------|
-| 3.x           | 2.1.0              |
-| 4.0           | 3.1.0              |
-| 4.2           | 4.0.0              |
-
 BigInt deploys to macOS 10.10, iOS 9, watchOS 2 and tvOS 9.
 It has been tested on the latest OS releases only---however, as the module uses very few platform-provided APIs,
 there should be very few issues with earlier versions.
@@ -120,20 +114,21 @@ Setup instructions:
   Add this to the dependency section of your `Package.swift` manifest:
 
     ```Swift
-    .package(url: "https://github.com/attaswift/BigInt.git", from: "4.0.0")
+    .Package(url: "https://github.com/attaswift/BigInt.git", from: "3.1.0")
     ```
 
 - **CocoaPods:** Put this in your `Podfile`:
 
     ```Ruby
-    pod 'BigInt', '~> 4.0'
+    pod 'BigInt', '~> 3.1'
     ```
 
 - **Carthage:** Put this in your `Cartfile`:
 
     ```
-    github "attaswift/BigInt" ~> 4.0
+    github "attaswift/BigInt" ~> 3.1
     ```
+
 
 ## <a name="notes">Implementation notes</a>
 

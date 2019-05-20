@@ -15,13 +15,12 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - Alamofire (4.8.2)
-  - BigInt (4.0.0)
+  - BigInt (3.1.0):
+    - SipHash (~> 1.2)
   - BlueCryptor (1.0.28)
   - Crashlytics (3.13.1):
     - Fabric (~> 1.10.1)
   - Fabric (1.10.1)
-  - FacebookCore (0.7.0):
-    - FBSDKCoreKit (~> 5.0)
   - FBSDKCoreKit (5.0.0):
     - FBSDKCoreKit/Basics (= 5.0.0)
     - FBSDKCoreKit/Core (= 5.0.0)
@@ -35,6 +34,15 @@ PODS:
     - FirebaseAnalytics (= 6.0.0)
   - Firebase/CoreOnly (6.0.0):
     - FirebaseCore (= 6.0.0)
+  - Firebase/Messaging (6.0.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 4.0.0)
+  - Firebase/RemoteConfig (6.0.0):
+    - Firebase/CoreOnly
+    - FirebaseRemoteConfig (~> 4.0.0)
+  - FirebaseABTesting (3.0.0):
+    - FirebaseCore (~> 6.0)
+    - Protobuf (~> 3.5)
   - FirebaseAnalytics (6.0.0):
     - FirebaseCore (~> 6.0)
     - FirebaseInstanceID (~> 4.0)
@@ -61,6 +69,13 @@ PODS:
     - GoogleUtilities/Reachability (~> 6.0)
     - GoogleUtilities/UserDefaults (~> 6.0)
     - Protobuf (~> 3.1)
+  - FirebaseRemoteConfig (4.0.0):
+    - FirebaseABTesting (~> 3.0)
+    - FirebaseCore (~> 6.0)
+    - FirebaseInstanceID (~> 4.0)
+    - GoogleUtilities/Environment (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - Protobuf (~> 3.5)
   - GoogleAppMeasurement (6.0.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
@@ -87,17 +102,21 @@ PODS:
     - GoogleUtilities/Logger
   - IOSLinkedInAPIFix (2.0.4):
     - AFNetworking (>= 2.0.0)
-  - IQKeyboardManagerSwift (6.3.0)
+  - IQKeyboardManager (6.3.0)
   - Kingfisher (5.5.0)
   - LinkedinSwift (1.7.9):
     - AFNetworking (>= 3.1.0)
     - IOSLinkedInAPIFix (>= 2.0.4)
+  - Mixpanel-swift (2.6.2):
+    - Mixpanel-swift/Complete (= 2.6.2)
+  - Mixpanel-swift/Complete (2.6.2)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.7.0)
+  - SipHash (1.2.2)
   - SwiftyJSON (5.0.0)
   - TwitterCore (3.2.0)
   - TwitterKit (3.4.2):
@@ -106,17 +125,18 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - BigInt
+  - BigInt (~> 3.1)
   - BlueCryptor
   - Crashlytics
   - Fabric
-  - FacebookCore
   - FBSDKLoginKit
   - Firebase/Core
-  - FirebaseMessaging
-  - IQKeyboardManagerSwift
-  - Kingfisher (~> 5.0)
-  - LinkedinSwift (~> 1.7)
+  - Firebase/Messaging
+  - Firebase/RemoteConfig
+  - IQKeyboardManager
+  - Kingfisher
+  - LinkedinSwift
+  - Mixpanel-swift
   - SwiftyJSON
   - TwitterKit
   - VSAlert
@@ -129,23 +149,26 @@ SPEC REPOS:
     - BlueCryptor
     - Crashlytics
     - Fabric
-    - FacebookCore
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
+    - FirebaseABTesting
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
     - FirebaseCore
     - FirebaseInstanceID
     - FirebaseMessaging
+    - FirebaseRemoteConfig
     - GoogleAppMeasurement
     - GoogleUtilities
     - IOSLinkedInAPIFix
-    - IQKeyboardManagerSwift
+    - IQKeyboardManager
     - Kingfisher
     - LinkedinSwift
+    - Mixpanel-swift
     - nanopb
     - Protobuf
+    - SipHash
     - SwiftyJSON
     - TwitterCore
     - TwitterKit
@@ -154,32 +177,35 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  BigInt: 2aad1a9942dc932ec8b84290d2c564a3d76f97ab
+  BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   BlueCryptor: 08562366c1612c821a85f16f99071ce42c41be51
   Crashlytics: 5aa8e90dcbf2f34898b4f5a0037787531246cca0
   Fabric: f6f21452846788bb44595d73e9909d79d328e617
-  FacebookCore: 4eee98476cb37a485af5d337eb21f8cd5b3c7e6c
   FBSDKCoreKit: ba361d4a9d4dc29ff218822b849b22d4f869c7bb
   FBSDKLoginKit: c6d0dc187bd076e370dffa10f7fc8a3562a6892c
   Firebase: fa80b9d987ca014a1ba9357496ef2a0178b28b12
+  FirebaseABTesting: a32c488eb75089a61eb3d86db061dfb909d765db
   FirebaseAnalytics: 1743c5f4de3687d0745709dfdc4b1dea1484f44c
   FirebaseAnalyticsInterop: efbe45c8385ec626e29f9525e5ebd38520dfb6c1
   FirebaseCore: e38f025287b413255a53acc1945d048a112047f7
   FirebaseInstanceID: 0e0348a3c00a734fa376a070f5ad4533ad975cb5
   FirebaseMessaging: c796d50864dc822a3c06c9c1c1444b37732b795b
+  FirebaseRemoteConfig: 40f75c6ea20a52bf65ef44e3898910dd5b57c532
   GoogleAppMeasurement: 7f028ea162b72c8f326daec74afc95d94f7a47d6
   GoogleUtilities: 84df567c76ca84f67b7bb40e769fdd4acc746a10
   IOSLinkedInAPIFix: a520fd805a03dade35f42904c7d89ded2a84c752
-  IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
+  IQKeyboardManager: 2ca9d64893247556f53523dcd8d78641f0ba7c23
   Kingfisher: 6fe5e67a90fd335e49b0f5c075ff55ac5ebedd94
   LinkedinSwift: f92083bf0404938768cc2cfd8c277205b566236f
+  Mixpanel-swift: eea98bb65fd80e992a9ecb3a0a421eca542ea72f
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
+  SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
   VSAlert: 14d4ff76ae920aac16f93c94869fac55328d5d8e
 
-PODFILE CHECKSUM: f42d6cb6aae65bc52872e221df85a7d3ad8472c1
+PODFILE CHECKSUM: 3b6805c4202035a87d91925acee78e2014d28068
 
 COCOAPODS: 1.6.2

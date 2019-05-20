@@ -46,6 +46,10 @@ class ProfileViewController: UIViewController {
     
     private var portfolioViewHeight: CGFloat = 100
     
+    private var skillsViewHeight: CGFloat = 100
+    
+    private var interestsViewHeight: CGFloat = 100
+    
     lazy var RookProfileCollectionView: UICollectionView = {
         var flowLayout = UICollectionViewFlowLayout()
         flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
@@ -170,6 +174,10 @@ extension ProfileViewController: ResizableCollectionViewDelegate {
             educationViewHeight = Size.height
         } else if (collectionView.tag == 6) {
             workExperienceViewHeight = Size.height
+        } else if (collectionView.tag == 7) {
+            skillsViewHeight = Size.height
+        } else if (collectionView.tag == 8) {
+            interestsViewHeight = Size.height
         } else {
             portfolioViewHeight = Size.height
         }
@@ -196,9 +204,9 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
         case 6:
             return CGSize(width: UIScreen.main.bounds.width-20, height: workExperienceViewHeight)
         case 7:
-          return CGSize(width: UIScreen.main.bounds.width-20, height: 100)
+          return CGSize(width: UIScreen.main.bounds.width-20, height: skillsViewHeight)
         case 8:
-            return CGSize(width: UIScreen.main.bounds.width-20, height: 100)
+            return CGSize(width: UIScreen.main.bounds.width-20, height: interestsViewHeight)
         case 9:
             return CGSize(width: UIScreen.main.bounds.width-20, height: 140)
         case 10:
@@ -234,10 +242,9 @@ extension ProfileViewController: UICollectionViewDataSource {
         switch indexPath.row {
         case 1:
             let statsCell: StatsCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.statsCellID, for: indexPath) as! StatsCell
-            statsCell.completed = 5
-            statsCell.tasks = 100
-            let badges: [String] = ["come","come","come","come"]
-            statsCell.badges = badges
+            statsCell.completed = RookUser.shared.user.stats?.completed ?? 0
+            statsCell.tasks = RookUser.shared.user.stats?.totalTasks ?? 0
+            statsCell.badges = RookUser.shared.user.stats?.badges
             return statsCell
         case 2:
             let walletCell: WalletCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.walletCellID, for: indexPath) as! WalletCell
@@ -249,12 +256,12 @@ extension ProfileViewController: UICollectionViewDataSource {
             return psychometricTestCell
         case 4:
             let demographicsCell: DemographicsCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.demopgraphicsCellID, for: indexPath) as! DemographicsCell
-            demographicsCell.gender = "Male"
-            demographicsCell.age = "22"
-            demographicsCell.nationality = "Ghana"
-            demographicsCell.employmentStatus = "Student"
-            demographicsCell.city = "Accra"
-            demographicsCell.maritalStatus = "Single"
+            demographicsCell.gender = RookUser.shared.user.gender
+            demographicsCell.age = RookUser.shared.user.dateOfBirth?.string2date(format: "yyyy-mm-dd")?.date2age()
+            demographicsCell.nationality = RookUser.shared.user.nationality
+            demographicsCell.employmentStatus = RookUser.shared.user.employmentStatus
+            demographicsCell.city = RookUser.shared.user.location
+            demographicsCell.maritalStatus = RookUser.shared.user.maritalStatus
             return demographicsCell
         case 5:
             let educationCell: Education = collectionView.dequeueReusableCell(withReuseIdentifier: self.educationCellID, for: indexPath) as! Education
@@ -266,16 +273,18 @@ extension ProfileViewController: UICollectionViewDataSource {
             return workExperienceCell
         case 7:
             let skillsCell: SkillsCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.skillsCellID, for: indexPath) as! SkillsCell
+            skillsCell.delegate = self
             return skillsCell
         case 8:
             let interestsCell: InterestsCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.interestsCellID, for: indexPath) as! InterestsCell
+            interestsCell.delegate = self
             return interestsCell
         case 9:
             let aptitudeTestCell: AptitudeTestCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.aptitudeTestCellID, for: indexPath) as! AptitudeTestCell
-            aptitudeTestCell.averageScore = 95
-            aptitudeTestCell.highestScore = 100
-            aptitudeTestCell.percentile = 75
-            aptitudeTestCell.testsTaken = 5
+            aptitudeTestCell.averageScore = RookUser.shared.user.aptitude?.average_score ?? 0
+            aptitudeTestCell.highestScore = RookUser.shared.user.aptitude?.highest_score ?? 0
+            aptitudeTestCell.percentile = RookUser.shared.user.aptitude?.percentile ?? 0
+            aptitudeTestCell.testsTaken = RookUser.shared.user.aptitude?.tests_taken ?? 0
             return aptitudeTestCell
         case 10:
             let portfolioCell: Portfolio = collectionView.dequeueReusableCell(withReuseIdentifier: self.portfolioCellID, for: indexPath) as! Portfolio
@@ -283,9 +292,10 @@ extension ProfileViewController: UICollectionViewDataSource {
             return portfolioCell
         default:
             let basicInfoCell: BasicInfoCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.basicInfoCellID, for: indexPath) as! BasicInfoCell
-            basicInfoCell.fullName = "Delmwin Baeka"
-            basicInfoCell.points = 2000
+            basicInfoCell.fullName = RookUser.shared.user.fullname
+            basicInfoCell.points = RookUser.shared.user.stats?.points ?? 0
             basicInfoCell.subscriptionLevel = "gold"
+            basicInfoCell.completion = 0.5
           //  basicInfoCell.delegate = self
             return basicInfoCell
         }

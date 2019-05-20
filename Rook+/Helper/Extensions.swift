@@ -335,49 +335,34 @@ extension String {
 }
 
 
-extension UIImage {
-    func resizeWith(width: CGFloat) -> UIImage? {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = self
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        imageView.layer.render(in: context)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
-        return result
-    }
-    
-    var jpegRepresentation:Data? {
-        return self.jpegData(compressionQuality: 0.8)
-    }
-    
-    convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
-        let rect = CGRect(origin: .zero, size: size)
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
-        color.setFill()
-        UIRectFill(rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        guard let cgImage = image?.cgImage else { return nil }
-        self.init(cgImage: cgImage)
+extension Encodable {
+    func asDisctionary() throws -> [String: Any] {
+        let data = try JSONEncoder().encode(self)
+        guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else { throw NSError() }
+        return dictionary
     }
 }
 
-
 extension String {
-    
-    var length: Int {
-        return self.count
+    func string2date(format: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.date(from: self)
+    }
+}
+
+extension Date {
+    func date2age() -> Int? {
+        let now = Date()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year], from: self, to: now)
+        return components.year
     }
     
- 
-    func substring(from: Int) -> String {
-        return self[min(from, length) ..< length]
-    }
-    
-    func substring(to: Int) -> String {
-        return self[0 ..< max(0, to)]
+    func date2string(format: String) -> String? {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_GH")
+        formatter.setLocalizedDateFormatFromTemplate(format)
+        return formatter.string(from: self)
     }
 }

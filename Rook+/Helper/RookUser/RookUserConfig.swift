@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 /**
  RookUserConfig class, let you declare your `RookUserConfig` Configs before setup
  
@@ -47,7 +48,7 @@ public protocol RookUserLoginStrategy {
     func login(email: String, password: String, completion: @escaping RookUser.RookUserCompletion)
     /// override for social login, you can use the default one like this
     ///     RookUserDefaultLoginStrategy().socialLogin(...)
-    func socialLogin(to: RookUser.socialTypes, token: String, completion: @escaping RookUser.RookUserCompletion)
+    func socialLogin(to: RookUser.socialTypes, id: String, completion: @escaping RookUser.RookUserCompletion)
 }
 
 /**
@@ -58,7 +59,7 @@ public protocol RookUserLoginStrategy {
 public protocol RookUserSignupStrategy {
     /// override for signup, you can use the default one like this
     ///     RookUserDefaultSignupStrategy().signup(...)
-    func signup(email: String, password: String, completion: @escaping RookUser.RookUserCompletion)
+    func signup(type: RookUser.signUpType, parameters: [String: Any], completion: @escaping RookUser.RookUserCompletion)
 }
 
 /**
@@ -80,7 +81,7 @@ public class RookUserDefaultLoginStrategy: RookUserLoginStrategy {
     
     public func login(email: String, password: String, completion: @escaping RookUser.RookUserCompletion) {
         assert(email != "" && password != "", "Email or password for user login cannot be empty")
-        RookUser.shared.post(url: "/login.php", parameters: ["email": email, "password":password, "firebaseToken": RookUser.getAppcode()!, "type": "email"], completion: { (success, data, error) in
+        RookUser.shared.post(url: "/auth/login.php", parameters: ["email": email, "password":password, "firebaseToken": RookUser.shared.user.firebaseToken ?? "no token", "type": "email"], completion: { (success, data, error) in
             if success {
                 if RookUser.getConfig().retrylogin { RookUser.saveUserPass(pass: password) }
                 RookUser.shared.user = RookUserModel.init(withDictionary: data as! [String:AnyObject], pushToken: RookUser.shared.user.pushToken, pushEnabled:RookUser.shared.user.pushEnabled)
@@ -90,11 +91,11 @@ public class RookUserDefaultLoginStrategy: RookUserLoginStrategy {
         })
     }
     
-    public func socialLogin(to: RookUser.socialTypes, token: String, completion: @escaping RookUser.RookUserCompletion) {
-        assert(token != "", "Token for social login cannot be empty")
-        RookUser.shared.post(url: "/social/"+to.rawValue, parameters: ["oauth_token": token, "oauth_secret": token], completion: { (success, data, error) in
+    public func socialLogin(to: RookUser.socialTypes, id: String, completion: @escaping RookUser.RookUserCompletion) {
+        assert(id != "", "Social ID cannot be empty")
+        RookUser.shared.post(url: "/auth/login.php", parameters: ["socialType": to.rawValue , "id": id, "firebaseToken": RookUser.shared.user.firebaseToken!, "type": "social"], completion: { (success, data, error) in
             if success {
-                if RookUser.getConfig().retrylogin { RookUser.saveUserPass(pass: token) }
+                if RookUser.getConfig().retrylogin { RookUser.saveUserPass(pass: id) }
                 RookUser.shared.user = RookUserModel.init(withDictionary: data as! [String:AnyObject], pushToken: RookUser.shared.user.pushToken, pushEnabled:RookUser.shared.user.pushEnabled, socialLogin:true, socialType: to.rawValue)
                 RookUser.saveCurrentUser()
             }
@@ -106,9 +107,10 @@ public class RookUserDefaultLoginStrategy: RookUserLoginStrategy {
 public class RookUserDefaultSignupStrategy : RookUserSignupStrategy {
     public init(){}
     
-    public func signup(email: String, password: String, completion: @escaping RookUser.RookUserCompletion) {
-        assert(email != "" && password != "", "Email or password for user creation cannot be empty")
-        RookUser.shared.post(url: "/user", parameters: ["email" : email, "password" : password], completion: {
+    public func signup(type: RookUser.signUpType, parameters: [String: Any], completion: @escaping RookUser.RookUserCompletion) {
+        (type == .email) ? assert(parameters["email"] as! String != "" && parameters["password"] as! String != "", "Email or password for user creation cannot be empty") : assert(parameters["email"] as! String != "", "Email for user creation cannot be empty")
+        let url = (type == .email) ? "/auth/register.php" : "/auth/social_register.php"
+        RookUser.shared.post(url: url, parameters: parameters, completion: {
             (success, data, error) in
             if success {
                 RookUser.shared.user = RookUserModel.init(withDictionary: data as! [String:AnyObject])

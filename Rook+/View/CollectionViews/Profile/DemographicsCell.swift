@@ -16,9 +16,10 @@ class DemographicsCell: UICollectionViewCell {
         }
     }
     
-    var age: String?  {
+    var age: Int?  {
         didSet {
-            self.ageLabel.text = age
+            guard let age = age else { return }
+            self.ageLabel.text = String(age)
         }
     }
     

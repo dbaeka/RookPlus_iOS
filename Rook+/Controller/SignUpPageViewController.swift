@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import VSAlert
 
 class SignUpPage1ViewController: UIViewController {
     
@@ -137,6 +138,9 @@ class SignUpPage1ViewController: UIViewController {
     
     @objc func handleNext(_ sender: Any) {
         self.resignKeyboards()
+        RookUser.shared.user.email = self.emailTextField.textField.text!
+        RookUser.shared.user.firstName = self.firstNameTextField.textField.text!
+        RookUser.shared.user.lastName = self.lastNameTextField.textField.text!
         let vc = self.parent?.parent as! SignUpPagesViewController
         vc.handleNext(sender)
     }
@@ -367,6 +371,8 @@ class SignUpPage2ViewController: UIViewController {
     }
     
     @objc func handleNext(_ sender: Any) {
+        RookUser.shared.user.gender = self.gender?.serializedString
+        RookUser.shared.user.dateOfBirth = self.birthdayString
         let vc = self.parent?.parent as! SignUpPagesViewController
         vc.handleNext(sender)
     }
@@ -576,6 +582,7 @@ class SignUpPage3ViewController: UIViewController {
     
     @objc func handleNext(_ sender: Any) {
         self.resignKeyboards()
+        RookUser.shared.user.tempPassword = self.passwordTextField.textFieldWithButton.text!
         let vc = self.parent?.parent as! SignUpPagesViewController
         vc.handleNext(sender)
     }
@@ -667,6 +674,8 @@ class SignUpPage4ViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
+    private let phoneFormat = "(NNN) NNN NNNN"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(headingLabel)
@@ -718,9 +727,42 @@ class SignUpPage4ViewController: UIViewController, UITextFieldDelegate {
     
     @objc func handleNext(_ sender: Any) {
         self.resignKeyboards()
-        let vc = self.parent?.parent as! SignUpPagesViewController
-        vc.SignUpPage5.phoneNumber = self.phoneNumberTextField.textFieldWithButton.text
-        vc.handleNext(sender)
+        let rawDigits = self.phoneNumberTextField.textFieldWithButton.text!
+        let digits = rawDigits.unformat(string: rawDigits, with: phoneFormat).dropFirst().lowercased()
+        RookUser.shared.user.phone = (self.phoneCode + digits).dropFirst().lowercased()
+        RookUser.shared.user.firebaseToken = "Your App Code"
+        do {
+            let encodedUser = try RookUser.shared.user.asDisctionary()
+            RookUser.shared.createUser(type: .email, parameters: encodedUser){ (success, data, error) in
+                if success {
+                    DispatchQueue.main.async {
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "VerificationViewController") as! VerificationViewController
+                        vc.phoneNumber = self.phoneNumberTextField.textFieldWithButton.text
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                } else {
+                    guard let error = error else { return }
+                    let statusMessage = (error as NSError).userInfo["message"] ?? "No message"
+                    DispatchQueue.main.async {
+                        let controller = VSAlertController(title: "SignUp Failed", message: statusMessage as? String, preferredStyle: VSAlertControllerStyle.alert)
+                        controller?.shouldDismissOnBackgroundTap = true
+                        controller?.animationStyle = .fall
+                        let action = VSAlertAction(title: "Close", style: VSAlertActionStyle.cancel, action: nil)
+                        controller?.add(action!)
+                        self.present(controller!, animated: true, completion: nil)
+                    }
+                }
+            }
+        } catch {
+            DispatchQueue.main.async {
+                let controller = VSAlertController(title: "Incomplete SignUp Details", message: "Recheck that all information is provided", preferredStyle: VSAlertControllerStyle.alert)
+                controller?.shouldDismissOnBackgroundTap = true
+                controller?.animationStyle = .fall
+                let action = VSAlertAction(title: "Close", style: VSAlertActionStyle.cancel, action: nil)
+                controller?.add(action!)
+                self.present(controller!, animated: true, completion: nil)
+            }
+        }
     }
     
     @objc private func updatePhoneCode(notification: Notification) {
@@ -767,7 +809,7 @@ class SignUpPage4ViewController: UIViewController, UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let lastText = (text as NSString).replacingCharacters(in: range, with: string) as String
-        textField.text = lastText.format(string: text, with: "(NNN) NNN NNNN")
+        textField.text = lastText.format(string: text, with: phoneFormat)
         let notification = Notification(name: UITextField.textDidChangeNotification, object: textField, userInfo: nil)
         self.textDidChange(notification)
         return false
@@ -775,7 +817,57 @@ class SignUpPage4ViewController: UIViewController, UITextFieldDelegate {
 }
 
 
-class SignUpPage5ViewController: UIViewController, RookKeypadVerificationViewDelegate {
+class VerificationViewController: UIViewController, RookKeypadVerificationViewDelegate {
+    
+    private let background: rectGradient = {
+        let view = rectGradient()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let backButton : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "Close.png"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let barrook: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "RookBar.png")
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let alreadyAccountLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(hexString: "#232222")
+        label.text = "Already have an account?"
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.font = UIFont(name: "Roboto-BoldCondensed", size: 12)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.8
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let loginButton: UIButton = {
+        let button = UIButton()
+        let textAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: "Roboto-BoldCondensed", size: 12), NSAttributedString.Key.foregroundColor: UIColor(hexString: "#004AEF"), NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+        let attributedString = NSMutableAttributedString(string: "log in", attributes: textAttributes)
+        button.setAttributedTitle(attributedString, for: .normal)
+        let textPressedAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: "Roboto-BoldCondensed", size: 12), NSAttributedString.Key.foregroundColor: UIColor.black]
+        let attributePresseddString = NSMutableAttributedString(string: "log in", attributes: textPressedAttributes)
+        button.setAttributedTitle(attributePresseddString, for: .highlighted)
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     var phoneNumber: String? {
         didSet {
@@ -819,10 +911,14 @@ class SignUpPage5ViewController: UIViewController, RookKeypadVerificationViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(background)
+        view.addSubview(barrook)
+        view.addSubview(backButton)
+        self.backButton.addTarget(self, action: #selector(goBack(_:)), for: .touchUpInside)
         view.addSubview(headingLabel)
         view.addSubview(verificationLabel)
         view.addSubview(keyPadContainer)
-        
+        self.loginButton.addTarget(self, action: #selector(goToLogin(_:)), for: .touchUpInside)
         keyPadContainer.delegate = self
         configureConstraints()
     }
@@ -839,6 +935,47 @@ class SignUpPage5ViewController: UIViewController, RookKeypadVerificationViewDel
         
         let textOffset: CGFloat = width/3.3
         let headingOffset: CGFloat = distanceToTop + 19 + height/24 + (width/4.5)/4.14814815
+        
+        self.background.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        self.background.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        self.background.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        self.background.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        self.backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: distanceToTop).isActive = true
+        self.backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 17).isActive = true
+        self.backButton.widthAnchor.constraint(equalToConstant: 12).isActive = true
+        self.backButton.heightAnchor.constraint(equalToConstant: 19).isActive = true
+        
+        self.barrook.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        self.barrook.topAnchor.constraint(equalTo: backButton.topAnchor, constant: height/24).isActive = true
+        let aspect = (barrook.image?.size.width)!/(barrook.image?.size.height)!
+        self.barrook.widthAnchor.constraint(equalToConstant: width/4.5).isActive = true
+        self.barrook.heightAnchor.constraint(equalToConstant: (width/4.5)/aspect).isActive = true
+        
+        let bottomView = UIView()
+        bottomView.backgroundColor = .clear
+        bottomView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bottomView)
+        bottomView.addSubview(loginButton)
+        bottomView.addSubview(alreadyAccountLabel)
+        
+        self.alreadyAccountLabel.heightAnchor.constraint(equalToConstant: textFontSize/1.6).isActive = true
+        self.alreadyAccountLabel.font = UIFont(name: "Roboto-BoldCondensed", size: textFontSize/1.4)
+        self.alreadyAccountLabel.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor).isActive = true
+        self.alreadyAccountLabel.leftAnchor.constraint(equalTo: bottomView.leftAnchor).isActive = true
+        
+        self.loginButton.centerYAnchor.constraint(equalTo: alreadyAccountLabel.centerYAnchor).isActive = true
+        self.loginButton.leftAnchor.constraint(equalTo: alreadyAccountLabel.rightAnchor, constant: 5).isActive = true
+        self.loginButton.heightAnchor.constraint(equalToConstant: textFontSize/1.6).isActive = true
+        let attributedStrings = self.setFontForAttributedText(with: alreadyAccountLabel.font, color: UIColor(hexString: "#004AEF"), string: "log in")
+        self.loginButton.setAttributedTitle(attributedStrings.normal, for: .normal)
+        self.loginButton.setAttributedTitle(attributedStrings.highlighted, for: .highlighted)
+        
+        let distance: CGFloat = (screenRatio < 2.0 && self.sizeClass() != (UIUserInterfaceSizeClass.regular, UIUserInterfaceSizeClass.regular)) ? -20 : -distanceToTop*1.2
+        bottomView.heightAnchor.constraint(equalToConstant: textFontSize/1.6).isActive = true
+        bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: distance).isActive = true
+        bottomView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        bottomView.widthAnchor.constraint(equalToConstant: alreadyAccountLabel.intrinsicContentSize.width + loginButton.intrinsicContentSize.width + 5).isActive = true
         
         self.headingLabel.font = UIFont(name: "Roboto-Bold", size: textFontSize)
         self.headingLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: headingOffset).isActive = true
@@ -858,10 +995,396 @@ class SignUpPage5ViewController: UIViewController, RookKeypadVerificationViewDel
         self.keyPadContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
+    private func setFontForAttributedText(with font: UIFont, color: UIColor, string: String) -> (normal: NSMutableAttributedString, highlighted: NSMutableAttributedString) {
+        let textAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+        let attributedString = NSMutableAttributedString(string: string, attributes: textAttributes)
+        let textPressedAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.black]
+        let attributePressedString = NSMutableAttributedString(string: string, attributes: textPressedAttributes)
+        return (attributedString, attributePressedString)
+    }
+    
+    @objc func goBack(_ sender: Any){
+        let count = self.navigationController?.viewControllers.count
+        if count != nil {
+            let presignUpVC = self.navigationController?.viewControllers[count!-3]
+            self.navigationController?.popToViewController(presignUpVC!, animated: true)
+        }
+    }
+    
+    @objc private func goToLogin(_ sender: Any) {
+        let count = self.navigationController?.viewControllers.count
+        if count != nil {
+            let loginVC = self.navigationController?.viewControllers[count!-4]
+            self.navigationController?.popToViewController(loginVC!, animated: true)
+        }
+    }
     
     func codeView(sender: RookKeypadVerificationView, didFinishInput code: String) {
         print(code)
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "WelcomeScreenViewController") as! WelcomeScreenViewController
         self.present(vc, animated: false, completion: nil)
+    }
+}
+
+class SocialSignUpViewController: UIViewController, UITextFieldDelegate {
+    
+    private let background: rectGradient = {
+        let view = rectGradient()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let backButton : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "BackButton.png"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let barrook: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "RookBar.png")
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let alreadyAccountLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(hexString: "#232222")
+        label.text = "Already have an account?"
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.font = UIFont(name: "Roboto-BoldCondensed", size: 12)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.8
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let loginButton: UIButton = {
+        let button = UIButton()
+        let textAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: "Roboto-BoldCondensed", size: 12), NSAttributedString.Key.foregroundColor: UIColor(hexString: "#004AEF"), NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+        let attributedString = NSMutableAttributedString(string: "log in", attributes: textAttributes)
+        button.setAttributedTitle(attributedString, for: .normal)
+        let textPressedAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: UIFont(name: "Roboto-BoldCondensed", size: 12), NSAttributedString.Key.foregroundColor: UIColor.black]
+        let attributePresseddString = NSMutableAttributedString(string: "log in", attributes: textPressedAttributes)
+        button.setAttributedTitle(attributePresseddString, for: .highlighted)
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let firstNameTextField: RookRoundText = {
+        let textfield = RookRoundText()
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.placeholder = "First Name"
+        textfield.textField.keyboardType = UIKeyboardType.alphabet
+        textfield.textField.tag = 1
+        return textfield
+    }()
+    
+    private let lastNameTextField: RookRoundText = {
+        let textfield = RookRoundText()
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.placeholder = "Last Name"
+        textfield.textField.keyboardType = UIKeyboardType.alphabet
+        textfield.textField.tag = 2
+        return textfield
+    }()
+    
+    
+    private var phoneCode: String = "+233" {
+        didSet {
+            phoneNumberTextField.buttonText = phoneCode
+            self.validate()
+        }
+    }
+    
+    private let phoneNumberTextField: RookRoundText = {
+        let textfield = RookRoundText()
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.placeholder = "Enter your phone number"
+        textfield.textFieldWithButton.keyboardType = UIKeyboardType.alphabet
+        textfield.isLeft = true
+        textfield.TFType = .button
+        textfield.buttonText = "+233"
+        textfield.textFieldWithButton.tag = 4
+        return textfield
+    }()
+    
+    private let phoneFormat = "(NNN) NNN NNNN"
+    
+    private let headingLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.text = "Enter your name &"
+        label.numberOfLines = 1
+        label.textAlignment = .left
+        label.font = UIFont(name: "Roboto-Bold", size: 22)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.8
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let subHeadingLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.text = "phone"
+        label.numberOfLines = 1
+        label.textAlignment = .left
+        label.font = UIFont(name: "Roboto-Regular", size: 22)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.8
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let nextButton: RookAnimatedLoadingButton = {
+        let button = RookAnimatedLoadingButton()
+        button.isAnimatable = false
+        button.title = "Next"
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(background)
+        view.addSubview(barrook)
+        view.addSubview(backButton)
+        self.backButton.addTarget(self, action: #selector(goBack(_:)), for: .touchUpInside)
+        view.addSubview(headingLabel)
+        view.addSubview(subHeadingLabel)
+        view.addSubview(firstNameTextField)
+        view.addSubview(lastNameTextField)
+        view.addSubview(phoneNumberTextField)
+        self.phoneNumberTextField.textFieldWithButton.delegate = self
+        self.phoneNumberTextField.textFieldWithButton.button.addTarget(self, action: #selector(selectPhoneCode(_:)), for: .touchUpInside)
+        view.addSubview(nextButton)
+        self.nextButton.addTarget(self, action: #selector(handleNext(_:)), for: .touchUpInside)
+        
+        self.loginButton.addTarget(self, action: #selector(goToLogin(_:)), for: .touchUpInside)
+        
+        configureConstraints()
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: UITextField.textDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updatePhoneCode(notification:)), name: NSNotification.Name("localeDoneChosen"), object: nil)
+        self.nextButton.isEnabled = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: UITextField.textDidChangeNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("localeDoneChosen"), object: nil)
+    }
+    
+    
+    private func configureConstraints() {
+        let height = UIScreen.main.bounds.height
+        let width = UIScreen.main.bounds.width
+        let screenRatio = UIScreen.main.bounds.height/UIScreen.main.bounds.width
+        let distanceToTop: CGFloat = (screenRatio < 2.0 && self.sizeClass() != (UIUserInterfaceSizeClass.regular, UIUserInterfaceSizeClass.regular)) ? 30 : 40
+        let textFontSize: CGFloat = (self.sizeClass() == (UIUserInterfaceSizeClass.regular, UIUserInterfaceSizeClass.regular)) ? 35 : 22
+        
+        let textFieldWIdth: CGFloat = (self.sizeClass() == (UIUserInterfaceSizeClass.regular, UIUserInterfaceSizeClass.regular)) ? 400 : width-50
+        
+        let textOffset: CGFloat = width/3.3
+        let headingOffset: CGFloat = distanceToTop + 19 + height/24 + (width/4.5)/4.14814815
+        
+        self.background.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        self.background.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        self.background.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        self.background.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        self.backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: distanceToTop).isActive = true
+        self.backButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 17).isActive = true
+        self.backButton.widthAnchor.constraint(equalToConstant: 12).isActive = true
+        self.backButton.heightAnchor.constraint(equalToConstant: 19).isActive = true
+        
+        self.barrook.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        self.barrook.topAnchor.constraint(equalTo: backButton.topAnchor, constant: height/24).isActive = true
+        let aspect = (barrook.image?.size.width)!/(barrook.image?.size.height)!
+        self.barrook.widthAnchor.constraint(equalToConstant: width/4.5).isActive = true
+        self.barrook.heightAnchor.constraint(equalToConstant: (width/4.5)/aspect).isActive = true
+        
+        let bottomView = UIView()
+        bottomView.backgroundColor = .clear
+        bottomView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bottomView)
+        bottomView.addSubview(loginButton)
+        bottomView.addSubview(alreadyAccountLabel)
+        
+        self.alreadyAccountLabel.heightAnchor.constraint(equalToConstant: textFontSize/1.6).isActive = true
+        self.alreadyAccountLabel.font = UIFont(name: "Roboto-BoldCondensed", size: textFontSize/1.4)
+        self.alreadyAccountLabel.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor).isActive = true
+        self.alreadyAccountLabel.leftAnchor.constraint(equalTo: bottomView.leftAnchor).isActive = true
+        
+        self.loginButton.centerYAnchor.constraint(equalTo: alreadyAccountLabel.centerYAnchor).isActive = true
+        self.loginButton.leftAnchor.constraint(equalTo: alreadyAccountLabel.rightAnchor, constant: 5).isActive = true
+        self.loginButton.heightAnchor.constraint(equalToConstant: textFontSize/1.6).isActive = true
+        let attributedStrings = self.setFontForAttributedText(with: alreadyAccountLabel.font, color: UIColor(hexString: "#004AEF"), string: "log in")
+        self.loginButton.setAttributedTitle(attributedStrings.normal, for: .normal)
+        self.loginButton.setAttributedTitle(attributedStrings.highlighted, for: .highlighted)
+        
+        let distance: CGFloat = (screenRatio < 2.0 && self.sizeClass() != (UIUserInterfaceSizeClass.regular, UIUserInterfaceSizeClass.regular)) ? -20 : -distanceToTop*1.2
+        bottomView.heightAnchor.constraint(equalToConstant: textFontSize/1.6).isActive = true
+        bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: distance).isActive = true
+        bottomView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        bottomView.widthAnchor.constraint(equalToConstant: alreadyAccountLabel.intrinsicContentSize.width + loginButton.intrinsicContentSize.width + 5).isActive = true
+        
+        self.headingLabel.font = UIFont(name: "Roboto-Bold", size: textFontSize)
+        self.headingLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: headingOffset).isActive = true
+        self.headingLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: textOffset/4.8).isActive = true
+        self.headingLabel.heightAnchor.constraint(equalToConstant: headingLabel.intrinsicContentSize.width/7.5).isActive = true
+        
+        self.subHeadingLabel.font = headingLabel.font
+        self.subHeadingLabel.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: textFontSize/4).isActive = true
+        self.subHeadingLabel.leftAnchor.constraint(equalTo: headingLabel.leftAnchor).isActive = true
+        self.subHeadingLabel.rightAnchor.constraint(equalTo: headingLabel.rightAnchor).isActive = true
+        
+        self.firstNameTextField.topAnchor.constraint(equalTo: subHeadingLabel.bottomAnchor, constant: height/10).isActive = true
+        self.firstNameTextField.widthAnchor.constraint(equalToConstant: textFieldWIdth/2.2).isActive = true
+        self.firstNameTextField.heightAnchor.constraint(equalToConstant: textFieldWIdth/7.76).isActive = true
+        self.firstNameTextField.leftAnchor.constraint(equalTo: phoneNumberTextField.leftAnchor).isActive = true
+        
+        self.lastNameTextField.centerYAnchor.constraint(equalTo: firstNameTextField.centerYAnchor).isActive = true
+        self.lastNameTextField.widthAnchor.constraint(equalToConstant: textFieldWIdth/2.2).isActive = true
+        self.lastNameTextField.heightAnchor.constraint(equalToConstant: textFieldWIdth/7.76).isActive = true
+        self.lastNameTextField.rightAnchor.constraint(equalTo: phoneNumberTextField.rightAnchor).isActive = true
+        
+        self.phoneNumberTextField.topAnchor.constraint(equalTo: firstNameTextField.bottomAnchor, constant: height/25).isActive = true
+        self.phoneNumberTextField.widthAnchor.constraint(equalToConstant: textFieldWIdth).isActive = true
+        self.phoneNumberTextField.heightAnchor.constraint(equalToConstant: textFieldWIdth/7.76).isActive = true
+        self.phoneNumberTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        self.nextButton.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor, constant: height/25).isActive = true
+        self.nextButton.rightAnchor.constraint(equalTo: phoneNumberTextField.rightAnchor).isActive = true
+        self.nextButton.widthAnchor.constraint(equalToConstant: textFieldWIdth/4).isActive = true
+        self.nextButton.heightAnchor.constraint(equalToConstant: textFieldWIdth/(4*2.3)).isActive = true
+    }
+    
+    private func setFontForAttributedText(with font: UIFont, color: UIColor, string: String) -> (normal: NSMutableAttributedString, highlighted: NSMutableAttributedString) {
+        let textAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+        let attributedString = NSMutableAttributedString(string: string, attributes: textAttributes)
+        let textPressedAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor: UIColor.black]
+        let attributePressedString = NSMutableAttributedString(string: string, attributes: textPressedAttributes)
+        return (attributedString, attributePressedString)
+    }
+    
+    @objc func goBack(_ sender: Any){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func handleNext(_ sender: Any) {
+        self.resignKeyboards()
+        RookUser.shared.user.firstName = self.firstNameTextField.textField.text!
+        RookUser.shared.user.lastName = self.lastNameTextField.textField.text!
+        let rawDigits = self.phoneNumberTextField.textFieldWithButton.text!
+        let digits = rawDigits.unformat(string: rawDigits, with: phoneFormat).dropFirst().lowercased()
+        RookUser.shared.user.phone = (self.phoneCode + digits).dropFirst().lowercased()
+        RookUser.shared.user.firebaseToken = "Your App Code"
+        do {
+            let encodedUser = try RookUser.shared.user.asDisctionary()
+            print(encodedUser)
+            RookUser.shared.createUser(type: .social, parameters: encodedUser) { (success, data, error) in
+                if success {
+                    DispatchQueue.main.async {
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "VerificationViewController") as! VerificationViewController
+                        vc.phoneNumber = self.phoneNumberTextField.textFieldWithButton.text
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                } else {
+                    guard let error = error else { return }
+                    let statusMessage = (error as NSError).userInfo["message"] ?? "No message"
+                    DispatchQueue.main.async {
+                        let controller = VSAlertController(title: "SignUp Failed", message: statusMessage as? String, preferredStyle: VSAlertControllerStyle.alert)
+                        controller?.shouldDismissOnBackgroundTap = true
+                        controller?.animationStyle = .fall
+                        let action = VSAlertAction(title: "Close", style: VSAlertActionStyle.cancel, action: nil)
+                        controller?.add(action!)
+                        self.present(controller!, animated: true, completion: nil)
+                    }
+                }
+            }
+        } catch {
+            DispatchQueue.main.async {
+                let controller = VSAlertController(title: "Sign Up Failed", message: "Try again later!", preferredStyle: VSAlertControllerStyle.alert)
+                controller?.shouldDismissOnBackgroundTap = true
+                controller?.animationStyle = .fall
+                let action = VSAlertAction(title: "Close", style: VSAlertActionStyle.cancel, action: nil)
+                controller?.add(action!)
+                self.present(controller!, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    @objc private func goToLogin(_ sender: Any) {
+        let count = self.navigationController?.viewControllers.count
+        if count != nil {
+            let loginVC = self.navigationController?.viewControllers[count!-3]
+            self.navigationController?.popToViewController(loginVC!, animated: true)
+        }
+    }
+    
+    @objc private func updatePhoneCode(notification: Notification) {
+        if let info = notification.userInfo {
+            let userInfo = info as! [String: LocaleInfo]
+            self.phoneCode = (userInfo["locale"]?.phoneCode)!
+        }
+        RookBSController.shared().dismiss(from: self)
+    }
+    
+    @objc private func textDidChange (_ notification: Notification){
+        let textfield = notification.object as! UITextField
+        self.validate(textfield)
+    }
+    
+    @objc private func selectPhoneCode(_ sender: Any) {
+        RookBSController.shared().present(LocalePickerViewController(type: .phoneCode), on: self)
+    }
+    
+    private func validate(_ textField: UITextField? = nil){
+        var fnameIsValid = false
+        var lnameIsValid = false
+        var phoneIsValid = false
+        
+        fnameIsValid = Validator.isASCII().apply(firstNameTextField.textField.text) && Validator.required().apply(firstNameTextField.textField.text)
+        firstNameTextField.textField.errorMessage = (fnameIsValid) ? "" : "Invalid First Name"
+        
+        lnameIsValid = Validator.isASCII().apply(lastNameTextField.textField.text) && Validator.required().apply(lastNameTextField.textField.text)
+        lastNameTextField.textField.errorMessage = (lnameIsValid) ? "" : "Invalid Last Name"
+        
+        guard let text = phoneNumberTextField.textFieldWithButton.text else {return}
+        let unformattedText = text.unformat(string: text, with: "(NNN) NNN NNNN")
+        phoneIsValid = Validator.isPhone(.en_GH).apply(unformattedText) && Validator.required().apply(unformattedText)
+        self.phoneNumberTextField.textFieldWithButton.errorMessage = (phoneIsValid) ? "" : "Invalid Phone Number"
+            
+        UIView.animate(withDuration: 0.25, animations: {
+            self.nextButton.isEnabled = phoneIsValid && fnameIsValid && lnameIsValid
+        })
+        
+    }
+    
+    private func resignKeyboards() {
+        self.firstNameTextField.textField.resignFirstResponder()
+        self.lastNameTextField.textField.resignFirstResponder()
+        self.phoneNumberTextField.textFieldWithButton.resignFirstResponder()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.resignKeyboards()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let lastText = (text as NSString).replacingCharacters(in: range, with: string) as String
+        textField.text = lastText.format(string: text, with: phoneFormat)
+        let notification = Notification(name: UITextField.textDidChangeNotification, object: textField, userInfo: nil)
+        self.textDidChange(notification)
+        return false
     }
 }

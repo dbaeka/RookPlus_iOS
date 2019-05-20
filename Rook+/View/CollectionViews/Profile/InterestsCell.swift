@@ -10,10 +10,9 @@ import UIKit
 
 class InterestsCell: UICollectionViewCell {
     
-    var interests: [String]?  {
-        didSet {
-        }
-    }
+    var delegate: ResizableCollectionViewDelegate?
+    
+    var interests: [(id: String, title: String)]? = RookUser.shared.user.interests?.map({($0.id, $0.title)})
     
     private let headerImageView : UIImageView = {
         let imageView = UIImageView()
@@ -49,12 +48,37 @@ class InterestsCell: UICollectionViewCell {
         return button
     }()
     
+    private lazy var InterestsCollectionView: UICollectionView = {
+        let tagCellLayout = TagCellLayout(alignment: .center, delegate: self)
+        var collectionView = UICollectionView(frame: .zero, collectionViewLayout: tagCellLayout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = .clear
+        collectionView.tag = 7
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        //      collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
+        collectionView.allowsSelection = true
+        return collectionView
+    }()
+    
+    private let tagsCollectionViewID = "tagsCollectionViewID"
+    
+    private var oneLineHeight: CGFloat {
+        return 16
+    }
+    
+    var longTagIndex: Int {
+        return 1
+    }
     
     private func configureViews() {
         backgroundColor = UIColor.white
         
         addSubview(headerImageView)
         addSubview(headingLabel)
+        addSubview(InterestsCollectionView)
         addSubview(updateButton)
     }
     
@@ -80,16 +104,80 @@ class InterestsCell: UICollectionViewCell {
         self.updateButton.centerYAnchor.constraint(equalTo: headingLabel.centerYAnchor).isActive = true
         self.updateButton.heightAnchor.constraint(equalToConstant: 11).isActive = true
         
+        InterestsCollectionView.register(TagCollectionViewCell.self, forCellWithReuseIdentifier: tagsCollectionViewID)
+        InterestsCollectionView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        InterestsCollectionView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        InterestsCollectionView.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 15).isActive = true
+        InterestsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
+        
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureViews()
         self.setupConstraints()
+        
+        InterestsCollectionView.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let observedObject = object as? UICollectionView, observedObject == self.InterestsCollectionView {
+            let size = self.InterestsCollectionView.collectionViewLayout.collectionViewContentSize
+            delegate?.resizeParent(with: CGSize(width: size.width, height: size.height+45+40), for: self.InterestsCollectionView)
+        }
+    }
+}
+
+
+extension InterestsCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    //MARK: - UICollectionView Delegate/Datasource Methods
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tagsCollectionViewID, for: indexPath) as! TagCollectionViewCell
+        let item = interests?[indexPath.row]
+        cell.configure(with: (item?.title)!)
+        cell.normalBorderColor = UIColor.black
+        cell.normalTextColor = UIColor.gray
+        return cell
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.interests?.count ?? 0
+    }
+}
+
+
+extension InterestsCell: TagCellLayoutDelegate {
+    func tagCellLayoutTagSize(layout: TagCellLayout, atIndex index: Int) -> CGSize {
+        if (interests?[index].title.count ?? 0) <= 7 {
+            let width: CGFloat = ((interests?[index].title.count ?? 0) < 3) ? 60 : 100
+            return CGSize(width: width, height: oneLineHeight)
+        } else {
+            var s = textSize(text: interests?[index].title ?? "", font: UIFont(name: "Roboto-Medium", size: 17)!, collectionView: InterestsCollectionView)
+            s.height += 8.0
+            return s
+        }
+    }
+    
+    func textSize(text: String, font: UIFont, collectionView: UICollectionView) -> CGSize {
+        var f = collectionView.bounds
+        f.size.height = 9999.0
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = text
+        label.font = font
+        var s = label.sizeThatFits(f.size)
+        s.height = max(oneLineHeight, s.height)
+        return s
     }
     
 }

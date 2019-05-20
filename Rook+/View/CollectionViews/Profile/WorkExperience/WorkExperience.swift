@@ -125,15 +125,24 @@ extension WorkExperience: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return RookUser.shared.user.experience?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let workExperienceCell: WorkExperienceCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.workExperienceCellID, for: indexPath) as! WorkExperienceCell
-        workExperienceCell.workTitle = "Software Developer Intern"
-        workExperienceCell.workplace = "DreamOval Ghana Ltd."
-        workExperienceCell.duration = "Jan 2017 - Feb 2018"
-        workExperienceCell.location = "Accra"
+        let experienceItem = RookUser.shared.user.experience?[indexPath.row]
+        workExperienceCell.workTitle = experienceItem?.title
+        workExperienceCell.workplace = experienceItem?.name
+        let startDate = experienceItem?.startDate.string2date(format: "yyyy-mm")?.date2string(format: "MMMMy")
+        let endDate: String? = (experienceItem?.isCurrent ?? "0" == "1") ? "Present" : experienceItem?.endDate.string2date(format: "yyyy-mm")?.date2string(format: "MMMMy")
+        if (startDate != nil && endDate != nil){
+            workExperienceCell.duration = startDate! + "-" + endDate!
+        } else if (startDate != nil){
+            workExperienceCell.duration = startDate
+        } else if (endDate != nil) {
+            workExperienceCell.duration = endDate
+        }
+        workExperienceCell.location = experienceItem?.location
         return workExperienceCell
         
     }

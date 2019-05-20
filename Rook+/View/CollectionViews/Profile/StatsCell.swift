@@ -52,7 +52,7 @@ class StatsCell: UICollectionViewCell {
         }
     }
     
-    var badges: [String]? {
+    var badges: [StatsItem.Badge]? {
         didSet {
             guard let badges = badges else {return}
             self.numberOfBadgesLabel.text = String(badges.count)
@@ -69,28 +69,30 @@ class StatsCell: UICollectionViewCell {
     }()
     
     private let successRateView : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.red
+        let view = RookProgressBar()
+        view.gaugeColor = UIColor.black
+        view.tubeColor = UIColor.lightGray
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private let speedRateView : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.red
+    private let speedRateView : RookProgressBar = {
+        let view = RookProgressBar()
+        view.gaugeColor = UIColor.black
+        view.tubeColor = UIColor.lightGray
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private let badgesIconView : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.red
-        view.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+//    private let badgesIconView : UIView = {
+//        let view = UIView()
+//        view.backgroundColor = UIColor.red
+//        view.clipsToBounds = true
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        return view
+//    }()
     
     private let headingLabel: UILabel = {
         let label = UILabel()
@@ -197,9 +199,21 @@ class StatsCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var badgesIconView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = .white
+        collectionView.isScrollEnabled = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
+    private var bubblePictures: BubblePictures!
+    
     private func configureViews() {
         backgroundColor = UIColor.white
-    
+        
         addSubview(headerImageView)
         addSubview(successRateView)
         addSubview(speedRateView)
@@ -230,7 +244,7 @@ class StatsCell: UICollectionViewCell {
         
         self.headingLabel.leftAnchor.constraint(equalTo: headerImageView.rightAnchor, constant: 5).isActive = true
         self.headingLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -15).isActive = true
-         self.headingLabel.centerYAnchor.constraint(equalTo: headerImageView.centerYAnchor).isActive = true
+        self.headingLabel.centerYAnchor.constraint(equalTo: headerImageView.centerYAnchor).isActive = true
         self.headingLabel.heightAnchor.constraint(equalToConstant: 12).isActive = true
         
         self.numberOfTasksLabel.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 15).isActive = true
@@ -261,7 +275,7 @@ class StatsCell: UICollectionViewCell {
         self.badgesIconView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         self.badgesIconView.topAnchor.constraint(equalTo: numberOfBadgesLabel.topAnchor).isActive = true
         self.badgesIconView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-       
+        
         self.successRateLabel.topAnchor.constraint(equalTo: numberOfCompletedLabel.topAnchor).isActive = true
         self.successRateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
         self.successRateLabel.leftAnchor.constraint(equalTo: centerXAnchor, constant: 20).isActive = true
@@ -269,7 +283,7 @@ class StatsCell: UICollectionViewCell {
         self.successRateView.topAnchor.constraint(equalTo: successRateLabel.bottomAnchor, constant: 3).isActive = true
         self.successRateView.leftAnchor.constraint(equalTo: successRateLabel.leftAnchor).isActive = true
         self.successRateView.rightAnchor.constraint(equalTo: successRateLabel.rightAnchor).isActive = true
-        self.successRateView.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        self.successRateView.heightAnchor.constraint(equalToConstant: 6).isActive = true
         
         self.speedRateLabel.topAnchor.constraint(equalTo: successRateView.bottomAnchor, constant: 8).isActive = true
         self.speedRateLabel.leftAnchor.constraint(equalTo: successRateLabel.leftAnchor).isActive = true
@@ -278,17 +292,58 @@ class StatsCell: UICollectionViewCell {
         self.speedRateView.topAnchor.constraint(equalTo: speedRateLabel.bottomAnchor, constant: 3).isActive = true
         self.speedRateView.leftAnchor.constraint(equalTo: speedRateLabel.leftAnchor).isActive = true
         self.speedRateView.rightAnchor.constraint(equalTo: speedRateLabel.rightAnchor).isActive = true
-        self.speedRateView.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        self.speedRateView.heightAnchor.constraint(equalToConstant: 6).isActive = true
+    }
+    
+    private func setupBadges(){
+        self.badgesIconView.layoutIfNeeded()
+        let configFiles = getConfigFiles()
+        let layoutConfigurator = BPLayoutConfigurator(
+            backgroundColorForTruncatedBubble: UIColor.lightGray,
+            fontForBubbleTitles: UIFont(name: "Roboto-Regular", size: 16.0)!,
+            colorForBubbleBorders: UIColor.black,
+            colorForBubbleTitles: UIColor.black,
+            maxCharactersForBubbleTitles: 2,
+           // maxNumberOfBubbles: 4,
+            distanceInterBubbles: 0.2,
+            direction: .leftToRight,
+            alignment: .left)
+        
+        bubblePictures = BubblePictures(collectionView: badgesIconView, configFiles: configFiles, layoutConfigurator: layoutConfigurator , width: 240)
+        bubblePictures.delegate = self
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.configureViews()
         self.setupConstraints()
+        self.setupBadges()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    func getConfigFiles() -> [BPCellConfigFile] {
+        let _badges = RookUser.shared.user.stats?.badges
+        guard let badges = _badges else { return [] }
+        var badgeItems: [BPCellConfigFile] = []
+        for badge in badges {
+            badgeItems.append(BPCellConfigFile(imageType: BPImageType.URL(URL(string: badge.image)!), title: badge.name))
+        }
+        return badgeItems
+    }
+}
+
+extension StatsCell: BPDelegate {
+    func didSelectBubble(at index: Int) {
+        print(index)
+    }
+    
+    func didSelectTruncatedBubble() {
+        print("more!")
+    }
+    
     
 }

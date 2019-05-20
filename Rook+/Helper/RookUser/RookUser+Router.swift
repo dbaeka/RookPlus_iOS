@@ -44,7 +44,7 @@ extension RookUser {
                         }
                         return
                     }
-                    if ( json?["success"] as! Bool == true ) {
+                    if (json?["success"] as! Bool == true ) {
                         completion(true, json?["result"], nil)
                     } else { completion(false, nil, NSError.init(domain: self.domain, code: sc, userInfo: ["message":json?["errorMessage"] as! String])) }
                 }
@@ -231,7 +231,7 @@ extension RookUser {
                 completion(success)
             })
         } else {
-            self.config.loginStrategy.socialLogin(to: getSocialType(s: self.user.socialType), token: pass, completion: { (success, data, error) in
+            self.config.loginStrategy.socialLogin(to: getSocialType(s: self.user.socialType), id: pass, completion: { (success, data, error) in
                 self.isRetry = false
                 completion(success)
             })

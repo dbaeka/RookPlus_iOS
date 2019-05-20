@@ -50,6 +50,7 @@ class videos: UICollectionViewCell {
         let decoder = JSONDecoder()
         do {
             let response = try decoder.decode([VideosItem].self, from: data)
+            
             for item in response {
                 videosItemStore.allItems.append(item)
             }

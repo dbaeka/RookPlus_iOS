@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="slU-LW-hZj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -95,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JaM-RG-gZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5438" y="890"/>
+            <point key="canvasLocation" x="6258" y="890"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="vyt-Ai-4bM">
@@ -374,10 +374,10 @@
             </objects>
             <point key="canvasLocation" x="3962" y="891"/>
         </scene>
-        <!--Sign Up Page5 View Controller-->
+        <!--Verification View Controller-->
         <scene sceneID="bXn-Zq-PxM">
             <objects>
-                <viewController storyboardIdentifier="SignUpPage5" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tjs-bj-UwA" customClass="SignUpPage5ViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VerificationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tjs-bj-UwA" customClass="VerificationViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QBb-So-Zgx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -443,7 +443,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yW0-oa-5z6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7009" y="890"/>
+            <point key="canvasLocation" x="7830" y="890"/>
         </scene>
         <!--Welcome Screen1 View Controller-->
         <scene sceneID="qcs-PC-vLo">
@@ -458,7 +458,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wwi-S5-gzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6250" y="890"/>
+            <point key="canvasLocation" x="7070" y="890"/>
         </scene>
         <!--Welcome Screen3 View Controller-->
         <scene sceneID="hVh-ce-vhP">
@@ -473,7 +473,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YNw-ox-Wb8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7839" y="890"/>
+            <point key="canvasLocation" x="8658" y="890"/>
         </scene>
         <!--Welcome Screen4 View Controller-->
         <scene sceneID="jvJ-sX-dD5">
@@ -488,7 +488,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbL-Pv-Bb1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8626" y="890"/>
+            <point key="canvasLocation" x="9446" y="890"/>
         </scene>
         <!--Welcome Screen5 View Controller-->
         <scene sceneID="x2k-Gk-kcz">
@@ -503,7 +503,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4t3-YB-cwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9422" y="890"/>
+            <point key="canvasLocation" x="10242" y="890"/>
         </scene>
         <!--Interests Page View Controller-->
         <scene sceneID="Wcj-C7-4NE">
@@ -518,11 +518,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJ8-im-gEA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10164" y="890"/>
+            <point key="canvasLocation" x="10985" y="890"/>
+        </scene>
+        <!--Social Sign Up View Controller-->
+        <scene sceneID="a56-1I-oDd">
+            <objects>
+                <viewController storyboardIdentifier="SocialSignUpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kGK-o7-jpb" customClass="SocialSignUpViewController" customModule="RookPlus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NCb-vW-Ba2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="qxg-hZ-QYY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xll-xO-LRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5471" y="890"/>
         </scene>
     </scenes>
     <resources>
-        <image name="BackButton" width="12" height="19"/>
+        <image name="BackButton" width="14" height="21"/>
         <image name="CVOnboard" width="263" height="424"/>
         <image name="CompaniesActive" width="31" height="30"/>
         <image name="CompaniesInactive" width="31" height="30"/>

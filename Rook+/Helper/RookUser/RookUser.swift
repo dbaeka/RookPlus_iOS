@@ -27,7 +27,7 @@ import Cryptor
 
 
 public class RookUser {
-    
+        
     static let shared = RookUser()
     
     private var _user = RookUser.getSavedUser()
@@ -711,7 +711,7 @@ public class RookUser {
         }
         return h
     }
-    
+   
     
     // MARK: Variables
     

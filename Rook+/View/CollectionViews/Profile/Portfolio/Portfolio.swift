@@ -132,14 +132,32 @@ extension Portfolio: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return RookUser.shared.user.portfolio?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let portfolioCell: PortfolioCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.portfolioCellID, for: indexPath) as! PortfolioCell
-        portfolioCell.projectTitle = "iOS Software Development"
-        portfolioCell.projectDescription = "Developed software for the payment API"
-        portfolioCell.duration = "Jan 2017 - Feb 2018"
+        let portfolioItem = RookUser.shared.user.portfolio?[indexPath.row]
+        portfolioCell.projectTitle = portfolioItem?.title
+        portfolioCell.projectDescription = portfolioItem?.desc
+        if portfolioItem?.items != nil {
+            for item in (portfolioItem?.items)! {
+                if item.type == "link" {
+                    portfolioCell.linkItem = (item.item_id, item.type, item.url)
+                }
+            }
+        } else {
+            portfolioCell.linkItem = nil
+        }
+        let startDate = portfolioItem?.startDate.string2date(format: "yyyy-mm")?.date2string(format: "MMMMy")
+        let endDate: String? = portfolioItem?.endDate.string2date(format: "yyyy-mm")?.date2string(format: "MMMMy")
+        if (startDate != nil && endDate != nil){
+            portfolioCell.duration = startDate! + "-" + endDate!
+        } else if (startDate != nil){
+            portfolioCell.duration = startDate
+        } else if (endDate != nil) {
+            portfolioCell.duration = endDate
+        }
         return portfolioCell
         
     }

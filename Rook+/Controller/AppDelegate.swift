@@ -13,7 +13,7 @@ import Firebase
 import FBSDKLoginKit
 import TwitterKit
 import LinkedinSwift
-import IQKeyboardManagerSwift
+import IQKeyboardManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,11 +24,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = RookUserConfig()
         RookUser.setup(url: "http://localhost:8080/api/v0", appcode: "your appcode", config: config)
         // Override point for customization after application launch.
-        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared().isEnabled = true
       //  FirebaseApp.configure()
        // Fabric.with([Crashlytics.self])
         TWTRTwitter.sharedInstance().start(withConsumerKey:"SlZzOGKqNhTACSlc3IfoYwuqq", consumerSecret:"WZ6zRcAVuLUxCNh1nbRNDRckxUl7BUM8b3EM4aXofiTEb6wKVD")
      //   dummyView()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loggedIn = !RookUser.shared.user.token.isEmpty && !RookUser.shared.user.email.isEmpty
+        let initialVC = (loggedIn) ? storyboard.instantiateViewController(withIdentifier: "MainNavigationController") : storyboard.instantiateViewController(withIdentifier: "IntroNavigationController")
+        self.window?.rootViewController = initialVC
+        self.window?.makeKeyAndVisible()
         return ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

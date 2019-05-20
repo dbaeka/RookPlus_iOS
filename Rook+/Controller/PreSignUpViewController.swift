@@ -10,6 +10,8 @@ import UIKit
 import FBSDKLoginKit
 import TwitterKit
 import LinkedinSwift
+import VSAlert
+import SwiftyJSON
 
 class PreSignUpViewController: UIViewController {
     
@@ -312,7 +314,6 @@ class PreSignUpViewController: UIViewController {
                 print("error: \(String(describing: error?.localizedDescription))")
                 return
             }
-            print(session.userName)
             let client = TWTRAPIClient.withCurrentUser()
             let request = client.urlRequest(withMethod: "GET", urlString: "https://api.twitter.com/1.1/account/verify_credentials.json", parameters: ["include_email": "true", "skip_status": "true"], error: nil)
             client.sendTwitterRequest(request) { (response, data, connectionError) in
@@ -320,24 +321,53 @@ class PreSignUpViewController: UIViewController {
                     print("Error: \(connectionError)")
                 }
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: [.allowFragments])
-                    print("json: \(json)")
-                } catch let jsonError as NSError {
+                    guard let data = data else { return }
+                    let json = try JSON(data: data)
+                    RookUser.shared.user.email = json["email"].stringValue
+                    RookUser.shared.user.socialID = json["id_str"].stringValue
+                    RookUser.shared.user.avatar = json["default_profile_image"].boolValue ? "" : json["profile_image_url_https"].stringValue
+                    RookUser.shared.user.location = json["location"].stringValue
+                    RookUser.shared.user.socialToken = session.authToken
+                    self.socialSignUp(with: RookUser.socialTypes.twitter.rawValue)
+                } catch let jsonError {
                     print("json error: \(jsonError.localizedDescription)")
                 }
             }
-            client.loadUser(withID: session.userID, completion: { (user, error) in
-                print(user?.name ?? "")
-            })
-            client.requestEmail { email, error in
-                guard let email = email else {
-                    print("error: \(String(describing: error?.localizedDescription))")
-                    return
+        }
+    }
+    
+    
+    private func socialSignUp(with option: String) {
+        do {
+            RookUser.shared.user.socialType = option
+            let encodedUser = try RookUser.shared.user.asDisctionary()
+            RookUser.shared.getUser(parameters: encodedUser) { (success, data, error) in
+                if success {
+                    DispatchQueue.main.async {
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SocialSignUpViewController") as! SocialSignUpViewController
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                } else {
+                    guard let error = error else { return }
+                    let statusMessage = (error as NSError).userInfo["message"] ?? "No message"
+                    DispatchQueue.main.async {
+                        let controller = VSAlertController(title: "SignUp Failed", message: statusMessage as? String, preferredStyle: VSAlertControllerStyle.alert)
+                        controller?.shouldDismissOnBackgroundTap = true
+                        controller?.animationStyle = .fall
+                        let action = VSAlertAction(title: "Close", style: VSAlertActionStyle.cancel, action: nil)
+                        controller?.add(action!)
+                        self.present(controller!, animated: true, completion: nil)
+                    }
                 }
-                print("signed in as \(String(describing: session.userName))")
-                let recivedEmailID = email
-                print(recivedEmailID)
-            
+            }
+        } catch {
+            DispatchQueue.main.async {
+                let controller = VSAlertController(title: "Could not complete signup", message: "Try again later!", preferredStyle: VSAlertControllerStyle.alert)
+                controller?.shouldDismissOnBackgroundTap = true
+                controller?.animationStyle = .fall
+                let action = VSAlertAction(title: "Close", style: VSAlertActionStyle.cancel, action: nil)
+                controller?.add(action!)
+                self.present(controller!, animated: true, completion: nil)
             }
         }
     }
@@ -345,9 +375,14 @@ class PreSignUpViewController: UIViewController {
     @objc func handleLinkedIn() {
         linkedinHelper.authorizeSuccess({ (lsToken) -> Void in
             //Login success lsToken
-            self.linkedinHelper.requestURL("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url,picture-urls::(original),positions,date-of-birth,phone-numbers,location)?format=json", requestType: LinkedinSwiftRequestGet, success: { (response) -> Void in
-                print(response)
-                //parse this response which is in the JSON format
+            self.linkedinHelper.requestURL("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,industry,picture-url,picture-urls::(original),positions,date-of-birth,phone-numbers,location)?format=json", requestType: LinkedinSwiftRequestGet, success: { (response) -> Void in
+                let json = JSON(response.jsonObject)
+                RookUser.shared.user.email = json["emailAddress"].stringValue
+                RookUser.shared.user.socialID = json["id"].stringValue
+                RookUser.shared.user.avatar = json["pictureUrl"].boolValue ? "" : json["pictureUrl"].stringValue
+                RookUser.shared.user.location = json["location"]["name"].stringValue
+                RookUser.shared.user.socialToken = self.linkedinHelper.lsAccessToken?.accessToken!
+                
             }) {(error) -> Void in
                 
                 print(error.localizedDescription)
@@ -365,7 +400,14 @@ class PreSignUpViewController: UIViewController {
             GraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
                 if (error == nil){
                     //everything works print the user data
-                    print(result)
+                    guard let result = result else { return }
+                    let json = JSON(result)
+                    RookUser.shared.user.email = json["email"].stringValue
+                    RookUser.shared.user.socialID = json["id"].stringValue
+                    RookUser.shared.user.avatar = json["picture"].exists() ?  json["picture"]["data"]["url"].stringValue : ""
+                    RookUser.shared.user.location = json["location"]["name"].stringValue
+                    RookUser.shared.user.socialToken = AccessToken.current?.tokenString
+                    
                 }
             })
         }

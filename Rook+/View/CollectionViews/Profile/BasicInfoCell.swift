@@ -24,9 +24,10 @@ class BasicInfoCell: UICollectionViewCell {
         }
     }
     
-    var completion: Int = 0 {
+    var completion: Double = 0 {
         didSet {
-            
+            self.completionView.percentFill = completion
+            self.completionLabel.text =  String(completion*100) + "% complete"
         }
     }
     
@@ -82,9 +83,10 @@ class BasicInfoCell: UICollectionViewCell {
         return button
     }()
     
-    private let completionView : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.red
+    private let completionView : RookProgressBar = {
+        let view = RookProgressBar()
+        view.gaugeColor = UIColor(hexString: "FF5500")
+        view.tubeColor = UIColor.white
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -113,6 +115,18 @@ class BasicInfoCell: UICollectionViewCell {
         return label
     }()
     
+    private let completionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.numberOfLines = 1
+        label.font = UIFont(name: "Roboto-Medium", size: 11)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .right
+        label.minimumScaleFactor = 0.8
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     
     private let fullNameLabel: UILabel = {
         let label = UILabel()
@@ -135,6 +149,7 @@ class BasicInfoCell: UICollectionViewCell {
         addSubview(cvButton)
         addSubview(pointsLabel)
         addSubview(fullNameLabel)
+        addSubview(completionLabel)
     }
     
     private func setupConstraints() {
@@ -171,10 +186,15 @@ class BasicInfoCell: UICollectionViewCell {
         self.pointsLabel.centerYAnchor.constraint(equalTo: cvButton.centerYAnchor).isActive = true
         self.pointsLabel.leftAnchor.constraint(equalTo: cvButton.rightAnchor, constant: 10).isActive = true
         
-        self.completionView.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 10).isActive = true
+        self.completionView.topAnchor.constraint(equalTo: completionLabel.bottomAnchor, constant: 5).isActive = true
         self.completionView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 70).isActive = true
-        self.completionView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        self.completionView.heightAnchor.constraint(equalToConstant: 8).isActive = true
         self.completionView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
+        self.completionLabel.topAnchor.constraint(equalTo: headerImageView.bottomAnchor, constant: 10).isActive = true
+        self.completionLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 70).isActive = true
+        self.completionLabel.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        self.completionLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
       
         

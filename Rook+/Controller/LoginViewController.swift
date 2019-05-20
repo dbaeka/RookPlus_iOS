@@ -227,7 +227,7 @@ class LoginViewController: UIViewController {
         view.addSubview(linkedInButton)
          self.linkedInButton.addTarget(self, action: #selector(handleLinkedIn), for: .touchUpInside)
         view.addSubview(facebookButton)
-         self.facebookButton.addTarget(self, action: #selector(socialMediaRegister(_:)), for: .touchUpInside)
+         self.facebookButton.addTarget(self, action: #selector(facebookLogin(_:)), for: .touchUpInside)
         view.addSubview(twitterButton)
          self.twitterButton.addTarget(self, action: #selector(twitterConnect), for: .touchUpInside)
         
@@ -451,7 +451,6 @@ class LoginViewController: UIViewController {
                         }
                     })
                     })
-                
             } else {
                 self.signInButton.stopAnimating()
                 guard let error = error else { return }
@@ -468,7 +467,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @objc func socialMediaRegister(_ sender: Any) {
+    @objc func facebookLogin(_ sender: Any) {
         let fbLoginManager : LoginManager = LoginManager()
         fbLoginManager.logIn(permissions: ["email"], from: self) { (result, error) -> Void in
             if (error == nil){
@@ -500,11 +499,8 @@ class LoginViewController: UIViewController {
                 do {
                     guard let data = data else { return }
                     let json = try JSON(data: data)
-                    let email = json["email"].string
-                    let id = json["id_str"].string
-                    let avatar = json["default_profile_image"].boolValue ? "" : json["profile_image_url_https"].string
-                    let location = json["location"].string
-                    print("json: \(email! + id! + avatar!)")
+                    let id = json["id_str"].stringValue
+                    self.socialLogin(with: id)
                 } catch let jsonError {
                     print("json error: \(jsonError.localizedDescription)")
                 }
@@ -517,15 +513,8 @@ class LoginViewController: UIViewController {
             //Login success lsToken
             self.linkedinHelper.requestURL("https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,industry,picture-url,picture-urls::(original),positions,date-of-birth,phone-numbers,location)?format=json", requestType: LinkedinSwiftRequestGet, success: { (response) -> Void in
                 let json = JSON(response.jsonObject)
-                print(json)
-                let email = json["emailAddress"].string
-                let id = json["id"].string
-                let avatar = json["pictureUrl"].boolValue ? "" : json["pictureUrl"].string
-                let location = json["location"]["name"].string
-                let fname = json["firstName"].string
-                let lname = json["lastName"].string
-                let positions = json["positions"]
-                let industry = json["industry"].string
+                let id = json["id"].stringValue
+                self.socialLogin(with: id)
             }) {(error) -> Void in
                 
                 print(error.localizedDescription)
@@ -545,15 +534,39 @@ class LoginViewController: UIViewController {
                     //everything works print the user data
                     guard let result = result else { return }
                     let json = JSON(result)
-                    let email = json["email"].string
-                    let id = json["id"].string
-                    let avatar = json["picture"].exists() ?  json["picture"]["data"]["url"].string : ""
-                    let fname = json["first_name"].string
-                    let lname = json["last_name"].string
-                    print(email!+id!+avatar!+fname!+lname!)
+                    let id = json["id"].stringValue
+                    self.socialLogin(with: id)
                 }
             })
         }
+    }
+    
+    private func socialLogin(with id: String){
+        RookUser.shared.socialLogin(to: .twitter, id: id, completion: { (success, data, error) in
+            if success {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0, execute: {
+                    RookUser.shared.user.refresh(completion: { (success, data, error) in
+                        if (success){
+                            DispatchQueue.main.async {
+                                guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") else {return}
+                                self.present(vc, animated: true, completion: nil)
+                            }
+                        }
+                    })
+                })
+            } else {
+                guard let error = error else { return }
+                let statusMessage = (error as NSError).userInfo["message"] ?? "No message"
+                DispatchQueue.main.async {
+                    let controller = VSAlertController(title: "Social Login Failed", message: statusMessage as? String, preferredStyle: VSAlertControllerStyle.alert)
+                    controller?.shouldDismissOnBackgroundTap = true
+                    controller?.animationStyle = .fall
+                    let action = VSAlertAction(title: "Close", style: VSAlertActionStyle.cancel, action: nil)
+                    controller?.add(action!)
+                    self.present(controller!, animated: true, completion: nil)
+                }
+            }
+        })
     }
     
 }
